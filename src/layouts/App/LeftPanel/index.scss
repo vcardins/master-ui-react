@@ -1,0 +1,135 @@
+@import '~variables';
+
+@media only screen and (max-width: 768px) {
+    #layout-left-panel {
+        display: none;
+    }
+
+    main {
+        section {
+            width: 100% !important;
+        }
+    }
+}
+
+#app[data-viewport="mini"] #container,
+#app[data-viewport="tiny"] #container {
+    @extend %collapse-leftbar;
+}
+
+#container {
+    &.collapsed {
+        @extend %collapse-leftbar;
+    }
+}
+
+.main {
+    >.nav {
+        background-color: whitesmoke;
+        display: if($navbar-width-expanded > 0, flex, none);
+        flex-direction: column;
+        min-height: 0;
+        width: $navbar-width-expanded;
+        transition: width 0.5s ease;
+
+        >.nav-header {
+            @extend %top-fixed-bar;
+
+            padding: 0.5em;
+            background-color: $color-opaque;
+            color: $white;
+            box-shadow: 1px 1px 2px 1px rgba(34, 36, 38, 0.15);
+
+            .user-details,
+            .user-pic {
+                display: inline-block;
+                vertical-align: top;
+            }
+
+            .user-pic {
+                line-height: 0;
+
+                img {
+                    width: 2.5em;
+                    height: 2.5em;
+                    margin-left: 0.4em;
+                }
+            }
+
+            .user-details {
+                margin: 0 0.75em;
+                opacity: 1;
+                transition: opacity 0.5s ease;
+                line-height: 18px;
+
+                span {
+                    display: block;
+                }
+
+                .user-greetings {
+                    color: whitesmoke;
+                    font-size: 85%;
+                }
+
+                .user-name {
+                    a {
+                        color: $white;
+                    }
+                }
+            }
+        }
+
+        >.nav-options {
+            @extend %scrollable;
+
+            flex: 1 1 auto;
+            background: $white;
+            border-right: 1px solid #eee;
+
+            .searchbox {
+                padding: 0.5em;
+
+                .ui.input {
+                    width: 100%;
+
+                    input {
+                        border: 0;
+                    }
+                }
+            }
+
+            .menu {
+                border-radius: 0;
+                box-shadow: none;
+                margin: 0;
+                border: 0;
+            }
+        }
+
+        >.nav-footer {
+            background-color: $color-dark;
+            color: $white;
+            text-align: center;
+            bottom: 0;
+            clear: both;
+            display: block;
+            z-index: 999;
+
+            a {
+                padding: 5px 0;
+                text-align: center;
+                width: 33%;
+                font-size: 16px;
+                display: block;
+                float: left;
+                background: $color-dark;
+                cursor: pointer;
+                color: $color-lighter;
+
+                &:hover {
+                    color: $white;
+                }
+            }
+        }
+    }
+}

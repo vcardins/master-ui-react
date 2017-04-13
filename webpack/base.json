@@ -1,0 +1,28 @@
+{
+  "title": "Starter",
+  "host": "localhost",
+  "port": 5433,
+  "target": "web",
+  "publicPath": "/",
+  "distFolder": "dist",
+  "srcFolder": "src",
+  "staticFolder": "static",
+  "entryFile": "index.jsx",
+  "indexFile": "index.html",
+  "extensions": [
+      "*", ".js", ".jsx", ".ts", ".tsx", ".css", ".json", ".scss"
+  ],
+  "vendors": [
+    "react", 
+    "react-dom", 
+    "react-router", 
+    "redux", 
+    "react-router-redux", 
+    "redux-thunk", 
+    "semantic-ui-react"
+  ],
+  "babel": {
+    "babelrc": true
+  },
+  "cssModules": false
+}

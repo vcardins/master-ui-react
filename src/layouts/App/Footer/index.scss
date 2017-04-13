@@ -1,0 +1,8 @@
+@import '~variables';
+
+#layout-footer {
+    flex: none;
+    height: 25px;
+    background-color: $dark;
+    color: $light-gray;
+}

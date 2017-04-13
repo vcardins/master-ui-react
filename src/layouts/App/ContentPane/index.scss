@@ -1,0 +1,43 @@
+@import '~variables';
+
+.page-content {
+    .pane {
+        padding: 0;
+        display: flex;
+
+        .content-pane {
+            display: flex;
+            flex: 1 1 auto;
+            overflow: hidden;
+            flex-direction: column;
+
+            .content-pane-header {
+                @extend %top-fixed-bar;
+
+                min-height: 38px;
+                border-bottom: 1px solid $color-light;
+                // background-color: $color-light;
+                box-shadow: 1px 5px 20px 10px rgba(255, 255, 255, 0.85);
+                line-height: 24px;
+
+                .ui.basic.buttons {
+                    border: 0;
+                    margin: 4px;
+                    color: $white;
+                }
+            }
+
+            .content-pane-header,
+            .content-pane-body {
+                &:not(:last-child) {
+                    border-right: 0.5px solid #eee;
+                }
+            }
+
+            .content-pane-body {
+                flex: 1 1 auto;
+                overflow-y: auto;
+            }
+        }
+    }
+}

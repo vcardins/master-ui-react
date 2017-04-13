@@ -1,0 +1,24 @@
+@import '~variables';
+
+#container {
+    display: flex;
+    flex-direction: column;
+    background-color: #fafbfc;
+    height: 100%;
+
+    .main {
+        display: flex;
+        flex: 1 1 auto;
+        overflow-y: auto;
+    }
+
+    &>header {
+        a {
+            color: $color-lighter;
+
+            &:hover {
+                color: $white;
+            }
+        }
+    }
+}

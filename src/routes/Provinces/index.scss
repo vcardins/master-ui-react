@@ -1,0 +1,11 @@
+@import '~variables';
+
+#province {
+    .pane:first-child {
+        flex: 0.6;
+    }
+
+    .pane:last-child {
+        flex: 0.4;
+    }
+}

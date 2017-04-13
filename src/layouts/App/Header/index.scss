@@ -1,0 +1,93 @@
+@import '~variables';
+
+#app[data-viewport="mini"],
+#app[data-viewport="tiny"] {
+    #header {
+        .profile {
+            .info {
+                opacity: 0;
+                display: none;
+            }
+        }
+    }
+}
+
+#header {
+    background: linear-gradient(to bottom, $color-light, $color-dark);
+    padding: 0.5em 0;
+    color: $white;
+
+    .header-left,
+    .header-central,
+    .header-right {
+        display: inline-block;
+    }
+
+    .header-left {
+        width: $navbar-width-expanded;
+        font-weight: 400;
+        font-size: 1.5em;
+        line-height: 28px;
+
+        .header-logo {
+            width: $navbar-width-collapsed;
+            text-align: center;
+            display: inherit;
+        }
+    }
+
+    .header-central {
+        color: $white;
+    }
+
+    .header-right {
+        float: right;
+        margin-right: 1em;
+
+        img.image {
+            margin-right: 1em;
+        }
+
+        .profile {
+            display: inline-block;
+            margin-right: 1em;
+            vertical-align: middle;
+
+            .photo,
+            .info {
+                display: inline-block;
+            }
+
+            .photo {
+                vertical-align: top;
+
+                .avatar {
+                    margin-right: 1em;
+                }
+            }
+
+            .info {
+                line-height: initial;
+                vertical-align: baseline;
+                opacity: 1;
+                transition: opacity 0.5s ease;
+
+                &>span {
+                    display: block;
+                }
+
+                .greetings {
+                    font-size: 75%;
+                    line-height: 10px;
+                }
+            }
+        }
+
+        .logout {
+            display: inline-block;
+            vertical-align: bottom;
+            width: $navbar-width-collapsed - 20;
+            text-align: center;
+        }
+    }
+}

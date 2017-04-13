@@ -1,0 +1,101 @@
+/*
+.page-layout {
+    main {
+        z-index: 1;
+        overflow-x: auto;
+        height: 100%;
+        padding-top: 90px;
+        position: absolute;
+        transition: translate3d 2s cubic-bezier(0.4, 0, 0.2, 1) ease;
+        transform-style: preserve-3d;
+        will-change: transform;
+        transition-property: transform;
+
+        @include respond-to('sm', 'xs') {
+            width: 100%;
+            transform: translate3d(0, 0, 0) !important;
+        }
+
+        @include respond-to('lg') {
+            width: calc(100% - #{$sidebar-width}); //
+            transform: translate3d($sidebar-width, 0, 0) !important; //
+        }
+
+        &.no_sidebar {
+            width: 100%;
+            transform: translate3d(0, 0, 0) !important; //
+        }
+
+        .main-content {
+            // 120px = footer margin-top + footer height
+            min-height: calc(100% - 120px);
+            width: 100%;
+
+            @include respond-to('sm', 'xs') {
+                margin: 0 auto;
+            }
+
+            @include respond-to('md', 'lg') {
+                margin: 0;
+            }
+
+            .container {
+                margin-top: 0;
+                margin-bottom: 0;
+
+                >div:first-child {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+#layout-left-panel {
+    .ui.sidebar {
+        z-index: 5;
+        // overwrite semantic-ui undocumented styles
+        visibility: visible !important;
+        overflow-x: hidden;
+        will-change: transform;
+        transition-duration: 0.2s;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-property: transform;
+        // overwrite semantic-ui undocumented styles
+        &.closed {
+            transform: translate3d($sidebar-width, 0, 0) !important;
+        }
+
+        &.open {
+            z-index: 11111;
+            transform: translate3d(0, 0, 0) !important;
+        }
+
+        @include respond-to('sm', 'xs') {
+            z-index: 10000;
+            transform: translate3d(-#{$sidebar-width}, 0, 0) !important;
+        }
+
+        @include respond-to('lg') {
+            transform: translate3d(0, 0, 0) !important;
+        }
+
+        .logo {
+            // height: 100px;
+            padding: 18px 5px;
+            background-color: #f5f5f5;
+        }
+
+        .logout {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .item {
+            align-items: center;
+            font-size: 16px;
+        }
+    }
+} */

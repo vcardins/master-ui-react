@@ -1,0 +1,105 @@
+// File with all scss variables. Import it in your .scss file as "~variables" 
+// http://jackiebalzer.com/color 
+@import './mixins.scss';
+// UI
+$navbar-width-expanded: 210px;
+$navbar-width-collapsed: 60px;
+$topbar-height: 4.5em;
+// COLORS
+$primary-color: #2f3f5f;
+$secondary-color: gold;
+$white: #fff;
+$background: #f3f3f3;
+$grey: #dbe2e8;
+$light-gray: #fcfcfc;
+
+$green:#00b5ad;
+$dark: #303030;
+
+$color-dark: $primary-color;
+$color-light: lighten($primary-color, 25%);
+$color-lighter: lighten($primary-color, 50%);
+$color-opaque: scale-color($primary-color, 50%, 20%, 10%);
+
+// MEASURES
+$default-padding: 10px;
+$default-content-padding: 1em;
+
+%top-fixed-bar {
+    top: 0;
+    clear: both;
+    display: block;
+    z-index: 999;
+}
+
+%padded {
+    padding: $default-content-padding;
+}
+
+%def_padding {
+    padding: $default_padding;
+}
+
+%scrollable {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+%resize-page {
+    .main {
+        >.page {
+            width: calc(100% - #{$navbar-width-collapsed});
+        }
+    }
+}
+
+%collapse-leftbar {
+    .main {
+        >.nav {
+            width: $navbar-width-collapsed;
+
+            .nav-header {
+                .user-details {
+                    opacity: 0;
+                    display: none;
+                }
+            }
+
+            .nav-options {
+                .menu {
+                    width: auto;
+
+                    >.item {
+                        >label {
+                            opacity: 0;
+                            display: none;
+                        }
+
+                        .icon {
+                            float: none;
+                            font-size: 160%;
+                            margin: 0;
+                            transition: font-size 0.5s ease;
+                        }
+                    }
+                }
+
+                .searchbox {
+                    opacity: 0;
+                    display: none;
+                }
+            }
+
+            .nav-footer {
+                .toggle-fullscreen,
+                .open-settings {
+                    display: none;
+                }
+
+                .toggle-collapse {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

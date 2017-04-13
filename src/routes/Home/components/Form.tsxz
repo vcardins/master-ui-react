@@ -1,0 +1,93 @@
+import * as React from 'react';
+import { Form } from 'semantic-ui-react';
+
+const FormExampleField = () => (
+  <Form>
+    <Form.Field>
+      <label>User Input</label>
+      <input />
+    </Form.Field>
+  </Form>
+)
+
+export default FormExampleField
+
+/*import * as React from 'react';
+// import _ from 'lodash';
+import Cryptr from 'cryptr';
+import Field from './Field';
+
+interface IForm {
+    fields: Array<any>;
+    refs: string;
+}
+
+interface IFormState {
+    fields: Array<any>;
+}
+
+export default class Form extends React.Component<IForm, {}> {
+
+    //private cryptr:Cryptr;
+
+    public static defaultProps: Partial<IForm> = {
+        fields: [],
+        refs: 'my-form',
+    };
+
+    public static defaultState: Partial<IFormState> = {
+        fields: []
+    };
+
+    constructor(public props:IForm, public state:IFormState, public context:any) {
+        super(props);
+        this.state = { fields: [] };
+        this.handleFieldChange = this.handleFieldChange.bind(this);   
+        //this.cryptr = new Cryptr('#$$%ˆ*&&**)(*_)fgh4564778');
+    }
+
+    setState() { }
+
+    forceUpdate() { }
+
+    //private cryptr = new Cryptr('#$$%ˆ*&&**)(*_)fgh4564778');
+
+    componentWillMount():void {        
+        // const fields:any = this.props.fields.reduce((result:Field, field:Field) => {
+        //     result[field.name] = '';
+        //     return result;
+        // }, {});
+        // this.setState({fields});         
+    }
+
+    render() {
+        
+        console.log(this.props);
+
+        const fields = this.props.fields.map(({type, label, name}) => {
+            const field:any = {
+                id: 10, //this.cryptr.encrypt(name),
+                type,
+                name, 
+                label,
+                onChange: this.handleFieldChange, 
+                value: this.state.fields[name],
+            }
+            return <Field key={field.id} {...field} />
+        }, this);
+        
+        return (
+            <div>
+                {fields}
+                <div>{JSON.stringify(this.state.fields)}</div>
+            </div>
+        );
+    }
+
+    public handleFieldChange (fieldId, value) {
+        const fields = Object.assign({}, this.state.fields);
+        fields[fieldId] = value;
+        //this.setState({fields});
+    }
+
+}*/
