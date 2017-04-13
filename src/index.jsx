@@ -28,7 +28,7 @@ const render = (key = null) => {
 
 // Enable HMR and catch runtime errors in RedBox
 // This code is excluded from production bundle
-if (module.hot) { //__DEV__ && 
+if (module.hot) { 
     module.hot.accept('./layouts/App', () => {
         try {
             render(Math.random());
@@ -37,20 +37,6 @@ if (module.hot) { //__DEV__ &&
             renderError(error);
         }        
     });
-    // module.hot.accept(['./reducers'], () => {
-    //     try {
-    //         const nextRootReducer = require('./reducers/index');
-    //         store.replaceReducer(nextRootReducer);
-    //         render(Math.random());
-    //     } 
-    //     catch (error) {
-    //         renderError(error);
-    //     }
-    // })
 }
 
 render();
-// Use Redux DevTools chrome extension
-//if (__DEBUG__) {
-//if (window.devToolsExtension) window.devToolsExtension.open();
-//}
