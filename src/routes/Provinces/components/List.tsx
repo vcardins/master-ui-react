@@ -12,6 +12,7 @@ interface Props {
     selected?: Province;
     filters?: Array<string | JSX.Element>;
     isLoading: boolean;
+    filter: string;
 }
 
 const ProvinceList: React.StatelessComponent<Props> = (props: Props): JSX.Element => {
@@ -22,33 +23,20 @@ const ProvinceList: React.StatelessComponent<Props> = (props: Props): JSX.Elemen
         selected = new Province(),
         filters, 
         isLoading,
+        filter,
     } = props;
 
     const filterOptions = [
-        {
-            text: 'Canada',
-            value: 'CA',
-            label: { color: 'red', empty: true, circular: true },
-        },
-        {
-            text: 'United States',
-            value: 'US',
-            label: { color: 'blue', empty: true, circular: true },
-        },
+        { key: 'ca', value: 'ca', text: 'Canada', flag: 'ca' },
+        { key: 'us', value: 'us', text: 'United States', flag: 'us' },
     ];
 
     const FilterDropdown = () => (
-            <Dropdown text="Filter" multiple icon="filter" onChange={ onCountrySelected }>
-                <Dropdown.Menu>
-                    <Input icon="search" iconPosition="left" className="search" />
-                    <Dropdown.Divider />
-                    <Dropdown.Header icon="tags" content="Tag Label" />
-                    <Dropdown.Menu scrolling>
-                        { filterOptions.map((option) => <Dropdown.Item key={option.value} {...option} />) }
-                    </Dropdown.Menu>
-                </Dropdown.Menu>
-            </Dropdown>
-        );
+            <Dropdown 
+                placeholder="Select Country" 
+                onChange={onCountrySelected}
+                value={filter}
+                search selection options={filterOptions} />);
 
     return (
         <ContentPane toolbar={<FilterDropdown/>}>
@@ -75,6 +63,6 @@ const ProvinceList: React.StatelessComponent<Props> = (props: Props): JSX.Elemen
             }
         </ContentPane>
     );
-};
+}
 
 export default ProvinceList;

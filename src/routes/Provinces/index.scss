@@ -3,6 +3,11 @@
 #province {
     .pane:first-child {
         flex: 0.6;
+
+        .dropdown {
+            min-height: auto;
+            border: 0;
+        }
     }
 
     .pane:last-child {

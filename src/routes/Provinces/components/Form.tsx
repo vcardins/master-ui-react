@@ -35,15 +35,9 @@ const ProvinceForm: React.StatelessComponent<Props> = (props: Props): JSX.Elemen
     return (    
         <ContentPane toolbar={<ActionButtons/>} className="padded">
             <Form className={ isSaving ? 'loading' : ''} onSubmit={onSubmit} >
-                <Form.Field>
-                    <Form.Input name="iso2" value={ model.iso2 } placeholder="Country" onChange={onChange} readOnly/>
-                </Form.Field>                
-                <Form.Field>
-                    <Form.Input name="code" value={ model.code } placeholder="Code" onChange={onChange} readOnly/>
-                </Form.Field>
-                <Form.Field>
-                    <Form.Input name="name" value={ model.name } placeholder="Name" onChange={onChange} />
-                </Form.Field>
+                <Form.Field name="iso2" label="Iso 2" value={ model.iso2 } control="input" onChange={onChange} readOnly />
+                <Form.Field name="code" label="Code" value={ model.code } control="input" onChange={onChange} readOnly />
+                <Form.Field name="name" label="Name" value={ model.name } control="input" onChange={onChange} readOnly />
             </Form>
             {/*{ renderErrors(errors) }*/}                
         </ContentPane>

@@ -34,7 +34,7 @@ class ProvinceContainer extends React.Component<Props, State>  {
         models: new Array<Province>(),
         model: new Province(), 
         validationErrors: {},
-        iso2: 'CA',
+        iso2: 'ca',
     };
 
     constructor(props: Props) {
@@ -45,21 +45,21 @@ class ProvinceContainer extends React.Component<Props, State>  {
     
     componentDidMount() {                   
         this.formPanel = document.getElementById('pane-2').getElementsByClassName('form')[0] as HTMLElement;
-        this.setState({isLoading: true}, this.loadModels);              
+        this.setState({isLoading: true}, this.loadModels.bind(null, this.state.iso2));              
     }
 
-    loadModels() {
+    loadModels(iso2: string) {
         const { id } = this.props.params;
-        Actions.getAll(this.state.iso2)
+        this.setState({ isLoading: true });
+        Actions.getAll(iso2)
             .then((models: any) => {
                 const model = (!!id && models.filter(({code}) => code === id)[0]) || new Province();            
-                this.setState({ models, model, isLoading: false });
+                this.setState({ iso2, models, model, isLoading: false });
             });  
     }
 
-    handleCountrySelect(iso2: any) {
-        console.log(iso2);
-        //this.setState({ iso2 }, this.loadModels);
+    handleCountrySelect(event, {value}) {
+        this.loadModels(value);
     }
 
     handleFieldChange = (event: any): void => {
@@ -102,14 +102,15 @@ class ProvinceContainer extends React.Component<Props, State>  {
     }
 
     render(): JSX.Element {
-        const { isLoading, isSaving, models, model, validationErrors } = this.state;
+        const { isLoading, isSaving, iso2, models, model, validationErrors } = this.state;
         const panels: Array<string | JSX.Element> = 
         [
             <ProvinceList 
                 key="list"
                 models={ models } 
-                selected={ model } 
-                onCountrySelected={ this.handleCountrySelect }
+                selected={ model }
+                filter={iso2} 
+                onCountrySelected={ this.handleCountrySelect.bind(this) }
                 onSelected={ this.handleSelect }
                 isLoading={ isLoading }
             />,
