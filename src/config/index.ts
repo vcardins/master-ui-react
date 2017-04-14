@@ -20,7 +20,7 @@ let configBase = {
 
 let configForDevelopment = {
 	api : { url: 'http://immiplanner.azurewebsites.net' },
-	signalR : { host: 'http://starter.azurewebsites.net', logging : true },
+	signalR : { host: 'http://immiplanner.azurewebsites.net', logging : true },
 	isInDebugMode: true,
 	providers: {
 		google: {

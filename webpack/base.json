@@ -1,7 +1,7 @@
 {
-  "title": "Starter",
+  "title": "Master UI",
   "host": "localhost",
-  "port": 5433,
+  "port": 5555,
   "target": "web",
   "publicPath": "/",
   "distFolder": "dist",
