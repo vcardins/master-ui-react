@@ -10,7 +10,7 @@ interface Props {
     onSelected: Function;
     onCountrySelected: any;
     selected?: Province;
-    filters?: Array<React.ReactNode>;
+    filters?: Array<string | JSX.Element>;
     isLoading: boolean;
 }
 

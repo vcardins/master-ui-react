@@ -47,25 +47,44 @@
 
             .page-content {
                 flex: 1 1 auto;
-                overflow: hidden;
-                display: flex;
-                z-index: 0;
-
-                .pane {
-                    @extend %scrollable;
-
-                    flex: 1;
-                }
 
                 .loader {
                     width: 100%;
                     margin: 5em auto;
                 }
 
-                &.multi-pane {
+                &.fixed-pane-header {
+                    overflow: hidden;
+                    display: flex;
+                    z-index: 0;
+
+                    .pane {
+                        @extend %scrollable;
+
+                        flex: 1;
+                    }
+                }
+
+                &.multi-pane-2 {
                     .pane {
                         flex: 0.5;
                     }
+                }
+
+                &.multi-pane-3 {
+                    .pane {
+                        flex: 0.33;
+                    }
+                }
+
+                &.multi-pane-4 {
+                    .pane {
+                        flex: 0.25;
+                    }
+                }
+
+                &:not(.fixed-pane-header) {
+                    @extend %scrollable;
                 }
 
                 .table {

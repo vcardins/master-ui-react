@@ -40,9 +40,10 @@ class CountriesContainer extends React.Component<Props, State>  {
 
         return (
             <Page 
-                id="enum" 
+                id="country" 
                 title="Countries" 
                 subTitle="World Countries"
+                hasFixedHeader={true}
                 panels={[
                     <CountriesList key="list" models={ models } isLoading={ isLoading }/>,
                 ]} 

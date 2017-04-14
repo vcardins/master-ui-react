@@ -24,7 +24,7 @@ interface Route {
 interface Props {
     dispatch: any;
     currentURL: string;
-    children: React.ReactNode;
+    children: string | JSX.Element;
     router: any;
     location: any;
 }

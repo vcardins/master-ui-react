@@ -5,13 +5,13 @@
         padding: 0;
         display: flex;
 
-        .content-pane {
+        .pane-content {
             display: flex;
             flex: 1 1 auto;
             overflow: hidden;
             flex-direction: column;
 
-            .content-pane-header {
+            .pane-content-header {
                 @extend %top-fixed-bar;
 
                 min-height: 38px;
@@ -27,14 +27,14 @@
                 }
             }
 
-            .content-pane-header,
-            .content-pane-body {
+            .pane-content-header,
+            .pane-content-body {
                 &:not(:last-child) {
                     border-right: 0.5px solid #eee;
                 }
             }
 
-            .content-pane-body {
+            .pane-content-body {
                 flex: 1 1 auto;
                 overflow-y: auto;
             }

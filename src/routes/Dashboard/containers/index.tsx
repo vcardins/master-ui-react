@@ -29,15 +29,14 @@ class DashboardContainer extends React.Component<Props, State>  {
             title="Dashboard" 
             hideTitleBar={true} 
             className="padded"
-            panels={ 
-                [
+            panels={[
                     <Dashboard                 
                         header="Header"
                         lookup={ this.state.lookup }
                         description="This is the Dashboard page."
                     />,
-                ] 
-            }/>;
+                ]}
+            />;
     }
 }
 

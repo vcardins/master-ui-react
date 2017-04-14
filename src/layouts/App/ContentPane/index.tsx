@@ -3,8 +3,8 @@ import { Icon, Button, Popup } from 'semantic-ui-react';
 import './index.scss';
 
 interface Props {
-    children?: React.ReactNode;
-    toolbar?: React.ReactNode;
+    children?: string | JSX.Element;
+    toolbar?: string | JSX.Element;
     className?: string;
 }
 
@@ -12,11 +12,11 @@ const ContentPanel: React.StatelessComponent<Props> = (props: Props): JSX.Elemen
      const { children, toolbar, className } = props;
 
      return (
-        <div className="content-pane">
-            { toolbar && <div className="content-pane-header">
+        <div className="pane-content">
+            { toolbar && <div className="pane-content-header">
                 { toolbar }    
             </div>}
-            <div className={`content-pane-body ${className}`}>
+            <div className={`pane-content-body ${className || ''}`.trim()}>
                 { children }               
             </div>
         </div>

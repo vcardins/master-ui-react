@@ -103,7 +103,7 @@ class ProvinceContainer extends React.Component<Props, State>  {
 
     render(): JSX.Element {
         const { isLoading, isSaving, models, model, validationErrors } = this.state;
-        const panels: Array<React.ReactNode> = 
+        const panels: Array<string | JSX.Element> = 
         [
             <ProvinceList 
                 key="list"
@@ -127,7 +127,8 @@ class ProvinceContainer extends React.Component<Props, State>  {
         return (
             <Page id="province" 
                 title="Province" 
-                subTitle="Country Province"
+                subTitle="Country province"
+                hasFixedHeader={true}
                 panels={ panels } />
         );
     } 
