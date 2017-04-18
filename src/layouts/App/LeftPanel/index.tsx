@@ -41,7 +41,7 @@ const LeftPanel: React.StatelessComponent<Props> = (props: Props): JSX.Element =
             </nav>
             <footer className="nav-footer">
                 <a href="javascript:void(0)" title="Expand/Collapse" onClick={onTogglePanel} className="toggle-collapse">
-                    <Icon name={`angle double ${!collapsed ? 'left' : 'right'}`} aria-hidden="true" />
+                    <Icon name="angle double left" aria-hidden="true" />
                 </a>                
                 <a href="javascript:void(0)" title="Settings" className="open-settings">
                     <Icon name="cogs" aria-hidden="true" />

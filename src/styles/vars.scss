@@ -98,6 +98,10 @@ $default-content-padding: 1em;
 
                 .toggle-collapse {
                     width: 100%;
+
+                    i {
+                        transform: rotate(-180deg) translateZ(0);
+                    }
                 }
             }
         }

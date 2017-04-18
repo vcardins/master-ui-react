@@ -129,6 +129,15 @@
                 &:hover {
                     color: $white;
                 }
+
+                &.toggle-collapse {
+                    i {
+                        height: auto;
+                        transform: rotate(0) translateZ(0);
+                        transition-property: transform;
+                        transition-duration: 250ms;
+                    }
+                }
             }
         }
     }
