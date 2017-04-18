@@ -3,8 +3,8 @@ import IUserAction from './IUserAction';
 import UserSignup from './UserSignup';
 import AccessLevel from './AccessLevel';
 import ActionResult from 'core/models/ActionResult';
-import { Api } from '../helpers';
-import settings from '../settings';
+import { Api } from 'core/helpers';
+import settings from 'core/settings';
 
 const UserAction: IUserAction = { 
 

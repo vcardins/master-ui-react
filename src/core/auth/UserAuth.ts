@@ -1,5 +1,5 @@
-import settings from '../settings';
-import { Api, LocalStorage } from '../helpers';
+import settings from 'core/settings';
+import { Api, LocalStorage } from 'core/helpers';
 import { userRoles, accessLevels } from './Access';
 import { ActionResult } from 'core/models';
 
@@ -53,7 +53,7 @@ class UserAuth {
               .patch(settings.api.resetPasswordUrl, { email }, null, true)
               .then((result) => {
                 if (!apiResponse.error) {
-                    apiResponse.redirect = settings.logintRoute;
+                    apiResponse.redirect = settings.loginRedirect;
                     apiResponse.message = 'User has been successfully authenticated';
                     resolve(apiResponse);
                 } else {

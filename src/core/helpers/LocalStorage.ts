@@ -1,5 +1,5 @@
-﻿import appSettings from '../settings';
-import { LocalStorageTypes } from '../enums';
+﻿import appSettings from 'core/settings';
+import { LocalStorageTypes } from 'core/enums';
 
 export interface IStorage {
 	getItem(key: string): any;

@@ -1,6 +1,6 @@
 import axios from 'axios'; // https://github.com/mzabriskie/axios
 
-import settings from '../settings';
+import settings from 'core/settings';
 import Utils from './Utils';
 import { UserAuth } from '../auth';
 

@@ -11,13 +11,10 @@ export default class EntityModel {
     if (model) { 
       _.merge(this, model); 
     }
-    // if (required) {
-    //   this.required = required;
-    // }
     this.isInEditMode = true;
     this.isValid = this.isValid.bind(this);
     this.setEditMode = this.setEditMode.bind(this);
-    this.getOwnProperties = this.getOwnProperties.bind(this);
+    this.get = this.get.bind(this);
   }
 
   isValid() : boolean {
@@ -37,7 +34,7 @@ export default class EntityModel {
   setEditMode(edit: boolean) {
     this.isInEditMode = edit;
     if (edit) {
-      this._previousValues = this.getOwnProperties();
+      this._previousValues = this.get();
     } else {
       this._previousValues = undefined;
     }
@@ -50,12 +47,12 @@ export default class EntityModel {
     }
   }
 
-  getOwnProperties(onlyFilled: boolean = null) {
-    const result: EntityModel = new EntityModel();
+  get (onlyFilled: boolean = null) {
+    let result: any = {};
     for (let prop in this) {
       if (this.hasOwnProperty(prop) && result.hasOwnProperty(prop)) {
         if (!this[prop] && onlyFilled) { continue; }
-        // result[prop] = this[prop];
+        result[prop] = this[prop];
       }
     }
     delete result.isInEditMode;
