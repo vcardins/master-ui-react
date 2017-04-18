@@ -20,6 +20,12 @@ const basePlugins = [
         title: settings.title,
         template: settings.template,
         filename: settings.bundleOutputPath,
+        minify: settings.isProduction(),
+    }),
+    new webpack.DefinePlugin({
+        'process.env': {
+            NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        },
     }),
     new webpack.LoaderOptionsPlugin(settings.loadersOptions()),
     new CopyWebpackPlugin([
@@ -38,9 +44,6 @@ const devPlugins = [
         files: ['src/**/*.scss'],
         failOnError: false,
     }),
-    new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify('development'),
-    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new FriendlyErrors(),
@@ -49,14 +52,11 @@ const devPlugins = [
 const prodPlugins = [
     new ProgressPlugin(),
     new ExtractTextPlugin('styles.[contenthash:8].css'),
-    new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify('production'),
-    }),
     new SplitByPathPlugin([
         { name: 'vendor', path: [path.join(__dirname, '..', 'node_modules/')] },
     ]),
     new webpack.optimize.UglifyJsPlugin({
-        sourceMap: true,
+        sourceMap: false,
         compress: {
             warnings: false,
         },
@@ -65,12 +65,14 @@ const prodPlugins = [
         },
     }),
     // extract vendor chunks
-    new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        filename: 'vendor.[chunkhash:8].js',
-    }),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //     name: 'vendor',
+    //     filename: 'vendor.[chunkhash:8].js',
+    // }),
 ];
 
-module.exports = basePlugins
+const plugins = basePlugins
   .concat(settings.isProduction() ? prodPlugins : [])
   .concat(settings.isDevelopment() ? devPlugins : []);
+
+module.exports = plugins;

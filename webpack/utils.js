@@ -61,10 +61,10 @@ _.getJsBundleFilename = () => `${_.bundleName}${_.isProduction() ? '.min' : ''}.
 _.loadersOptions = () => {
     return {
         minimize: _.isProduction(),
+        debug: _.isDevelopment(),
         options: {
             // css-loader relies on context
-            context: process.cwd(),
-            babel: appConfig.babel,
+            context: __dirname,
         },
     }
 }

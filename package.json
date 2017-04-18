@@ -106,12 +106,9 @@
     "webpack-visualizer-plugin": "^0.1.11"
   },
   "scripts": {
-    "prebuild": "npm run clean",
-    "build": "cross-env webpack -p --config",
     "clean": "rimraf dist/",
-    "compile": "webpack -p",
-    "compile:dev": "NODE_ENV=development webpack",
-    "compile:server": "webpack -p --config=webpack.server.config.js",
+    "prebuild": "npm run clean",
+    "build": "NODE_ENV=production webpack --progress --colors",
     "lint": "npm run lint-ts && npm run lint-js && npm run lint-scss",
     "lint-scss": "stylelint \"./src/**/*.scss\"",
     "lint-ts": "tslint \"src/**/*.tsx\" \"src/**/*.ts\" \"test/**/*.tsx\" \"test/**/*.ts\"",
@@ -121,7 +118,7 @@
     "test": "NODE_ENV=test ./node_modules/.bin/karma start --single-run",
     "test:dev": "NODE_ENV=test ./node_modules/.bin/karma start",
     "db": "nodemon ./db",
-    "dev": "NODE_ENV=development node webpack.server.js --hot"
+    "dev": "NODE_ENV=development node webpack.server.js --hot --progress --colors"
   },
   "author": "Victor Cardins <vcardins@gmail.com>",
   "keywords": [
