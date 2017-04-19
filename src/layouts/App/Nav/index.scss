@@ -1,0 +1,75 @@
+@import '~variables';
+
+#app[data-viewport="mini"] #container,
+#app[data-viewport="tiny"] #container {
+    font-size: 100%;
+}
+
+#container {
+    &.collapsed {
+        font-size: 100%;
+    }
+}
+
+//colors
+$color_celeste_approx: transparent;
+$black: #000;
+$color_pumice_approx: transparent;
+$color_mountain_mist_approx:transparent;
+$color_storm_dust_approx: transparent;
+
+//@extend-elements
+//original selectors
+//.mainmenu, .submenu
+
+.main {
+    >.nav {
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu {
+            >div {
+                .parentMenu {
+                    .submenu {
+                        overflow: hidden;
+                        max-height: 0;
+                        transition: all 0.5s ease-out;
+                        margin-right: -1em;
+
+                        a {
+                            background-color: $color_mountain_mist_approx;
+                            padding-left: 0;
+
+                            label {
+                                &::before {
+                                    padding-left: 10px;
+                                    content: '';
+                                }
+                            }
+
+                            &:last-child {
+                                padding-bottom: 0;
+                            }
+
+                            &:hover {
+                                background-color: $color_storm_dust_approx;
+                            }
+                        }
+                    }
+
+                    &:hover,
+                    &.active {
+                        .submenu {
+                            margin-top: 10px;
+                            display: block;
+                            max-height: 200px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

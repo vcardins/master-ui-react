@@ -122,8 +122,8 @@ export default class Validator extends React.Component<Props, State> {
 //   WrappedComponent: React.Component<Props, State>,
 // ) {
 //   // static propTypes = {
-//   //   schema: PropTypes.object,
-//   //   children: PropTypes.node,
+//   //   schema: any,
+//   //   children: JSX.Element,
 //   // };
   
   
