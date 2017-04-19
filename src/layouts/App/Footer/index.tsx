@@ -3,7 +3,7 @@ import { Grid } from 'semantic-ui-react';
 import './index.scss';
 
 interface Props {
-    children?: typeof React.PropTypes.element;
+    children?: JSX.Element;
 }
 
 const Footer: React.StatelessComponent<Props> = (props: Props): JSX.Element => {

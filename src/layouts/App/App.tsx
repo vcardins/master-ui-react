@@ -18,7 +18,8 @@ interface Route {
     id: string;
     href: string;
     label: string;
-    icon: string;
+    icon?: string;
+    children?: Array<Route>;
 }
 
 interface Props {
@@ -37,12 +38,14 @@ interface State {
 }
 
 class App extends React.Component<Props, State>  {
+
     routes: Array<Route>;       
 
     constructor(props: any) {
         super(props);
         this.handleLogout = this.handleLogout.bind(this); 
         this.handleTogglePanel = this.handleTogglePanel.bind(this);
+        this.handleOpenSettings = this.handleOpenSettings.bind(this);
         this.state = {           
             isSideBarCollapsed: new Map<string, boolean>([['left', false], ['right', false]]),
             page: new PageInfo(),
@@ -51,6 +54,13 @@ class App extends React.Component<Props, State>  {
         };
         this.routes = [
             { id: 'dashboard', href: '/', label: 'Dashboard', icon: 'dashboard' },
+            { 
+                id: 'geography', href: '', label: 'Geeography', icon: 'map',
+                children: [
+                    { id: 'countries', href: '/countries', label: 'Countries', icon: 'flag' },
+                    { id: 'city', href: '/provinces', label: 'Provinces', icon: 'map' },
+                ],
+            },
             { id: 'countries', href: '/countries', label: 'Countries', icon: 'flag' },
             { id: 'city', href: '/provinces', label: 'Provinces', icon: 'map' },
             { id: 'reports', href: '/reports', label: 'Reports', icon: 'calculator' },
@@ -71,9 +81,9 @@ class App extends React.Component<Props, State>  {
             // dispatch(setRedirectUrl(currentURL))
             browserHistory.replace(appSettings.loginRoute);
         } else {
-            const promises = [UserAction.getProfile()]; // , Api.get('lookup')
-            Promise.all(promises)
-                .then((result: any) => this.setState({ user: result[0] }));
+            /* const promises = [UserAction.getProfile()]; Api.get('lookup') //Promise.all(promises) */
+            UserAction.getProfile()
+                .then((result: any) => this.setState({ user: result }));
         }
 
         const node = ReactDOM.findDOMNode(this).parentNode as HTMLElement;
@@ -116,6 +126,10 @@ class App extends React.Component<Props, State>  {
         this.setState({ isSideBarCollapsed });
     }
 
+    handleOpenSettings() {
+        console.log('Open Settings');
+    }
+
     _preparePageInfo = (props) => {
         const { router, routes, params } = props;
         let breadcrumb = '';
@@ -152,7 +166,7 @@ class App extends React.Component<Props, State>  {
         
         const isNavBarCollapsed = isSideBarCollapsed.get('left');
         const isSettingsBarCollapsed = isSideBarCollapsed.get('right');
-
+        
         return ( <section id="container" className={`${isNavBarCollapsed ? 'collapsed' : ''}`}>
                     { showHeader && <Header 
                         user={user}
@@ -165,6 +179,7 @@ class App extends React.Component<Props, State>  {
                             collapsed={ isNavBarCollapsed }
                             routes={ this.routes }
                             onTogglePanel={ () => this.handleTogglePanel('left') }
+                            onOpenSettings={ this.handleOpenSettings }
                             />            
                         <article className="page">                             
                             { children }
