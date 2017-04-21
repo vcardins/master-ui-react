@@ -1,3 +1,5 @@
+import INodeRequireUpdated from 'core/interfaces/INodeRequireUpdated';
+
 // We only need to import the modules necessary for initial render
 export const createRoutes = () => {
 /*  Note: Instead of using JSX, we are using react-router PlainRoute,
@@ -6,7 +8,8 @@ export const createRoutes = () => {
   const routes = {
     path: '/',
     getChildRoutes (location: any, next: any) {
-      require.ensure(['layouts/App'], (require: any): void => {
+      const updatedRequire = require as INodeRequireUpdated;
+      updatedRequire.ensure(['layouts/App'], (require: any): void => {
         
         const workspace = require('layouts/App').default;
         const protectedRoutes = Object.assign({}, workspace, {
