@@ -15,10 +15,11 @@ interface Props {
     onTogglePanel?: () => void;
     onOpenSettings?: () => void;
     showUserInfo?: boolean;
+    activeRoute: string;
 }
 
 const LeftPanel: React.StatelessComponent<Props> = (props: Props): JSX.Element => {
-    const { routes, collapsed = false, onTogglePanel, onOpenSettings, user, showUserInfo = false } = props;
+    const { routes, collapsed = false, onTogglePanel, onOpenSettings, user, showUserInfo = false, activeRoute } = props;
     let activeItem: string = '';
 
     return (
@@ -28,9 +29,7 @@ const LeftPanel: React.StatelessComponent<Props> = (props: Props): JSX.Element =
                 <div className="searchbox">
                     <Input icon="search" placeholder="Search ..." />
                 </div>
-                <Menu vertical>
-                    <Nav routes={routes} position="vertical"/>
-                </Menu>
+                <Nav routes={routes} position="vertical" activeRoute={activeRoute}/>
             </nav>
             <footer className="nav-footer">
                 <a href="javascript:void(0)" title="Expand/Collapse" onClick={onTogglePanel} className="toggle-collapse">

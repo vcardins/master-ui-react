@@ -40,6 +40,7 @@ interface State {
 class App extends React.Component<Props, State>  {
 
     routes: Array<Route>;       
+    currentRoute: string;
 
     constructor(props: any) {
         super(props);
@@ -61,8 +62,6 @@ class App extends React.Component<Props, State>  {
                     { id: 'city', href: '/provinces', label: 'Provinces', icon: 'map' },
                 ],
             },
-            { id: 'countries', href: '/countries', label: 'Countries', icon: 'flag' },
-            { id: 'city', href: '/provinces', label: 'Provinces', icon: 'map' },
             { id: 'reports', href: '/reports', label: 'Reports', icon: 'calculator' },
         ];
     }
@@ -134,8 +133,8 @@ class App extends React.Component<Props, State>  {
         const { router, routes, params } = props;
         let breadcrumb = '';
         const pathname = router.getCurrentLocation().pathname;
-        const currentRoute = routes.filter( ({path, name}) => pathname !== '/' ? path === pathname : !!name)[0]; 
-        const page = new PageInfo(currentRoute);
+        this.currentRoute = routes.filter( ({path, name}) => pathname !== '/' ? path === pathname : !!name)[0]; 
+        const page = new PageInfo(this.currentRoute);
 
         page.breadcrumb = routes
             .filter(({ path }) => !!path)
@@ -165,8 +164,8 @@ class App extends React.Component<Props, State>  {
             </div>);
         
         const isNavBarCollapsed = isSideBarCollapsed.get('left');
-        const isSettingsBarCollapsed = isSideBarCollapsed.get('right');
-        
+        const isSettingsBarCollapsed = isSideBarCollapsed.get('right');        
+
         return ( <section id="container" className={`${isNavBarCollapsed ? 'collapsed' : ''}`}>
                     { showHeader && <Header 
                         user={user}
@@ -175,9 +174,10 @@ class App extends React.Component<Props, State>  {
                         title="Master UI"/> }
                     <main className="main">
                         <LeftPanel 
-                            user={user}
+                            user={ user }
                             collapsed={ isNavBarCollapsed }
                             routes={ this.routes }
+                            activeRoute={router.getCurrentLocation().pathname}
                             onTogglePanel={ () => this.handleTogglePanel('left') }
                             onOpenSettings={ this.handleOpenSettings }
                             />            

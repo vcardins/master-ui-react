@@ -19,6 +19,7 @@ $dark: #303030;
 $color-dark: $primary-color;
 $color-light: lighten($primary-color, 25%);
 $color-lighter: lighten($primary-color, 50%);
+$color-lightest: lighten($primary-color, 65%);
 $color-opaque: scale-color($primary-color, 50%, 20%, 10%);
 
 // MEASURES
