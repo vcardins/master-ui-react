@@ -9,11 +9,26 @@
     @extend %resize-page;
 }
 
+section.horizontal-menu {
+    .main {
+        >.page {
+            width: 100%;
+        }
+    }
+}
+
+section.vertical-menu {
+    .main {
+        >.page {
+            width: calc(100% - #{$navbar-width-expanded});
+        }
+    }
+}
+
 .main {
     >.page {
         display: flex;
         flex-direction: column;
-        width: calc(100% - #{$navbar-width-expanded});
         transition: width 0.5s ease;
 
         >div {

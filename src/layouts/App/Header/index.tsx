@@ -2,8 +2,10 @@ import * as React from 'react';
 import { browserHistory, Link } from 'react-router';
 import { Icon, Image, Dropdown } from 'semantic-ui-react';
 import Logo from '../Logo';
+import IRoute from 'core/interfaces/IRoute';
 import { UserProfile } from 'core/auth';
 import appSettings from 'core/settings';
+import Nav from '../Nav';
 import './index.scss';
 
 interface Props {
@@ -11,10 +13,12 @@ interface Props {
     title?: string;
     onLogout: () => void;    
     onTogglePanel: (side: string) => void;
+    routes?: Array<IRoute>;
+    activeRoute?: string;
 }
 
 const Header: React.StatelessComponent<Props> = (props: Props): JSX.Element => {
-    const { title, onTogglePanel, onLogout, user } = props;
+    const { title, onTogglePanel, onLogout, user, routes, activeRoute } = props;
 
     const trigger = (
         <div className="profile">
@@ -48,7 +52,7 @@ const Header: React.StatelessComponent<Props> = (props: Props): JSX.Element => {
                 </span>
             </div>
             <div className="header-central">
-                <span/>
+                { routes && <Nav routes={routes} position="horizontal" activeRoute={activeRoute}/> }
             </div>
             <div className="header-right">                
                 <DropdownUserProfile/>                

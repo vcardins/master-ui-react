@@ -4,6 +4,7 @@ import { browserHistory, Link } from 'react-router';
 import { UserAuth, UserAction } from 'core/auth';
 import { Api } from 'core/helpers';
 import { PageInfo } from 'core/models';
+import IRoute from 'core/interfaces/IRoute';
 import appSettings from 'core/settings';
 import Header from './Header';
 import LeftPanel from './LeftPanel';
@@ -13,14 +14,6 @@ import './index.scss';
 import { UserProfile } from 'core/auth';
 
 const Console = console;
-
-interface Route {
-    id: string;
-    href: string;
-    label: string;
-    icon?: string;
-    children?: Array<Route>;
-}
 
 interface Props {
     dispatch: any;
@@ -39,8 +32,9 @@ interface State {
 
 class App extends React.Component<Props, State>  {
 
-    routes: Array<Route>;       
+    routes: Array<IRoute>;       
     currentRoute: string;
+    menuPosition: string = 'vertical';
 
     constructor(props: any) {
         super(props);
@@ -56,7 +50,7 @@ class App extends React.Component<Props, State>  {
         this.routes = [
             { id: 'dashboard', href: '/', label: 'Dashboard', icon: 'dashboard' },
             { 
-                id: 'geography', href: '', label: 'Geeography', icon: 'map',
+                id: 'geography', href: '', label: 'Locations', icon: 'map',
                 children: [
                     { id: 'countries', href: '/countries', label: 'Countries', icon: 'flag' },
                     { id: 'city', href: '/provinces', label: 'Provinces', icon: 'map' },
@@ -165,22 +159,27 @@ class App extends React.Component<Props, State>  {
         
         const isNavBarCollapsed = isSideBarCollapsed.get('left');
         const isSettingsBarCollapsed = isSideBarCollapsed.get('right');        
+        const activeRoute = router.getCurrentLocation().pathname;
 
-        return ( <section id="container" className={`${isNavBarCollapsed ? 'collapsed' : ''}`}>
+        return ( <section id="container" className={`${isNavBarCollapsed ? 'collapsed' : ''} ${this.menuPosition}-menu`}>
                     { showHeader && <Header 
                         user={user}
                         onLogout={ this.handleLogout }
                         onTogglePanel={ this.handleTogglePanel }
+                        routes={ this.menuPosition === 'horizontal' ? this.routes : null }
+                        activeRoute={ activeRoute }
                         title="Master UI"/> }
                     <main className="main">
-                        <LeftPanel 
-                            user={ user }
-                            collapsed={ isNavBarCollapsed }
-                            routes={ this.routes }
-                            activeRoute={router.getCurrentLocation().pathname}
-                            onTogglePanel={ () => this.handleTogglePanel('left') }
-                            onOpenSettings={ this.handleOpenSettings }
-                            />            
+                        { this.menuPosition === 'vertical' && 
+                            <LeftPanel 
+                                user={ user }
+                                collapsed={ isNavBarCollapsed }
+                                routes={this.routes}
+                                activeRoute={ activeRoute }
+                                onTogglePanel={ () => this.handleTogglePanel('left') }
+                                onOpenSettings={ this.handleOpenSettings }
+                                /> 
+                        }
                         <article className="page">                             
                             { children }
                         </article>

@@ -3,19 +3,20 @@ import { Link } from 'react-router';
 import { Sidebar, Segment, Icon, Menu, Input } from 'semantic-ui-react';
 import Logo from '../Logo';
 import Nav from '../Nav';
+import IRoute from 'core/interfaces/IRoute';
 import UserInfo from './components/UserInfo';
 import { UserProfile } from 'core/auth';
 import FullScreen from 'widgets/FullScreen';
 import './index.scss';
 
 interface Props {
-    routes: Array<any>;
     collapsed: boolean;
     user?: UserProfile;
+    routes?: Array<IRoute>;
     onTogglePanel?: () => void;
     onOpenSettings?: () => void;
     showUserInfo?: boolean;
-    activeRoute: string;
+    activeRoute?: string;
 }
 
 const LeftPanel: React.StatelessComponent<Props> = (props: Props): JSX.Element => {
@@ -29,7 +30,7 @@ const LeftPanel: React.StatelessComponent<Props> = (props: Props): JSX.Element =
                 <div className="searchbox">
                     <Input icon="search" placeholder="Search ..." />
                 </div>
-                <Nav routes={routes} position="vertical" activeRoute={activeRoute}/>
+                { routes && <Nav routes={routes} position="vertical" activeRoute={activeRoute}/> }
             </nav>
             <footer className="nav-footer">
                 <a href="javascript:void(0)" title="Expand/Collapse" onClick={onTogglePanel} className="toggle-collapse">
