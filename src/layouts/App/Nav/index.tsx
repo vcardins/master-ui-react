@@ -42,7 +42,7 @@ const Nav: React.StatelessComponent<Props> = (props: Props): JSX.Element => {
             <Tag {...props}>
                 { icon && !isChild && <Icon name={ icon } /> }
                 { label }
-                { hasChildren && <span className="expander"><Icon className="chevron right"></Icon></span>}
+                { hasChildren && <Icon className="chevron down expander"></Icon>}
             </Tag>
             { hasChildren && <ul className="submenu">{<li className="placeholder"></li>}{children.map((item) => getMenuItem(Object.assign({}, item, {isChild: true})))}</ul> }
         </li>);

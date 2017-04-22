@@ -23,7 +23,7 @@
                     }
                 }
 
-                .expander {
+                i.expander {
                     display: none;
                 }
 
@@ -178,19 +178,17 @@
         position: relative;
 
         a {
-            i {
+            i:first-child {
                 font-size: 18px;
                 margin-right: 0.5em;
             }
 
-            .expander {
+            i.expander {
                 float: right;
-
-                i {
-                    font-size: 10px;
-                    min-width: inherit;
-                    transition-duration: 250ms;
-                }
+                line-height: normal;
+                font-size: 10px;
+                transition-duration: 250ms;
+                margin-top: 5px;
             }
         }
     }
@@ -198,11 +196,8 @@
     .parentLevel {
         &:hover,
         &.expanded {
-            .expander {
-                i {
-                    transform-origin: 50% 50%;
-                    transform: rotate(90deg);
-                }
+            i.expander {
+                transform: rotateZ(180deg);
             }
 
             .submenu {
