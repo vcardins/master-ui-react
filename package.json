@@ -18,6 +18,7 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-form-controlled": "^0.17.22",
+    "react-ga": "^2.2.0",
     "react-router": "^3.0.5",
     "screenfull": "^3.1.0",
     "semantic-ui-css": "^2.2.9",

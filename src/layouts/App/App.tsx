@@ -12,6 +12,7 @@ import Footer from './Footer';
 import { Container, Sidebar, Segment, Popup } from 'semantic-ui-react';
 import './index.scss';
 import { UserProfile } from 'core/auth';
+import * as ReactGA from 'react-ga';
 
 const Console = console;
 
@@ -41,6 +42,7 @@ class App extends React.Component<Props, State>  {
         this.handleLogout = this.handleLogout.bind(this); 
         this.handleTogglePanel = this.handleTogglePanel.bind(this);
         this.handleOpenSettings = this.handleOpenSettings.bind(this);
+        this.logPageView = this.logPageView.bind(this);
         this.state = {           
             isSideBarCollapsed: new Map<string, boolean>([['left', false], ['right', false]]),
             page: new PageInfo(),
@@ -61,12 +63,11 @@ class App extends React.Component<Props, State>  {
     }
 
     componentWillReceiveProps = (newProps) => {
-        this._preparePageInfo(newProps);
+        this.preparePageInfo(newProps);
     }
 
     componentDidMount() {
         const { dispatch, router } = this.props;      
-        // this._preparePageInfo(this.props);
 
         if (!UserAuth.isAuthenticated()) {
             // set the current url/path for future redirection (we use a Redux action)
@@ -79,11 +80,28 @@ class App extends React.Component<Props, State>  {
                 .then((result: any) => this.setState({ user: result }));
         }
 
+        if (appSettings.analyticsId) {
+            // Initialize Google Analytics
+            ReactGA.initialize(appSettings.analyticsId, { debug: false });
+            // Log page view as soon as page is loaded
+            this.logPageView();
+             browserHistory.listen((nextLocation: any) => {
+                this.logPageView();
+            });
+        }
+
         const node = ReactDOM.findDOMNode(this).parentNode as HTMLElement;
         window.addEventListener('resize', this.handleWindowResize.bind(this, node));
         this.handleWindowResize(node);
     }
     
+	logPageView() {
+        ReactGA.set({ page: this.locationPath });
+        ReactGA.pageview(this.locationPath);
+	}	
+
+    get locationPath() { return this.props.router.getCurrentLocation().pathname; }
+
     handleWindowResize(node: HTMLElement) { 
         if (!node) {
             return;
@@ -123,12 +141,12 @@ class App extends React.Component<Props, State>  {
         console.log('Open Settings');
     }
 
-    _preparePageInfo = (props) => {
+    preparePageInfo = (props) => {
         const { router, routes, params } = props;
         let breadcrumb = '';
         const pathname = router.getCurrentLocation().pathname;
-        this.currentRoute = routes.filter( ({path, name}) => pathname !== '/' ? path === pathname : !!name)[0]; 
-        const page = new PageInfo(this.currentRoute);
+        const currentRoute = routes.filter( ({path, name}) => pathname !== '/' ? path === pathname : !!name)[0]; 
+        const page = new PageInfo(currentRoute);
 
         page.breadcrumb = routes
             .filter(({ path }) => !!path)
@@ -159,15 +177,14 @@ class App extends React.Component<Props, State>  {
         
         const isNavBarCollapsed = isSideBarCollapsed.get('left');
         const isSettingsBarCollapsed = isSideBarCollapsed.get('right');        
-        const activeRoute = router.getCurrentLocation().pathname;
-
+        
         return ( <section id="container" className={`${isNavBarCollapsed ? 'collapsed' : ''} ${this.menuPosition}-menu`}>
                     { showHeader && <Header 
                         user={user}
                         onLogout={ this.handleLogout }
                         onTogglePanel={ this.handleTogglePanel }
                         routes={ this.menuPosition === 'horizontal' ? this.routes : null }
-                        activeRoute={ activeRoute }
+                        activeRoute={ this.locationPath }
                         title="Master UI"/> }
                     <main className="main">
                         { this.menuPosition === 'vertical' && 
@@ -175,7 +192,7 @@ class App extends React.Component<Props, State>  {
                                 user={ user }
                                 collapsed={ isNavBarCollapsed }
                                 routes={this.routes}
-                                activeRoute={ activeRoute }
+                                activeRoute={ this.locationPath }
                                 onTogglePanel={ () => this.handleTogglePanel('left') }
                                 onOpenSettings={ this.handleOpenSettings }
                                 /> 

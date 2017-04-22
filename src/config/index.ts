@@ -7,7 +7,7 @@ let configBase = {
 	defaultRoute: '/',
 	version: '0.0.1',
 	tokenPrefix: 'masterui',
-	analyticsId: 'UA-71612383-1',
+	analyticsId: '',
 	api : {
 		url: '/',
 		clientId: '045A23D0-3859-42F1-A9CF-AE688EA0F030',
