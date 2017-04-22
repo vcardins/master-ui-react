@@ -1,12 +1,10 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Router } from 'react-router';
+import { Router, browserHistory } from 'react-router';
 // application styles
 import 'styles/index.scss';
 // also, semantic already has normalize.css 3.0.1 (I'm not sure)
 import 'semantic-ui-css/semantic.css';
-
-import { browserHistory } from 'react-router';
 
 const ROOT_NODE = 'app';
 const ROOT_ELEMENT = document.getElementById(ROOT_NODE);
