@@ -62,7 +62,7 @@ class ProvinceContainer extends React.Component<Props, State>  {
         this.loadModels(value);
     }
 
-    handleFieldChange = (event: any): void => {
+    handleFieldChange (event: any): void {
         event.preventDefault();
         const { name, value } = event.target;
         const state = Object.assign({}, {}, this.state.model);
