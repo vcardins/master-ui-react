@@ -2,7 +2,7 @@ import * as React from 'react';
 import { browserHistory, Link } from 'react-router';
 import { Icon, Image, Dropdown } from 'semantic-ui-react';
 import Logo from '../Logo';
-import IRoute from 'core/interfaces/IRoute';
+import IMenuItem from '../../interfaces/IMenuItem';
 import { UserProfile } from 'core/auth';
 import appSettings from 'core/settings';
 import Nav from '../Nav';
@@ -13,7 +13,7 @@ interface Props {
     title?: string;
     onLogout: () => void;    
     onTogglePanel: (side: string) => void;
-    routes?: Array<IRoute>;
+    routes?: Array<IMenuItem>;
     activeRoute?: string;
 }
 

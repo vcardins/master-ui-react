@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Router, browserHistory } from 'react-router';
+import { AppContainer } from 'react-hot-loader';
 // application styles
 import 'styles/index.scss';
 // also, semantic already has normalize.css 3.0.1 (I'm not sure)
@@ -17,7 +18,9 @@ const renderError = (error) => {
 const render = (key = null) => {
     const children = require('./routes/index').default(); 
     const App = (
-        <Router routes={children} history={browserHistory} key={key} />
+        <AppContainer>
+            <Router routes={children} history={browserHistory} key={key} />
+        </AppContainer>
     )
     document.addEventListener('DOMContentLoaded', () => {
         ReactDOM.render(App, ROOT_ELEMENT);

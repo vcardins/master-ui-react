@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { Sidebar, Segment, Icon, Menu, Input } from 'semantic-ui-react';
 import Logo from '../Logo';
 import Nav from '../Nav';
-import IRoute from 'core/interfaces/IRoute';
+import IMenuItem from '../interfaces/IMenuItem';
 import UserInfo from './components/UserInfo';
 import { UserProfile } from 'core/auth';
 import FullScreen from 'widgets/FullScreen';
@@ -12,7 +12,7 @@ import './index.scss';
 interface Props {
     collapsed: boolean;
     user?: UserProfile;
-    routes?: Array<IRoute>;
+    routes?: Array<IMenuItem>;
     onTogglePanel?: () => void;
     onOpenSettings?: () => void;
     showUserInfo?: boolean;

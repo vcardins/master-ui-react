@@ -3,11 +3,11 @@
 import * as React from 'react';
 import { Link } from 'react-router';
 import { Menu, Icon } from 'semantic-ui-react';
-import IRoute from 'core/interfaces/IRoute';
+import IMenuItem from '../interfaces/IMenuItem';
 import './index.scss';
 
 interface Props {
-    routes: Array<IRoute>;
+    routes: Array<IMenuItem>;
     position: string;
     activeRoute: string;
 }

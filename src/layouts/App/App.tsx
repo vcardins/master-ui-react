@@ -1,18 +1,22 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { browserHistory, Link } from 'react-router';
-import { UserAuth, UserAction } from 'core/auth';
+import * as ReactGA from 'react-ga';
+import { Container, Sidebar, Segment, Popup } from 'semantic-ui-react';
+
+import { BaseComponent } from 'core/decorators';
+import { UserAuth, UserAction, UserProfile } from 'core/auth';
 import { Api } from 'core/helpers';
 import { PageInfo } from 'core/models';
-import IRoute from 'core/interfaces/IRoute';
+import IMenuItem from '../interfaces/IMenuItem';
 import appSettings from 'core/settings';
+
 import Header from './Header';
 import LeftPanel from './LeftPanel';
 import Footer from './Footer';
-import { Container, Sidebar, Segment, Popup } from 'semantic-ui-react';
 import './index.scss';
-import { UserProfile } from 'core/auth';
-import * as ReactGA from 'react-ga';
+
+import * as menu from '../menu.json';
 
 const Console = console;
 
@@ -31,35 +35,20 @@ interface State {
     showHeader: boolean;
 }
 
-class App extends React.Component<Props, State>  {
-
-    routes: Array<IRoute>;       
+class App extends BaseComponent<Props, State> {
+    // tslint:disable-next-line:no-string-literal
+    routes: Array<IMenuItem> = menu['items'] as Array<IMenuItem>;
     currentRoute: string;
     menuPosition: string = 'vertical';
+    state = {           
+        isSideBarCollapsed: new Map<string, boolean>([['left', false], ['right', false]]),
+        page: new PageInfo(),
+        user: new UserProfile(),
+        showHeader: true,
+    };
 
-    constructor(props: any) {
-        super(props);
-        this.handleLogout = this.handleLogout.bind(this); 
-        this.handleTogglePanel = this.handleTogglePanel.bind(this);
-        this.handleOpenSettings = this.handleOpenSettings.bind(this);
-        this.logPageView = this.logPageView.bind(this);
-        this.state = {           
-            isSideBarCollapsed: new Map<string, boolean>([['left', false], ['right', false]]),
-            page: new PageInfo(),
-            user: new UserProfile(),
-            showHeader: true,
-        };
-        this.routes = [
-            { id: 'dashboard', href: '/', label: 'Dashboard', icon: 'dashboard' },
-            { 
-                id: 'geography', href: '', label: 'Locations', icon: 'map',
-                children: [
-                    { id: 'countries', href: '/countries', label: 'Countries', icon: 'flag' },
-                    { id: 'city', href: '/provinces', label: 'Provinces', icon: 'map' },
-                ],
-            },
-            { id: 'reports', href: '/reports', label: 'Reports', icon: 'calculator' },
-        ];
+    constructor(props: Props) {
+        super();        
     }
 
     componentWillReceiveProps = (newProps) => {
@@ -96,11 +85,13 @@ class App extends React.Component<Props, State>  {
     }
     
 	logPageView() {
-        ReactGA.set({ page: this.locationPath });
-        ReactGA.pageview(this.locationPath);
+        ReactGA.set({ page: this.getLocationPath() });
+        ReactGA.pageview(this.getLocationPath());
 	}	
 
-    get locationPath() { return this.props.router.getCurrentLocation().pathname; }
+    getLocationPath() { 
+        return this.props.router.getCurrentLocation().pathname; 
+    }
 
     handleWindowResize(node: HTMLElement) { 
         if (!node) {
@@ -184,7 +175,7 @@ class App extends React.Component<Props, State>  {
                         onLogout={ this.handleLogout }
                         onTogglePanel={ this.handleTogglePanel }
                         routes={ this.menuPosition === 'horizontal' ? this.routes : null }
-                        activeRoute={ this.locationPath }
+                        activeRoute={ this.getLocationPath() }
                         title="Master UI"/> }
                     <main className="main">
                         { this.menuPosition === 'vertical' && 
@@ -192,7 +183,7 @@ class App extends React.Component<Props, State>  {
                                 user={ user }
                                 collapsed={ isNavBarCollapsed }
                                 routes={this.routes}
-                                activeRoute={ this.locationPath }
+                                activeRoute={ this.getLocationPath() }
                                 onTogglePanel={ () => this.handleTogglePanel('left') }
                                 onOpenSettings={ this.handleOpenSettings }
                                 /> 
@@ -207,4 +198,4 @@ class App extends React.Component<Props, State>  {
     }
 }
 
-export default App; 
+export default App;

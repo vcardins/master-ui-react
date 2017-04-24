@@ -74,7 +74,7 @@ const Dashboard: React.StatelessComponent<Props> = (props: Props): JSX.Element =
                         meta="Friend"
                         description={description}/>
                 </Grid.Column>
-            </Grid>                
+            </Grid>            
         </div>
     );
 };
