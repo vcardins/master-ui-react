@@ -1,7 +1,7 @@
-﻿export default class Base64 {
-    static keyStr: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+﻿const Base64 = () => {
+    const keyStr: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
 
-    static encode(e : string) : string {
+    function encode(e: string): string {
         let t = ''; let n, r, i, s, o, u, a; let f = 0; e = this.utf8Encode(e);
         while (f < e.length) {
             n = e.charCodeAt(f++); r = e.charCodeAt(f++);
@@ -18,7 +18,7 @@
         return t;
     }
 
-    static decode(e : string) : string {
+    function decode(e: string): string {
         let t = '';
         let n, r, i;
         let s, o, u, a;
@@ -42,7 +42,7 @@
         return t;
     }
 
-    static utf8Encode(e) {
+    function utf8Encode(e) {
         e = e.replace(/\r\n/g, '\n');
         let t = '';
         for (let n = 0; n < e.length; n++) {
@@ -63,7 +63,7 @@
         return t;
     }
 
-    static utf8Decode(e) {
+    function utf8Decode(e) {
         let t = '';
         let n = 0;
         let r = 0;        
@@ -86,7 +86,15 @@
                 n += 3;
             }
         }
-
         return t;
     }
-}
+
+    return {
+        encode,
+        decode,
+        utf8Encode,
+        utf8Decode,
+    };
+};
+
+export default Base64();

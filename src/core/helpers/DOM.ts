@@ -1,7 +1,6 @@
 import * as ReactDOM from 'react-dom';
 
 const DOM = {
-
     animateElement: function(ref: any, callback: Function = null, delay = 500, type = 'opacity') {
         const elem = ReactDOM.findDOMNode(ref);
         if (elem instanceof HTMLElement) {
