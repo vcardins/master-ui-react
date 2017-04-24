@@ -15,7 +15,7 @@ let webpackConfig = {
         // Add the react hot loader entry point - in reality, you only want this in your dev Webpack config
         client: [
             'react-hot-loader/patch',
-            'webpack-hot-middleware/client?reload=true',
+            'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
             'webpack/hot/only-dev-server',
             './src/index.jsx',
         ],

@@ -26,7 +26,7 @@ const basePlugins = [
         'process.env': {
             NODE_ENV: JSON.stringify(process.env.NODE_ENV),
         },
-    }),
+    }),    
     new webpack.LoaderOptionsPlugin(settings.loadersOptions()),
     new CopyWebpackPlugin([
         {
@@ -35,6 +35,14 @@ const basePlugins = [
             to: './',
         },
     ]),
+    new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor',
+        filename: 'vendor.[hash].js',
+        minChunks: (module) => {
+            // this assumes your vendor imports exist in the node_modules directory
+            return module.context && module.context.indexOf('node_modules') !== -1;
+        },
+    }),
     new LogPlugin(settings.port),
 ].concat(sourceMap);
 
@@ -45,6 +53,7 @@ const devPlugins = [
         failOnError: false,
     }),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new FriendlyErrors(),
 ];
@@ -53,8 +62,13 @@ const prodPlugins = [
     new ProgressPlugin(),
     new ExtractTextPlugin('styles.[contenthash:8].css'),
     new SplitByPathPlugin([
-        { name: 'vendor', path: [path.join(__dirname, '..', 'node_modules/')] },
+        { 
+            name: 'vendor', 
+            path: [path.join(__dirname, '..', 'node_modules/')],
+            filename: 'vendors.[hash].js', 
+        },
     ]),
+    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
         sourceMap: false,
         compress: {

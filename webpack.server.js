@@ -22,7 +22,7 @@ catch (err) {
 
 const devMiddleWare = require('webpack-dev-middleware')(compiler, {
     publicPath: webpackConfig.output.publicPath,
-    quiet: false,
+    quiet: true,
     inline: true,
     headers: {
         'Access-Control-Allow-Origin': '*',

@@ -8,6 +8,7 @@ exports.javascript = {
 exports.typescript = {
     test: /\.(ts|tsx)$/,
     loaders: [`awesome-typescript-loader?${JSON.stringify({ignoreDiagnostics:[2305, 2307]})}`],
+    exclude: /node_modules/,
 };
 
 exports.tslint = {
