@@ -29,7 +29,7 @@ interface Props {
 }
 
 interface State {    
-    isSideBarCollapsed: Map<string, boolean>;
+    isNavBarCollapsed: boolean;
     page: PageInfo;
     user: UserProfile;
     showHeader: boolean;
@@ -41,7 +41,7 @@ class App extends BaseComponent<Props, State> {
     currentRoute: string;
     menuPosition: string = 'vertical';
     state = {           
-        isSideBarCollapsed: new Map<string, boolean>([['left', false], ['right', false]]),
+        isNavBarCollapsed: false,
         page: new PageInfo(),
         user: new UserProfile(),
         showHeader: true,
@@ -97,7 +97,6 @@ class App extends BaseComponent<Props, State> {
         if (!node) {
             return;
         }
-        const { isSideBarCollapsed } = this.state;
         const w = window.innerWidth;
         let viewport;
 
@@ -123,9 +122,8 @@ class App extends BaseComponent<Props, State> {
     }
 
     handleTogglePanel(side: string, isCollapsed: boolean = false) {
-        const { isSideBarCollapsed } = this.state;
-        isSideBarCollapsed.set(side, isCollapsed ? isCollapsed : !isSideBarCollapsed.get(side));
-        this.setState({ isSideBarCollapsed });
+        const { isNavBarCollapsed } = this.state;
+        this.setState({ isNavBarCollapsed: !isNavBarCollapsed });
     }
 
     handleOpenSettings() {
@@ -159,15 +157,12 @@ class App extends BaseComponent<Props, State> {
     }
     
     render(): JSX.Element {
-        const { isSideBarCollapsed, page, user, showHeader } = this.state;
+        const { page, user, showHeader, isNavBarCollapsed } = this.state;
         const { router, children } = this.props;      
         const header = page.title && !page.headerless && (
             <div className="page-header">
                 <h2>{ page.title }</h2>
             </div>);
-        
-        const isNavBarCollapsed = isSideBarCollapsed.get('left');
-        const isSettingsBarCollapsed = isSideBarCollapsed.get('right');        
         
         return ( <section id="container" className={`${isNavBarCollapsed ? 'collapsed' : ''} ${this.menuPosition}-menu`}>
                     { showHeader && <Header 
@@ -182,7 +177,7 @@ class App extends BaseComponent<Props, State> {
                             <LeftPanel 
                                 user={ user }
                                 collapsed={ isNavBarCollapsed }
-                                routes={this.routes}
+                                routes={ this.routes }
                                 activeRoute={ this.getLocationPath() }
                                 onTogglePanel={ () => this.handleTogglePanel('left') }
                                 onOpenSettings={ this.handleOpenSettings }

@@ -1,7 +1,7 @@
 import INodeRequireUpdated from 'core/interfaces/INodeRequireUpdated';
 
 // We only need to import the modules necessary for initial render
-export const createRoutes = () => {
+const createRoutes = () => {
 /*  Note: Instead of using JSX, we are using react-router PlainRoute,
     a simple javascript object to provide route definitions.  */
   
@@ -51,4 +51,4 @@ export const createRoutes = () => {
   return routes;
 };
 
-export default createRoutes;
+export default createRoutes();

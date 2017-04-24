@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Router, browserHistory } from 'react-router';
 import { AppContainer } from 'react-hot-loader';
+import routes from './routes';
 // application styles
 import 'styles/index.scss';
 // also, semantic already has normalize.css 3.0.1 (I'm not sure)
@@ -15,11 +16,10 @@ const renderError = (error) => {
     ReactDOM.render(<RedBox error={error}/>, ROOT_ELEMENT)
 }
 
-const render = (key = null) => {
-    const children = require('./routes/index').default(); 
+const render = (children) => {
     const App = (
         <AppContainer>
-            <Router routes={children} history={browserHistory} key={key} />
+            <Router routes={children} history={browserHistory} />
         </AppContainer>
     )
     document.addEventListener('DOMContentLoaded', () => {
@@ -30,9 +30,10 @@ const render = (key = null) => {
 // Enable HMR and catch runtime errors in RedBox
 // This code is excluded from production bundle
 if (module.hot) { 
-    module.hot.accept('./layouts/App', () => {
+    module.hot.accept('./routes', () => {
+        const newRoutes = require('./routes').default;
         try {
-            render(Math.random());
+            render(newRoutes);
         } 
         catch (error) {
             renderError(error);
@@ -40,4 +41,4 @@ if (module.hot) {
     });
 }
 
-render();
+render(routes);
