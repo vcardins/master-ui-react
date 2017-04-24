@@ -9,15 +9,3 @@ export default function HOCBaseRender<Props, State, ComponentState>(
         }
     };
 }
-
-// export default function Validator <Props, State, CompState> (
-//     WrappedComponent: React.ComponentClass<Props & State>,
-// ): React.ComponentClass<Props & State> {
-//     const Decorator =  class extends React.Component<Props & State, CompState> {              
-//         render() {
-//             console.log(this.state);
-//             return <WrappedComponent {...this.props} {...this.state} />;
-//         }
-//     };
-//     return Decorator;
-// }
