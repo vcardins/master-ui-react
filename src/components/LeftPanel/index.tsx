@@ -11,7 +11,7 @@ import './index.scss';
 
 interface Props {
     collapsed: boolean;
-    user?: UserProfile;
+    user?: any;
     routes?: Array<IMenuItem>;
     children?: string | JSX.Element;
     onTogglePanel?: () => void;

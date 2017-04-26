@@ -17,11 +17,13 @@ const renderError = (error) => {
 };
 
 const render = (children) => {
+    // Let's bind the component to the tree through the `root` higher-order component
     const App = (
         <AppContainer>
             <Router routes={children} history={browserHistory} />
         </AppContainer>
     );
+
     document.addEventListener('DOMContentLoaded', () => {
         ReactDOM.render(App, ROOT_ELEMENT);
     });

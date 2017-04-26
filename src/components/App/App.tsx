@@ -3,7 +3,10 @@ import * as ReactDOM from 'react-dom';
 import { browserHistory, Link } from 'react-router';
 import * as ReactGA from 'react-ga';
 import { Icon } from 'semantic-ui-react';
+import { root, branch } from 'baobab-react/higher-order';
+import state from 'state';
 
+import LookupStore from 'core/data/LookupStore';
 import { BaseComponent } from 'core/decorators';
 import { UserAuth, UserAction, UserProfile } from 'core/auth';
 import { Api } from 'core/helpers';
@@ -31,17 +34,20 @@ interface Props {
     children: string | JSX.Element;
     router: any;
     location: any;
+    user: any;
 }
 
-interface State {    
+interface State {        
     isNavBarCollapsed: boolean;
     page: PageInfo;
-    user: UserProfile;
     layout: LayoutSettings;
 }
 
 const layoutProp = 'layout';
 
+@branch({
+  user: ['user'],
+})
 class App extends BaseComponent<Props, State> {
     // tslint:disable-next-line:no-string-literal    
     routes: Array<IMenuItem> = menu['items'] as Array<IMenuItem>;
@@ -64,7 +70,6 @@ class App extends BaseComponent<Props, State> {
     state = {           
         isNavBarCollapsed: false,
         page: new PageInfo(),
-        user: new UserProfile(),
         layout: LayoutSettings.getInstance(),
     };
 
@@ -84,6 +89,8 @@ class App extends BaseComponent<Props, State> {
         } else {
             try {                
                 const user = await UserAction.getProfile();
+            UserAction.loadProfile();
+            LookupStore.load();
                 this.setState({ user }, () => this.handleSuccessAuth());
             } catch (e) {
                 this.handleFailureAuth();
@@ -204,6 +211,8 @@ class App extends BaseComponent<Props, State> {
             <div className="page-header">
                 <h2>{ page.title }</h2>
             </div>);
+        // tslint:disable-next-line:no-string-literal
+        const user = this.props.user['model'] || {};
         
         if (!layout) {
             return null;
@@ -300,4 +309,4 @@ class App extends BaseComponent<Props, State> {
 }
                         
 
-export default App;
+export default root(state, App);

@@ -1,7 +1,7 @@
 import UserProfile from './UserProfile';
 
 interface IUserAction {
-    getProfile(): Promise<UserProfile>;
+    loadProfile(): void;
     updateProfile(data: UserProfile): Promise<UserProfile>;
     signup(data: any): Promise<any>;
     verifyAccount(data: any): Promise<any>;
