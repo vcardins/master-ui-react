@@ -7,10 +7,10 @@ global.shallow = shallow;
 global.render = render;
 global.mount = mount;
 
-// Fail tests on any warning
 // console.error = (message) => {
 //    throw new Error(message);
 // };
 
 // Reference
 // https://hackernoon.com/testing-react-components-with-jest-and-enzyme-41d592c174f
+// };
