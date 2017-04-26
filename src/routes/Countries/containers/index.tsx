@@ -5,36 +5,41 @@ import Actions from '../Actions';
 import Country from '../models/Country';
 import Page from 'components/Page';
 import { animateTransition } from 'core/decorators';
+import { branch } from 'baobab-react/higher-order';
 
 interface Props {
     children: JSX.Element;
-    router: any;    
+    router: any;
+    lookup: Array<any>;
+    ajax: any;
 }
 
 interface State {
     isLoading: boolean;
-    models: Array<any>;
 }
 
+@branch({
+  lookup: ['lookup'],
+  ajax: ['ajax'],
+})
 class CountriesContainer extends React.Component<Props, State>  {
 
     state: State = { 
         isLoading: false, 
-        models: [],
     };
 
     constructor(props: Props) {
         super(props);
     }
 
-    async componentDidMount() {           
-        this.setState({isLoading: true});
-        const models = await Actions.getCountries();
-        this.setState({ models, isLoading: false });
-    }
-
     render(): JSX.Element {
-        const { isLoading, models } = this.state;
+        // tslint:disable-next-line:no-string-literal
+        const lookup = this.props.lookup['models'];
+        // tslint:disable-next-line:no-string-literal
+        const models = !!lookup ? lookup['countries'] : [];
+        // tslint:disable-next-line:no-string-literal
+        const isLoading = this.props.ajax ? !!this.props.ajax['loading'] : false;
+        console.log(models, isLoading);
 
         return (
             <Page 

@@ -10,7 +10,7 @@ import Nav from '../Nav';
 import './index.scss';
 
 interface Props {
-    user?: UserProfile;
+    user?: any;
     title?: string;
     onLogout: () => void;    
     onTogglePanel: (side: string) => void;
@@ -28,7 +28,7 @@ const Header: React.StatelessComponent<Props> = (props: Props): JSX.Element => {
             </div>
             <div className="info">
                 <span className="greetings">Hello,</span> 
-                <span className="name">{ user.fullName }</span>
+                <span className="name">{ user.firstName }</span>
             </div>
         </div>
     );

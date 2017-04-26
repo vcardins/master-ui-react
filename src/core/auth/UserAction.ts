@@ -5,9 +5,17 @@ import AccessLevel from './AccessLevel';
 import ActionResult from 'core/models/ActionResult';
 import { Api } from 'core/helpers';
 import settings from 'core/settings';
+import State from 'state';
+import DataStore from 'core/data/DataStore';
+
+const userDataStore = new DataStore<UserProfile>('profile', 'user', 'userId');
+
+const userCursor = State.select('user');
 
 const UserAction: IUserAction = { 
 
+    loadProfile(): void {
+        userDataStore.getSingle().then((profile: any) => profile);
     async getProfile(): Promise<UserProfile> {
         const profile = await Api.get('profile');
         return new UserProfile(profile);
