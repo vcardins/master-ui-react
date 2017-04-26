@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Logo Component Rendering Should render something even if NO props are received 1`] = `
+<div
+  className="logo"
+>
+  <img
+    alt={undefined}
+    className="ui centered image"
+    height={35}
+    onClick={undefined}
+    src={undefined}
+    width={undefined}
+  />
+</div>
+`;
+
+exports[`Logo Component Rendering Should render something if it receives props 1`] = `
+<div
+  className="logo"
+>
+  <img
+    alt="Logo component test"
+    className="ui centered image"
+    height={50}
+    onClick={[Function]}
+    src="http://placehold.it/350x150"
+    width={undefined}
+  />
+</div>
+`;
+
+exports[`Logo behaviour should pass a selected value to the onClick handler 1`] = `
+<component
+  onClick={[Function]}
+/>
+`;

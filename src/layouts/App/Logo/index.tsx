@@ -3,16 +3,18 @@ import { Image } from 'semantic-ui-react';
 import './index.scss';
 
 interface Props {
-    imageUrl?: string;
-    onLogoBtnClick?: Function;    
+    height?: number;  
+    imageUrl: string;
+    alt?: string;
+    onClick?: Function;    
 }
 
 const Logo: React.StatelessComponent<Props> = (props: Props): JSX.Element => {
-    const { imageUrl, onLogoBtnClick } = props;
+    const { imageUrl, onClick, alt, height = 35 } = props;
 
     return (
         <div className="logo">
-            <Image src={imageUrl} centered height="34px" onClick={onLogoBtnClick}/>
+            <Image src={imageUrl} centered height={height} onClick={onClick} alt={alt} />
         </div>
     );
 };
