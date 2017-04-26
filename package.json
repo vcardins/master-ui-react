@@ -51,6 +51,7 @@
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
     "debug": "^2.6.4",
+    "env2": "^2.1.1",
     "enzyme": "^2.8.2",
     "enzyme-to-json": "^1.5.1",
     "eslint": "^3.16.1",
@@ -70,7 +71,7 @@
     "json-server": "^0.9.5",
     "lodash-webpack-plugin": "^0.11.2",
     "minimist": "^1.2.0",
-    "mocha": "^3.2.0",
+    "nightwatch": "^0.9.14",
     "node-sass": "^4.5.0",
     "nodemon": "^1.11.0",
     "null-loader": "^0.1.1",
@@ -86,6 +87,8 @@
     "resolve-url-loader": "^2.0.0",
     "rimraf": "^2.6.1",
     "sass-loader": "^6.0.2",
+    "selenium-download": "^2.0.10",
+    "selenium-standalone": "^6.4.1",
     "source-map-loader": "^0.2.0",
     "style-loader": "^0.16.1",
     "stylelint": "^7.9.0",
@@ -107,9 +110,11 @@
   },
   "jest": {
     "setupFiles": [
-      "./test/jestsetup.js"
+      "./test/jest/jestsetup.js"
     ],
-    "moduleDirectories": ["node_modules"],
+    "moduleDirectories": [
+      "node_modules"
+    ],
     "snapshotSerializers": [
       "<rootDir>/node_modules/enzyme-to-json/serializer"
     ],
@@ -125,16 +130,17 @@
       ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-		"unmockedModulePathPatterns": [
-			"node_modules/react/",
-			"node_modules/enzyme/"
-		],
-		"globals": {
-			"TS_CONFIG": "tsconfig.json"
-		},
+    "unmockedModulePathPatterns": [
+      "node_modules/react/",
+      "node_modules/enzyme/"
+    ],
+    "globals": {
+      "TS_CONFIG": "tsconfig.json"
+    },
     "testResultsProcessor": "<rootDir>/node_modules/ts-jest/coverageprocessor.js"
   },
   "scripts": {
+    "postinstall": "node test/nightwatch/nightwatch.conf.js",
     "clean": "rimraf dist/",
     "prebuild": "npm run clean",
     "build": "NODE_ENV=production webpack --progress --colors",
@@ -148,7 +154,11 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "db": "nodemon ./db",
-    "dev": "NODE_ENV=development node webpack.server.js --hot --progress --colors"
+    "dev": "NODE_ENV=development node webpack.server.js --hot --progress --colors",
+    "e2e-setup": "node_modules/selenium-standalone/bin/selenium-standalone install",
+    "e2e-test": "cd test/nightwatch && node nightwatch",
+    "e2e": "node_modules/.bin/nightwatch --config nightwatch.conf.js",
+    "e2e-ie": "node_modules/.bin/nightwatch -e ie11"
   },
   "author": "Victor Cardins <vcardins@gmail.com>",
   "keywords": [

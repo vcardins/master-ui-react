@@ -41,3 +41,8 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 *.gzip
+
+
+# Tests generated files
+test/nightwatch/reports
+test/nightwatch/screenshots
