@@ -63,6 +63,7 @@
     "fs": "0.0.1-security",
     "glob": "^7.1.1",
     "html-webpack-plugin": "^2.28.0",
+    "husky": "^0.13.3",
     "identity-obj-proxy": "^3.0.0",
     "isomorphic-style-loader": "^2.0.0",
     "isparta-loader": "latest",
@@ -140,6 +141,7 @@
     "testResultsProcessor": "<rootDir>/node_modules/ts-jest/coverageprocessor.js"
   },
   "scripts": {
+    "prepush": "npm test && test:coverage",
     "postinstall": "node test/nightwatch/nightwatch.conf.js",
     "clean": "rimraf dist/",
     "prebuild": "npm run clean",
