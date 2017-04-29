@@ -133,7 +133,7 @@
 		// "no-useless-call": 0, // disallow unnecessary .call() and .apply()
 		// "no-useless-concat": 0, // disallow unnecessary concatenation of literals or template literals
 		// "no-void": 0, // disallow use of the void operator
-		// "no-warning-comments": 0, // disallow usage of configurable warning terms in comments. e.g. TODO or FIXME
+		"no-warning-comments": 2, // disallow usage of configurable warning terms in comments. e.g. TODO or FIXME
 		// "no-with": 0, // disallow use of the with statement
 		"radix": 2, // require use of the second argument for parseInt()
 		// "vars-on-top": 0, // require declaration of all vars at the top of their containing scope

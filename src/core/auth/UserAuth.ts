@@ -2,6 +2,7 @@ import settings from 'core/settings';
 import { Api, LocalStorage } from 'core/helpers';
 import { userRoles, accessLevels } from './Access';
 import { ActionResult } from 'core/models';
+import IAuthResponse from './IAuthResponse';
 
 class UserAuth {
 
@@ -26,7 +27,7 @@ class UserAuth {
       return new Promise((resolve: any, reject: any) => {
           Api
               .plainRequest(settings.api.loginUrl, 'POST', bodyContent, 'application/x-www-form-urlencoded', true)
-              .then((result) => {
+              .then((result: IAuthResponse) => {
                 if (!apiResponse.error) {
                     self.setToken(result.access_token);
                     self.setUser({username: result.username}, {title: result.role, bitMask: parseInt(result.bitMask, 0)});

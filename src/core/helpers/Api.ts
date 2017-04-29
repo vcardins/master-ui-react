@@ -34,7 +34,7 @@ export default class Api {
   }
 
   public static find(route: string, prop: string, value: any): Promise<any> {
-    return this.get(route, 'GET').then(data => {
+    return this.get(route, 'GET').then((data: string[]) => {
       return data.filter((item: any) => {
         return item[prop] === value;
       })[0];
