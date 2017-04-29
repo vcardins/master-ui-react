@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
 import CountriesList from '../components/List';
 import Actions from '../Actions';
-import Country from 'core/models/Country';
+import Country from '../models/Country';
 import Page from 'layouts/App/Page';
 import { animateTransition } from 'core/decorators';
 

@@ -21,6 +21,7 @@ const createRoutes = () => {
                 require('./Countries').default,
                 require('./Report').default,
                 require('./Provinces').default,  
+                require('./Notebook').default,  
                 require('./Account/UserProfile').default,
               ]);
             });

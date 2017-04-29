@@ -17,6 +17,12 @@
             ]
         },
         { 
+            "id": "notebook", 
+            "href": "/notebook", 
+            "label": "Notebook", 
+            "icon": "book" 
+        },
+        { 
             "id": "reports", 
             "href": "/reports", 
             "label": "Reports", 
