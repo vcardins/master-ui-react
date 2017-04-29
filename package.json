@@ -141,8 +141,8 @@
     "testResultsProcessor": "<rootDir>/node_modules/ts-jest/coverageprocessor.js"
   },
   "scripts": {
-    "prepush": "npm test && test:coverage",
-    "precommit": "npm test && test:coverage",
+    ".prepush": "npm test && test:coverage",
+    ".precommit": "npm test && test:coverage",
     "postinstall": "node test/nightwatch/nightwatch.conf.js",
     "clean": "rimraf dist/",
     "prebuild": "npm run clean",
