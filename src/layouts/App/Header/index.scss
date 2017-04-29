@@ -13,7 +13,9 @@
 }
 
 #header {
-    background: linear-gradient(to bottom, $color-light, $color-dark);
+    background: $color-darkest;
+
+    /* linear-gradient(to bottom, $color-light, $color-darkest); */
     padding: 0.5em 0;
     color: $white;
 

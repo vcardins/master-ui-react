@@ -47,70 +47,85 @@
         li {
             display: block;
 
-            &:not(.expanded):hover {
-                background-color: $color-lightest;
+            &:not(.parentLevel) {
+                border-left: 3px solid $color-dark;
+
+                &.active {
+                    border-left-color: $secondary-color;
+
+                    a {
+                        color: $white;
+                    }
+                }
             }
 
-            &.active {
-                border-right: 3px solid $secondary-color;
-                background-color: lighten($secondary-color, 45%);
+            &:not(.expanded):hover {
+                background-color: $color-darkest;
             }
 
             a {
                 padding: 12px 6px 12px 16px;
                 position: relative;
                 display: block;
-                color: $color-dark;
-            }
-        }
+                color: $color-lighter;
 
-        .parentLevel {
-            .submenu {
-                overflow: hidden;
-                max-height: 0;
-                transition: all 0.5s ease-out;
-
-                li {
-                    padding-left: 36px;
-
-                    &:not(.active) {
-                        background-color: $white;
-
-                        &:hover {
-                            background-color: $color-lightest;
-                        }
-                    }
-
-                    &::before {
-                        background: $color-dark;
-                        bottom: auto;
-                        content: "";
-                        height: 8px;
-                        left: 23px;
-                        margin-top: 15px;
-                        position: absolute;
-                        right: auto;
-                        width: 8px;
-                        z-index: 1;
-                        border-radius: 50%;
-                    }
-
-                    &::after {
-                        border-left: 1px solid rgba($color-dark, 0.5);
-                        bottom: 0;
-                        content: "";
-                        left: 27px;
-                        position: absolute;
-                        top: 0;
-                    }
+                &:hover {
+                    color: $secondary-color;
                 }
             }
 
-            &:hover,
-            &.expanded {
+            &.parentLevel {
+                a {
+                    padding-left: 19px;
+                }
+
                 .submenu {
-                    display: block;
-                    max-height: 200px;
+                    overflow: hidden;
+                    max-height: 0;
+                    transition: all 0.5s ease-out;
+
+                    li {
+                        padding-left: 36px;
+
+                        &:not(.active) {
+                            background-color: $color-dark;
+
+                            &:hover {
+                                background-color: $color-darkest;
+                            }
+                        }
+
+                        &::before {
+                            background: $color-lighter;
+                            bottom: auto;
+                            content: "";
+                            height: 8px;
+                            left: 23px;
+                            margin-top: 15px;
+                            position: absolute;
+                            right: auto;
+                            width: 8px;
+                            z-index: 1;
+                            border-radius: 50%;
+                        }
+
+                        &::after {
+                            border-left: 1px solid rgba($color-lighter, 0.5);
+                            bottom: 0;
+                            content: '';
+                            left: 27px;
+                            position: absolute;
+                            top: 0;
+                        }
+                    }
+                }
+
+                &:hover,
+                &.expanded {
+                    .submenu {
+                        display: block;
+                        max-height: 200px;
+                    }
                 }
             }
         }
@@ -152,7 +167,7 @@
                 a {
                     padding: 10px 15px;
                     display: block;
-                    color: $color-dark !important;
+                    color: $color-darkest !important;
                 }
 
                 &::before {

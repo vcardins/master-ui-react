@@ -83,8 +83,7 @@
             @extend %scrollable;
 
             flex: 1 1 auto;
-            background: $white;
-            border-right: 1px solid #eee;
+            background: $color-dark;
 
             .searchbox {
                 padding: 0.5em;
@@ -107,7 +106,7 @@
         }
 
         >.nav-footer {
-            background-color: $color-dark;
+            background-color: $color-darkest;
             color: $white;
             text-align: center;
             bottom: 0;
@@ -122,7 +121,7 @@
                 font-size: 16px;
                 display: block;
                 float: left;
-                background: $color-dark;
+                background: $color-darkest;
                 cursor: pointer;
                 color: $color-lighter;
 

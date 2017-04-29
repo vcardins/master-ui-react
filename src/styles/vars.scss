@@ -7,7 +7,8 @@ $navbar-width-collapsed: 60px;
 $topbar-height: 4.5em;
 // COLORS
 $primary-color: #2f3f5f;
-$secondary-color: gold;
+$secondary-color: #02c1de;
+$terciary-color: gold;
 $white: #fff;
 $background: #f3f3f3;
 $grey: #dbe2e8;
@@ -16,7 +17,9 @@ $light-gray: #fcfcfc;
 $green:#00b5ad;
 $dark: #303030;
 
+$color-darkest: darken($primary-color, 5%);
 $color-dark: $primary-color;
+$color-medium: lighten($primary-color, 10%);
 $color-light: lighten($primary-color, 25%);
 $color-lighter: lighten($primary-color, 50%);
 $color-lightest: lighten($primary-color, 65%);
