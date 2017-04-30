@@ -83,7 +83,7 @@
             @extend %scrollable;
 
             flex: 1 1 auto;
-            background: $color-dark;
+            background: var(--themeColor);
 
             .searchbox {
                 padding: 0.5em;
@@ -106,7 +106,9 @@
         }
 
         >.nav-footer {
-            background-color: $color-darkest;
+            background:
+                linear-gradient(to top, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25))
+                var(--themeColor);
             color: $white;
             text-align: center;
             bottom: 0;
@@ -121,9 +123,8 @@
                 font-size: 16px;
                 display: block;
                 float: left;
-                background: $color-darkest;
                 cursor: pointer;
-                color: $color-lighter;
+                color: var(--themeLightestColor);
 
                 &:hover {
                     color: $white;

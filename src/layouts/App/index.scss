@@ -14,7 +14,7 @@
 
     &>header {
         a {
-            color: $color-lighter;
+            color: var(--themeLightestColor);
 
             &:hover {
                 color: $white;

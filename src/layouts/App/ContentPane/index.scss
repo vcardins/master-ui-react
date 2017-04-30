@@ -15,8 +15,7 @@
                 @extend %top-fixed-bar;
 
                 min-height: 38px;
-                border-bottom: 1px solid $color-light;
-                // background-color: $color-light;
+                border-bottom: 1px solid var(--themeLightestColor);
                 box-shadow: 1px 5px 20px 10px rgba(255, 255, 255, 0.85);
                 line-height: 24px;
 

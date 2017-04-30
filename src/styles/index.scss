@@ -1,6 +1,11 @@
 @import './form.scss';
 @import './base.scss';
 
+:root {
+    --themeColor: $theme-color;
+    --themeAltColor: $theme-alt-color;
+}
+
 body {
     #app {
         height: 100%;
