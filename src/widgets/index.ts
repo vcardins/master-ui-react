@@ -1,2 +1,2 @@
 export * from './FullScreen';
-export * from './ThemeColorPicker';
+export * from './ColorSchemaPicker';

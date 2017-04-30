@@ -3,7 +3,9 @@
 
 :root {
     --themeColor: $theme-color;
-    --themeAltColor: $theme-alt-color;
+    --themeLightColor: lighten($theme-color, 25%);
+    --themeLighterColor: lighten($theme-color, 50%);
+    --themeLightestColor: lighten($theme-color, 75%);
 }
 
 body {
