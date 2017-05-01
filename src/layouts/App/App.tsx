@@ -14,6 +14,7 @@ import appSettings from 'core/settings';
 import Header from './Header';
 import LeftPanel from './LeftPanel';
 import Footer from './Footer';
+import SlidingPanel from './SlidingPanel';
 import './index.scss';
 
 import * as menu from '../menu.json';
@@ -186,6 +187,7 @@ class App extends BaseComponent<Props, State> {
                         <article className="page">                             
                             { children }
                         </article>
+                        <SlidingPanel position="right" />
                     </main>
                     {/*<Footer/>*/}
                  </section>

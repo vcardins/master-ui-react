@@ -1,0 +1,105 @@
+@import '~variables';
+
+@mixin Pulse($duration) {
+    -webkit-animation-duration: $duration;
+    animation-duration: $duration;
+    -webkit-animation-name: pulse;
+    animation-name: pulse;
+}
+
+#sliding-pannel {
+    text-align: center;
+    width: $sliding-bar-width;
+    height: 100%;
+    position: fixed;
+    background-color: var(--themeLightestColor);
+    overflow: hidden;
+    transition-duration: 0.5s;
+    transition-timing-function: linear;
+    z-index: 9999;
+
+    .trigger {
+        width: 10px;
+        height: 100%;
+        float: left;
+        background: rgba(0, 0, 0, 0.15);
+        vertical-align: middle;
+        cursor: pointer;
+
+        i {
+            font-size: 9px;
+            height: 1.5em;
+        }
+    }
+
+    &:not(.right) {
+        left: -1 * ($sliding-bar-width - 10px);
+        transition-property: left;
+
+        .trigger {
+            float: right;
+        }
+    }
+
+    &.right {
+        right: -1 * ($sliding-bar-width - 10px);
+        transition-property: right;
+    }
+
+    &:not(:hover) {
+        &:not(.right) {
+            .trigger {
+                i {
+                    width: 0.5em;
+                    transform: rotate(-45deg);
+                }
+            }
+        }
+
+        &.right {
+            .trigger {
+                i {
+                    width: 1.5em;
+                    transform: rotate(45deg);
+                }
+            }
+        }
+    }
+
+    &:hover {
+        .trigger {
+            @include Pulse(200ms);
+        }
+
+        &:not(.right) {
+            left: 0;
+        }
+
+        &.right {
+            right: 0;
+        }
+
+        #sliding-panel-content {
+            .links {
+                opacity: 1;
+            }
+        }
+    }
+
+    a {
+        color: #000;
+        font-size: 1.3em;
+        line-height: 1.25em;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .vertical {
+        opacity: 0.5;
+        font-weight: bold;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}

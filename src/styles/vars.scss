@@ -31,6 +31,8 @@ $color-opaque: scale-color($theme-color, 50%, 20%, 10%);
 $default-padding: 10px;
 $default-content-padding: 1em;
 
+$sliding-bar-width: 250px;
+
 %top-fixed-bar {
     top: 0;
     clear: both;

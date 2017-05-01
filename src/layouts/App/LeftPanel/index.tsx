@@ -27,9 +27,9 @@ const LeftPanel: React.StatelessComponent<Props> = (props: Props): JSX.Element =
         <aside className="nav">
             { showUserInfo && <UserInfo user={user}/>}
             <nav className="nav-options">
-                <div className="searchbox">
+                {/*<div className="searchbox">
                     <Input icon="search" placeholder="Search ..." />
-                </div>
+                </div>*/}
                 { routes && <Nav routes={routes} position="vertical" activeRoute={activeRoute}/> }
             </nav>
             <footer className="nav-footer">
