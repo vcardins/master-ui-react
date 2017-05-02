@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { Link } from 'react-router';
 import { Menu, Icon } from 'semantic-ui-react';
-import IMenuItem from 'layouts/interfaces/IMenuItem';
+import IMenuItem from '../IMenuItem';
 import './index.scss';
 
 interface Props {

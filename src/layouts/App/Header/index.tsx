@@ -2,7 +2,7 @@ import * as React from 'react';
 import { browserHistory, Link } from 'react-router';
 import { Icon, Image, Dropdown } from 'semantic-ui-react';
 import Logo from '../Logo';
-import IMenuItem from '../../interfaces/IMenuItem';
+import IMenuItem from '../IMenuItem';
 import { UserProfile } from 'core/auth';
 import appSettings from 'core/settings';
 import Nav from '../Nav';

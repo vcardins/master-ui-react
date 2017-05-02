@@ -1,5 +1,5 @@
 ﻿import config from 'config';
-import { LocalStorageTypes, AuthenticationTypes, MenuPosition } from 'core/enums';
+import { LocalStorageTypes, AuthenticationTypes } from 'core/enums';
 import { merge } from 'lodash';
 import defaultConfig from './defaults';
 import IApiSettings from './IApiSettings';

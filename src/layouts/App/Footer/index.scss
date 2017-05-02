@@ -2,7 +2,7 @@
 
 #layout-footer {
     flex: none;
-    height: 25px;
-    background-color: $dark;
-    color: $light-gray;
+    height: 1.25em;
+    background-color: var(--themeColor);
+    color: var(--themeLighestColor);
 }

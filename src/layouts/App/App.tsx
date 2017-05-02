@@ -8,7 +8,8 @@ import { BaseComponent } from 'core/decorators';
 import { UserAuth, UserAction, UserProfile } from 'core/auth';
 import { Api } from 'core/helpers';
 import { PageInfo } from 'core/models';
-import IMenuItem from '../interfaces/IMenuItem';
+import IMenuItem from './IMenuItem';
+import LayoutSettings from './LayoutSettings';
 import appSettings from 'core/settings';
 
 import Header from './Header';
@@ -34,22 +35,21 @@ interface State {
     isNavBarCollapsed: boolean;
     page: PageInfo;
     user: UserProfile;
-    showHeader: boolean;
+    layout: LayoutSettings;
 }
 
 class App extends BaseComponent<Props, State> {
     // tslint:disable-next-line:no-string-literal    
     routes: Array<IMenuItem> = menu['items'] as Array<IMenuItem>;
     currentRoute: string;
-    menuPosition: string = 'horizontal';
-    appTitle: string = 'Master UI';
+    
     leftBarHeader: JSX.Element = (
         <div>
             <div className="nav-title">
                 <span className="nav-logo">
                     <Icon name="diamond"/>
                 </span>
-                <Link to="/">{ this.appTitle }</Link>
+                <Link to="/">{ appSettings.title }</Link>
             </div>
             {/*<div className="searchbox">
                 <Input icon="search" placeholder="Search ..." />
@@ -61,11 +61,11 @@ class App extends BaseComponent<Props, State> {
         isNavBarCollapsed: false,
         page: new PageInfo(),
         user: new UserProfile(),
-        showHeader: true,
+        layout: LayoutSettings.getInstance(),
     };
 
     constructor(props: Props) {
-        super();        
+        super();                
     }
 
     componentWillReceiveProps = (newProps) => {
@@ -145,7 +145,8 @@ class App extends BaseComponent<Props, State> {
     }
 
     handleOpenSettings() {
-        console.log('Open Settings');
+        const { layout } = this.state;
+        this.setState({ layout: Object.assign({}, layout, {showTopBar: !layout.showTopBar} ) });
     }
 
     preparePageInfo = (props) => {
@@ -175,45 +176,57 @@ class App extends BaseComponent<Props, State> {
     }
     
     render(): JSX.Element {
-        const { page, user, showHeader, isNavBarCollapsed } = this.state;
+        const { page, isNavBarCollapsed, layout } = this.state;
         const { router, children } = this.props;      
         const header = page.title && !page.headerless && (
             <div className="page-header">
                 <h2>{ page.title }</h2>
             </div>);
-
-        return ( <section id="container" className={`${isNavBarCollapsed ? 'collapsed' : ''} ${this.menuPosition}-menu`}>
-                    { showHeader && <Header 
-                        user={user}
-                        onLogout={ this.handleLogout }
-                        onTogglePanel={ this.handleTogglePanel }
-                        routes={ this.menuPosition === 'horizontal' ? this.routes : null }
-                        activeRoute={ this.getLocationPath() }
-                        title={ this.appTitle} /> }
+                
+        return ( <section id="container" className={`${isNavBarCollapsed ? 'collapsed' : ''} ${layout.menuOrientation}-menu`}>
+                    { layout.showTopBar && this.renderTopBar() }
                     <main className="main">
-                        { this.menuPosition === 'vertical' && 
-                            <LeftPanel 
-                                user={ user }
-                                collapsed={ isNavBarCollapsed }
-                                routes={ this.routes }
-                                activeRoute={ this.getLocationPath() }
-                                onTogglePanel={ () => this.handleTogglePanel('left') }
-                                onOpenSettings={ this.handleOpenSettings }
-                                >
-                                { !showHeader && this.leftBarHeader }
-                            </LeftPanel> 
-                        }
+                        { layout.menuOrientation === 'vertical' && this.renderLeftBar() }
                         <article className="page">                             
                             { children }
                         </article>
-                        <SlidingPanel position="right" >
-                            <ColorSchemaPicker/>
-                        </SlidingPanel>
+                        { layout.showSlidingBar && this.renderSlidingBar() }
                     </main>
-                    {/*<Footer/>*/}
+                    { layout.showFooter && <Footer/> }
                  </section>
             );       
     }
+
+    renderTopBar() {
+        const { layout, page, user, isNavBarCollapsed } = this.state;
+
+        return (<Header 
+            user={user}
+            onLogout={ this.handleLogout }
+            onTogglePanel={ this.handleTogglePanel }
+            routes={ layout.menuOrientation === 'horizontal' ? this.routes : null }
+            activeRoute={ this.getLocationPath() }
+            title={ appSettings.title } />);
+    }
+
+    renderLeftBar() {
+        const { layout, user, isNavBarCollapsed } = this.state;
+        
+        return (<LeftPanel 
+                    user={ user }
+                    collapsed={ isNavBarCollapsed }
+                    routes={ this.routes }
+                    activeRoute={ this.getLocationPath() }
+                    onTogglePanel={ () => this.handleTogglePanel('left') }
+                    onOpenSettings={ this.handleOpenSettings }>
+                    { !layout.showTopBar && this.leftBarHeader }
+                </LeftPanel> );
+    }
+
+    renderSlidingBar() {
+        return (<SlidingPanel position="right" ><ColorSchemaPicker/></SlidingPanel>);
+    }
 }
+                        
 
 export default App;
