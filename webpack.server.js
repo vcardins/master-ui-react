@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const webpack = require('webpack');
 const webpackConfig = require('./webpack.config');
-const config = require('./webpack/utils');
+const settings = require('./webpack/settings');
 const _debug = require('debug');
 const debug = _debug('app:webpack:compiler');
 
@@ -23,7 +23,7 @@ catch (err) {
 const devMiddleWare = require('webpack-dev-middleware')(compiler, {
     publicPath: webpackConfig.output.publicPath,
     quiet: true,
-    inline: true,
+    noInfo: true,
     headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': '*',
@@ -44,4 +44,4 @@ app.get('*', (req, res) => {
     devMiddleWare.waitUntilValid(() => res.end(mfs.readFileSync(file)))
 })
 
-app.listen(config.port)
+app.listen(settings.port)

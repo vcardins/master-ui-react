@@ -7,7 +7,7 @@ exports.javascript = {
 
 exports.typescript = {
     test: /\.(ts|tsx)$/,
-    loaders: [`awesome-typescript-loader?${JSON.stringify({ignoreDiagnostics:[2305, 2307]})}`],
+    loaders: ['react-hot-loader/webpack', 'awesome-typescript-loader'],
     exclude: /node_modules/,
 };
 
@@ -47,8 +47,3 @@ exports.styles = [
         loaders: ['style-loader', 'css-loader', 'resolve-url-loader', 'sass-loader', 'postcss-loader'],
     },
 ];
-
-exports.hotLoader = {
-    test: /\.(ts|tsx)$/,
-    loaders: ['react-hot-loader/webpack'],
-};

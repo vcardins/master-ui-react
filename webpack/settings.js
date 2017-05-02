@@ -1,15 +1,15 @@
 const path = require('path');
-const appConfig = require('./base.json');
+const baseConfig = require('./base.json');
 const bundleConfig = require('./bundle.json');
 
 const _ = module.exports = {}
 
-Object.keys(appConfig).forEach((key) => {
+Object.keys(baseConfig).forEach((key) => {
     if (['port', 'host'].indexOf(key) > -1) {
-        _[key] = process.env[key.toUpperCase()] || appConfig[key];  
+        _[key] = process.env[key.toUpperCase()] || baseConfig[key];  
     } 
     else {
-        _[key] = appConfig[key];    
+        _[key] = baseConfig[key];    
     }
 })
 
@@ -38,17 +38,17 @@ _.isHmrEnabled = () => _.hasProcessFlag('hot');
 
 _.root = path.resolve(__dirname, '..');
 
-_.template = path.resolve(_.root, appConfig.srcFolder, appConfig.indexFile);
+_.template = path.resolve(_.root, baseConfig.srcFolder, baseConfig.indexFile);
 
-_.outputPath = path.join(_.root, appConfig.distFolder);
+_.outputPath = path.join(_.root, baseConfig.distFolder);
 
-_.outputIndexPath = path.join(_.outputPath, appConfig.entryFile);
+_.outputIndexPath = path.join(_.outputPath, baseConfig.entryFile);
 
-_.bundleOutputPath = path.join(_.outputPath, appConfig.indexFile);
+_.bundleOutputPath = path.join(_.outputPath, baseConfig.indexFile);
 
-_.distPath = path.join(__dirname, `./../${appConfig.distFolder}`),
+_.distPath = path.join(__dirname, `./../${baseConfig.distFolder}`),
 
-_.srcPath = path.join(__dirname, `./../${appConfig.srcFolder}`),
+_.srcPath = path.join(__dirname, `./../${baseConfig.srcFolder}`),
 
 // Bundle Helpers
 

@@ -1,42 +1,43 @@
 const path = require('path');
 const loaders = require('./webpack/loaders');
 const plugins = require('./webpack/plugins');
-const config = require('./webpack/utils');
+const settings = require('./webpack/settings');
 const concat = require('lodash/concat');
-// const _debug = require('debug');
-// const debug = _debug('app:webpack:config');
 
-process.env.REACT_WEBPACK_ENV = config.isDevelopment() ? 'dev' : 'dist';
+process.env.REACT_WEBPACK_ENV = settings.isDevelopment() ? 'dev' : 'dist';
 
-const _path = (dir) => path.resolve(__dirname, `${config.srcFolder}/${dir}/`)
+const _path = (dir) => path.resolve(__dirname, `${settings.srcFolder}/${dir}/`)
 
 let webpackConfig = {
-    entry: {
-        // Add the react hot loader entry point - in reality, you only want this in your dev Webpack config
-        client: [
-            'react-hot-loader/patch',
-            'webpack-hot-middleware/client?quiet=true',
-            'webpack/hot/only-dev-server',
-            './src/index.jsx',
-        ],
-    },
-    devtool: config.isDevelopment() 
+    devtool: settings.isDevelopment() 
         ? 'eval-source-map' 
         : 'source-map',
-    target: config.target,
+    target: settings.target,
+    entry: {
+        // Add the react hot loader entry point - in reality, you only want this in your dev Webpack settings
+        client: settings.isDevelopment()
+            ? [
+                'react-hot-loader/patch',
+                'webpack-hot-middleware/client',
+                'webpack/hot/only-dev-server',
+                './src/index.tsx',
+              ]
+            : './src/index.tsx',  
+    },
     output: {
-        path: config.outputPath,
-        filename: config.isDevelopment() 
+        path: settings.outputPath,
+        filename: settings.isDevelopment() 
             ? '[name].js' 
             : '[name].[chunkhash:8].js',
-        publicPath: config.publicPath,
+        publicPath: '/',
     },
     performance: {
-        hints: config.isProduction() ? 'warning' : false,
+        hints: settings.isProduction() ? 'warning' : false,
     },
-    resolve: {
+    resolve: 
+    {
         //root: path.resolve('./src'),
-        extensions: config.extensions,
+        extensions: settings.extensions,
         // Fix webpack's default behavior to not load packages with jsnext:main module
         // https://github.com/Microsoft/TypeScript/issues/11677 
         mainFields: ['main'],
@@ -54,9 +55,9 @@ let webpackConfig = {
         },
         modules: [
             // places where to search for required modules
-            config.cwd('src'),
-            config.cwd('node_modules'),
-            config.cwd('./'),
+            settings.cwd('src'),
+            settings.cwd('node_modules'),
+            settings.cwd('./'),
         ],
     },
     module: {
@@ -76,22 +77,27 @@ let webpackConfig = {
         net: 'empty',
         tls: 'empty',
     },    
-    stats: config.isDevelopment() 
-        ? {} 
-        : {
-            // Add children information
-            children: false,
-            // Add chunk information (setting this to `false` allows for a less verbose output)
-            chunks: false,
-            // Add built modules information to chunk information
-            chunkModules: false,
-            chunkOrigins: false,
-            modules: false,
-        },
+    stats: settings.isDevelopment() ? {} : 
+    {
+        // Add children information
+        children: false,
+        // Add chunk information (setting this to `false` allows for a less verbose output)
+        chunks: false,
+        // Add built modules information to chunk information
+        chunkModules: false,
+        chunkOrigins: false,
+        modules: false,
+    },
+    // In case React libs are being loaded from a CDN or external source, don't bundle
+    // externals: settings.isDevelopment() ? '' : 
+    // {
+    //     react: 'React',
+    //     'react-dom': 'ReactDOM',
+    // },
 }
 
-if (config.isProduction()) {
-    webpackConfig = Object.assign({}, webpackConfig, config.vendors);
+if (settings.isProduction()) {
+    webpackConfig = Object.assign({}, webpackConfig);
 }
 
 module.exports = webpackConfig;
