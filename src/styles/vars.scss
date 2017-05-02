@@ -94,6 +94,12 @@ $sliding-trigger-width: 15px;
                     }
                 }
 
+                .nav-logo,
+                .nav-logo i {
+                    margin: 0;
+                }
+
+                .nav-title a,
                 .searchbox {
                     opacity: 0;
                     display: none;

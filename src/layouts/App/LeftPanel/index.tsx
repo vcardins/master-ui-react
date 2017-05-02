@@ -13,6 +13,7 @@ interface Props {
     collapsed: boolean;
     user?: UserProfile;
     routes?: Array<IMenuItem>;
+    children?: string | JSX.Element;
     onTogglePanel?: () => void;
     onOpenSettings?: () => void;
     showUserInfo?: boolean;
@@ -20,16 +21,14 @@ interface Props {
 }
 
 const LeftPanel: React.StatelessComponent<Props> = (props: Props): JSX.Element => {
-    const { routes, collapsed = false, onTogglePanel, onOpenSettings, user, showUserInfo = false, activeRoute } = props;
+    const { children, routes, collapsed = false, onTogglePanel, onOpenSettings, user, showUserInfo = false, activeRoute } = props;
     let activeItem: string = '';
 
     return (
         <aside className="nav">
             { showUserInfo && <UserInfo user={user}/>}
             <nav className="nav-options">
-                {/*<div className="searchbox">
-                    <Input icon="search" placeholder="Search ..." />
-                </div>*/}
+                { children }
                 { routes && <Nav routes={routes} position="vertical" activeRoute={activeRoute}/> }
             </nav>
             <footer className="nav-footer">
