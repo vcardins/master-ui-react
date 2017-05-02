@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
 import { Link } from 'react-router';
 import { FormValidationError } from 'core/models';
 import { Grid, Segment, Message, Header, Icon, Form, Checkbox, Button } from 'semantic-ui-react';

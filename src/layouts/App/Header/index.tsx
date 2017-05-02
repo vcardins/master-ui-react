@@ -43,7 +43,7 @@ const Header: React.StatelessComponent<Props> = (props: Props): JSX.Element => {
     );
 
     return (
-        <header id="header" className="ui fixed">
+        <header id="header">
             <div className="header-left">
                 <span className="header-logo">
                     <Icon name="diamond"/>

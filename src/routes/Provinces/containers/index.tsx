@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
 import { Grid, Segment, Message, Header, Icon, Table } from 'semantic-ui-react';
 import Actions from '../Actions';

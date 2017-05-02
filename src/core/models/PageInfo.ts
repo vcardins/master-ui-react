@@ -1,4 +1,5 @@
-import * as _ from 'lodash';
+import { merge, pick } from 'lodash';
+
 export default class PageInfo {
     name: string = '';
     title: string = '';
@@ -9,7 +10,7 @@ export default class PageInfo {
     
     constructor(config?: any) {
         if (config) { 
-            _.merge(this, _.pick(config, Object.keys(this))); 
+            merge(this, pick(config, Object.keys(this))); 
         }
     }
 }

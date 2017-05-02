@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
 import { DOM } from 'core/helpers';
 
 export default function animateTransitionFactoryFactory(delay: number = 500) {

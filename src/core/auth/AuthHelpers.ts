@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import { filter, map, reduce } from 'lodash';
 
 export function checkAccess(requiredLevel, currentLevel) {
   return !!(requiredLevel.bitMask & currentLevel.bitMask);
@@ -38,7 +38,7 @@ export function buildRoles(roles) {
   }
 
   // dbg
-  const userRoles = _.reduce(roles, (result, role) => {
+  const userRoles = reduce(roles, (result, role) => {
     const intCode: number = parseInt(bitMask, 2);
     result[role] = {
       bitMask: intCode,
@@ -63,15 +63,15 @@ export function buildAccessLevels(accessLevelDeclarations, userRoles) {
      =>
     [ { name: level1Name, level: level1 }, { name: level2Name, level: level2 } ] array
    */
-  const declarationsArr = _.map(accessLevelDeclarations, (level, name) => ({ name, level }));
+  const declarationsArr = map(accessLevelDeclarations, (level, name) => ({ name, level }));
 
   /*
     First step: filter access levels like:
      'public': '*',
     That means every user role enabled, so bitMask => sum of all bit masks
    */
-  let accessLevels = _
-      .filter(declarationsArr, ({ level }) => typeof level === 'string') // eslint-disable-line no-shadow
+  let accessLevels = 
+      filter(declarationsArr, ({ level }) => typeof level === 'string') // eslint-disable-line no-shadow
       .reduce((result, { level, name }) => { // eslint-disable-line no-shadow
 
         if (level !== '*') {
@@ -81,7 +81,7 @@ export function buildAccessLevels(accessLevelDeclarations, userRoles) {
           );
         }
 
-        const resultBitMask = _.reduce(userRoles, (result) => result + '1', ''); // eslint-disable-line no-shadow
+        const resultBitMask = reduce(userRoles, (result) => result + '1', ''); // eslint-disable-line no-shadow
 
         result[name] = {
           bitMask: parseInt(resultBitMask, 2),
@@ -96,8 +96,8 @@ export function buildAccessLevels(accessLevelDeclarations, userRoles) {
      'user': ['user', 'admin'],
     That means we need to iterate on ['user', 'admin'] array and summ bit mask for 'user' and 'admin'
    */
-  accessLevels = _
-    .filter(declarationsArr, ({ level }) => typeof level !== 'string') // eslint-disable-line no-shadow
+  accessLevels =
+    filter(declarationsArr, ({ level }) => typeof level !== 'string') // eslint-disable-line no-shadow
     .reduce((result, { level, name }) => { // eslint-disable-line no-shadow
       const levelName = name;
       const levelsArr = level;

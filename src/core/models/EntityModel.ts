@@ -1,4 +1,4 @@
-﻿import * as _ from 'lodash';
+﻿import { merge } from 'lodash';
 
 export default class EntityModel {
 
@@ -9,7 +9,7 @@ export default class EntityModel {
 
   constructor(model? : any) {
     if (model) { 
-      _.merge(this, model); 
+      merge(this, model); 
     }
     this.isInEditMode = true;
     this.isValid = this.isValid.bind(this);

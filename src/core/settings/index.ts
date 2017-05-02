@@ -1,6 +1,6 @@
 ﻿import config from 'config';
 import { LocalStorageTypes, AuthenticationTypes, MenuPosition } from 'core/enums';
-import * as _ from 'lodash';
+import { merge } from 'lodash';
 import defaultConfig from './defaults';
 import IApiSettings from './IApiSettings';
 
@@ -37,6 +37,6 @@ interface IApplicationSettings {
     providers: any;
 }
 
-const settings: IApplicationSettings = _.merge(defaultConfig, config);
+const settings: IApplicationSettings = merge(defaultConfig, config);
 
 export default settings;

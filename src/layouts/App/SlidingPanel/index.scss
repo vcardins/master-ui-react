@@ -12,17 +12,22 @@
     width: $sliding-bar-width;
     height: 100%;
     position: fixed;
-    background-color: var(--themeLightestColor);
     overflow: hidden;
     transition-duration: 0.5s;
     transition-timing-function: linear;
     z-index: 9999;
 
-    .trigger {
-        width: 10px;
+    #sliding-panel-content {
         height: 100%;
         float: left;
-        background: rgba(0, 0, 0, 0.15);
+        width: calc(100% - #{$sliding-trigger-width});
+        background: var(--themeLightestColor);
+    }
+
+    .trigger {
+        width: $sliding-trigger-width;
+        height: 100%;
+        float: left;
         vertical-align: middle;
         cursor: pointer;
 

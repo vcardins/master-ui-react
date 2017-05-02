@@ -1,5 +1,4 @@
-import axios from 'axios'; // https://github.com/mzabriskie/axios
-
+import nanoajax from 'nanoajax';  // https://github.com/yanatan16/nanoajax
 import settings from 'core/settings';
 import Utils from './Utils';
 import { UserAuth } from '../auth';
@@ -162,12 +161,30 @@ export default class Api {
               configRequest.headers[settings.authHeader] = authHeader;
             }
         }
+      
+      const request = Object.assign({}, configRequest, { url });
 
-        return new Promise((resolve, reject) => {
-          axios(url, configRequest)
-              .then(({data}: any) => resolve(data))
-              .catch(({response}: any) => reject(response.data));
+      return new Promise((resolve, reject) => {
+        return nanoajax.ajax(request, (code, response, xmlHttpRequest) => {
+          
+          if (code !== 204) {
+            const codeExplanation = code ? `responses: ${code}` : 'parameters: in: body';
+
+            if (code === 401) {
+              return reject(new Error('User not authorized. Please sign in again'));
+            }
+
+            try {
+              const data = JSON.parse(response); 
+              resolve(data);
+            } catch (e) {
+              return reject(
+                  new Error(`Request response is not a valid JSON ${url}: ${request.method}: ${e.message}`),
+              );
+            }
+          }
         });
+      });
     }
 
     private static getParams(obj: any, parameters: string[] = []): string {

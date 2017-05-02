@@ -98,6 +98,7 @@ class App extends BaseComponent<Props, State> {
         if (!node) {
             return;
         }
+        
         const w = window.innerWidth;
         let viewport;
 

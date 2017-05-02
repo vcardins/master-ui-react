@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import { merge } from 'lodash';
   
 let configBase = {
 	title: 'Master UI',
@@ -57,6 +57,6 @@ let configForProduction = {
 };
 
 let configEnv = (window.location.hostname === 'localhost' ? configForDevelopment : configForProduction);
-const config: any = _.merge(configBase, configEnv);
+const config: any = merge(configBase, configEnv);
 
 export { config as default };

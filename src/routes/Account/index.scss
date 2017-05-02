@@ -4,14 +4,15 @@
     color: #333;
     width: 100%;
     height: 100%;
+    background: var(--themeLightColor);
 
     .ui {
         h2 {
-            color: $color-light !important;
+            color: var(--themeLightColor) !important;
         }
 
         button {
-            background-color: $color-light !important;
+            background-color: var(--themeColor) !important;
             color: #fff;
         }
 
