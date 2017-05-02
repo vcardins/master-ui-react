@@ -7,7 +7,7 @@ exports.javascript = {
 
 exports.typescript = {
     test: /\.(ts|tsx)$/,
-    loaders: ['react-hot-loader/webpack', 'awesome-typescript-loader'],
+    loaders: ['react-hot-loader/webpack', `awesome-typescript-loader?${JSON.stringify({ignoreDiagnostics:[2320, 2307]})}`],
     exclude: /node_modules/,
 };
 
