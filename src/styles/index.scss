@@ -1,5 +1,6 @@
 @import './form.scss';
 @import './base.scss';
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin);
 
 :root {
     --themeColor: $theme-color;
@@ -9,6 +10,8 @@
 }
 
 body {
+    font-family: Lato;
+
     #app {
         height: 100%;
     }

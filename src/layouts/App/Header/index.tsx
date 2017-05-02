@@ -5,7 +5,6 @@ import Logo from '../Logo';
 import IMenuItem from '../../interfaces/IMenuItem';
 import { UserProfile } from 'core/auth';
 import appSettings from 'core/settings';
-import ColorSchemaPicker from 'widgets/ColorSchemaPicker';
 import Nav from '../Nav';
 import './index.scss';
 
@@ -55,8 +54,7 @@ const Header: React.StatelessComponent<Props> = (props: Props): JSX.Element => {
             <div className="header-central">
                 { routes && <Nav routes={routes} position="horizontal" activeRoute={activeRoute}/> }
             </div>
-            <div className="header-right">
-                <ColorSchemaPicker/>
+            <div className="header-right">                
                 <DropdownUserProfile/>                
             </div>
         </header>

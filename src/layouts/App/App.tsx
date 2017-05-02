@@ -16,6 +16,7 @@ import LeftPanel from './LeftPanel';
 import Footer from './Footer';
 import SlidingPanel from './SlidingPanel';
 import './index.scss';
+import ColorSchemaPicker from 'widgets/ColorSchemaPicker';
 
 import * as menu from '../menu.json';
 
@@ -40,7 +41,7 @@ class App extends BaseComponent<Props, State> {
     // tslint:disable-next-line:no-string-literal
     routes: Array<IMenuItem> = menu['items'] as Array<IMenuItem>;
     currentRoute: string;
-    menuPosition: string = 'vertical';
+    menuPosition: string = 'horizontal';
     state = {           
         isNavBarCollapsed: false,
         page: new PageInfo(),
@@ -188,7 +189,9 @@ class App extends BaseComponent<Props, State> {
                         <article className="page">                             
                             { children }
                         </article>
-                        <SlidingPanel position="right" />
+                        <SlidingPanel position="right" >
+                            <ColorSchemaPicker/>
+                        </SlidingPanel>
                     </main>
                     {/*<Footer/>*/}
                  </section>
