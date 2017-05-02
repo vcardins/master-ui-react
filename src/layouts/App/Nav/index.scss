@@ -19,7 +19,6 @@
                         font-size: 25px !important;
                         text-align: center;
                         width: 100% !important;
-                        margin-bottom: 5px;
                     }
                 }
 
@@ -42,6 +41,8 @@
 
 .menu {
     &.vertical {
+        margin-top: 10px !important;
+
         li {
             display: block;
 

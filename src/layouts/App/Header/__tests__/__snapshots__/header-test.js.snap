@@ -1,0 +1,320 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header Component Rendering Should render something if it receives required props 1`] = `
+<header
+  id="header"
+>
+  <div
+    className="header-left"
+  >
+    <span
+      className="header-logo"
+    >
+      <i
+        aria-hidden="true"
+        className="diamond icon"
+      />
+    </span>
+    <span
+      className="header-title"
+    >
+      <a
+        onClick={[Function]}
+        style={Object {}}
+      >
+        Master UI
+      </a>
+    </span>
+  </div>
+  <div
+    className="header-central"
+  >
+    <ul
+      className="menu horizontal"
+    >
+      <li
+        className=""
+        id="mnu-dashboard"
+        onClick={null}
+      >
+        <a
+          onClick={[Function]}
+          style={Object {}}
+        >
+          <i
+            aria-hidden="true"
+            className="dashboard icon"
+          />
+          Dashboard
+        </a>
+      </li>
+      <li
+        className="active parentLevel"
+        id="mnu-geography"
+        onClick={[Function]}
+      >
+        <a
+          onClick={[Function]}
+          style={Object {}}
+        >
+          <i
+            aria-hidden="true"
+            className="map icon"
+          />
+          Locations
+          <i
+            aria-hidden="true"
+            className="icon chevron down expander"
+          />
+        </a>
+        <ul
+          className="submenu"
+        >
+          <li
+            className="placeholder"
+          />
+          <li
+            className=""
+            id="mnu-countries"
+            onClick={[Function]}
+          >
+            <a
+              onClick={[Function]}
+              style={Object {}}
+            >
+              Countries
+            </a>
+          </li>
+          <li
+            className=""
+            id="mnu-city"
+            onClick={[Function]}
+          >
+            <a
+              onClick={[Function]}
+              style={Object {}}
+            >
+              Provinces
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li
+        className=""
+        id="mnu-notebook"
+        onClick={null}
+      >
+        <a
+          onClick={[Function]}
+          style={Object {}}
+        >
+          <i
+            aria-hidden="true"
+            className="book icon"
+          />
+          Notebook
+        </a>
+      </li>
+      <li
+        className=""
+        id="mnu-reports"
+        onClick={null}
+      >
+        <a
+          onClick={[Function]}
+          style={Object {}}
+        >
+          <i
+            aria-hidden="true"
+            className="calculator icon"
+          />
+          Reports
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    className="header-right"
+  >
+    <div
+      aria-busy={undefined}
+      aria-disabled={undefined}
+      aria-expanded={false}
+      aria-multiselectable={undefined}
+      className="ui top right pointing dropdown"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onMouseDown={[Function]}
+      role="listbox"
+      tabIndex={0}
+    >
+      <div
+        className="profile"
+      >
+        <div
+          className="photo"
+        >
+          <img
+            alt={undefined}
+            className="ui avatar image"
+            height={undefined}
+            src="https://avatars.io/twitter/admin"
+            width={undefined}
+          />
+        </div>
+        <div
+          className="info"
+        >
+          <span
+            className="greetings"
+          >
+            Hello,
+          </span>
+          <span
+            className="name"
+          >
+            System Admin
+          </span>
+        </div>
+      </div>
+      <div
+        className="menu transition"
+      >
+        <div
+          aria-checked={false}
+          aria-disabled={undefined}
+          aria-selected={true}
+          className="selected item"
+          onClick={[Function]}
+          role="option"
+          style={
+            Object {
+              "pointerEvents": "all",
+            }
+          }
+        >
+          <i
+            aria-hidden="true"
+            className="user icon"
+          />
+          <span
+            className="text"
+          >
+            Profile
+          </span>
+        </div>
+        <div
+          aria-checked={false}
+          aria-disabled={undefined}
+          aria-selected={false}
+          className="item"
+          onClick={[Function]}
+          role="option"
+          style={
+            Object {
+              "pointerEvents": "all",
+            }
+          }
+        >
+          <i
+            aria-hidden="true"
+            className="sign out icon"
+          />
+          <span
+            className="text"
+          >
+            Sign Out
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+`;
+
+exports[`Header behaviour should pass a selected value to the onClick handler 1`] = `
+<header
+  id="header"
+>
+  <div
+    className="header-left"
+  >
+    <span
+      className="header-logo"
+    >
+      <Icon
+        as="i"
+        name="diamond"
+      />
+    </span>
+    <span
+      className="header-title"
+    >
+      <Link
+        onlyActiveOnIndex={false}
+        style={Object {}}
+        to="/"
+      >
+        Master UI
+      </Link>
+    </span>
+  </div>
+  <div
+    className="header-central"
+  >
+    <Nav
+      activeRoute=""
+      position="horizontal"
+      routes={
+        Array [
+          Object {
+            "href": "/",
+            "icon": "dashboard",
+            "id": "dashboard",
+            "label": "Dashboard",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "href": "/countries",
+                "icon": "flag",
+                "id": "countries",
+                "label": "Countries",
+              },
+              Object {
+                "href": "/provinces",
+                "icon": "map",
+                "id": "city",
+                "label": "Provinces",
+              },
+            ],
+            "href": "",
+            "icon": "map",
+            "id": "geography",
+            "label": "Locations",
+          },
+          Object {
+            "href": "/notebook",
+            "icon": "book",
+            "id": "notebook",
+            "label": "Notebook",
+          },
+          Object {
+            "href": "/reports",
+            "icon": "calculator",
+            "id": "reports",
+            "label": "Reports",
+          },
+        ]
+      }
+    />
+  </div>
+  <div
+    className="header-right"
+  >
+    <DropdownUserProfile />
+  </div>
+</header>
+`;

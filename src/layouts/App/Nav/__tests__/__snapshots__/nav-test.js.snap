@@ -1,0 +1,218 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LeftPanel Component Rendering Should render something if it receives required props 1`] = `
+<ul
+  className="menu vertical"
+>
+  <li
+    className=""
+    id="mnu-dashboard"
+    onClick={null}
+  >
+    <a
+      onClick={[Function]}
+      style={Object {}}
+    >
+      <i
+        aria-hidden="true"
+        className="dashboard icon"
+      />
+      Dashboard
+    </a>
+  </li>
+  <li
+    className="active parentLevel"
+    id="mnu-geography"
+    onClick={[Function]}
+  >
+    <a
+      onClick={[Function]}
+      style={Object {}}
+    >
+      <i
+        aria-hidden="true"
+        className="map icon"
+      />
+      Locations
+      <i
+        aria-hidden="true"
+        className="icon chevron down expander"
+      />
+    </a>
+    <ul
+      className="submenu"
+    >
+      <li
+        className="placeholder"
+      />
+      <li
+        className=""
+        id="mnu-countries"
+        onClick={[Function]}
+      >
+        <a
+          onClick={[Function]}
+          style={Object {}}
+        >
+          Countries
+        </a>
+      </li>
+      <li
+        className=""
+        id="mnu-city"
+        onClick={[Function]}
+      >
+        <a
+          onClick={[Function]}
+          style={Object {}}
+        >
+          Provinces
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li
+    className=""
+    id="mnu-notebook"
+    onClick={null}
+  >
+    <a
+      onClick={[Function]}
+      style={Object {}}
+    >
+      <i
+        aria-hidden="true"
+        className="book icon"
+      />
+      Notebook
+    </a>
+  </li>
+  <li
+    className=""
+    id="mnu-reports"
+    onClick={null}
+  >
+    <a
+      onClick={[Function]}
+      style={Object {}}
+    >
+      <i
+        aria-hidden="true"
+        className="calculator icon"
+      />
+      Reports
+    </a>
+  </li>
+</ul>
+`;
+
+exports[`LeftPanel behaviour should pass a selected value to the onClick handler 1`] = `
+<ul
+  className="menu vertical"
+>
+  <li
+    className=""
+    id="mnu-dashboard"
+    onClick={null}
+  >
+    <Link
+      onlyActiveOnIndex={false}
+      style={Object {}}
+      to="/"
+    >
+      <Icon
+        as="i"
+        name="dashboard"
+      />
+      Dashboard
+    </Link>
+  </li>
+  <li
+    className="active parentLevel"
+    id="mnu-geography"
+    onClick={[Function]}
+  >
+    <Link
+      onlyActiveOnIndex={false}
+      style={Object {}}
+    >
+      <Icon
+        as="i"
+        name="map"
+      />
+      Locations
+      <Icon
+        as="i"
+        className="chevron down expander"
+      />
+    </Link>
+    <ul
+      className="submenu"
+    >
+      <li
+        className="placeholder"
+      />
+      <li
+        className=""
+        id="mnu-countries"
+        onClick={[Function]}
+      >
+        <Link
+          onlyActiveOnIndex={false}
+          style={Object {}}
+          to="/countries"
+        >
+          Countries
+        </Link>
+      </li>
+      <li
+        className=""
+        id="mnu-city"
+        onClick={[Function]}
+      >
+        <Link
+          onlyActiveOnIndex={false}
+          style={Object {}}
+          to="/provinces"
+        >
+          Provinces
+        </Link>
+      </li>
+    </ul>
+  </li>
+  <li
+    className=""
+    id="mnu-notebook"
+    onClick={null}
+  >
+    <Link
+      onlyActiveOnIndex={false}
+      style={Object {}}
+      to="/notebook"
+    >
+      <Icon
+        as="i"
+        name="book"
+      />
+      Notebook
+    </Link>
+  </li>
+  <li
+    className=""
+    id="mnu-reports"
+    onClick={null}
+  >
+    <Link
+      onlyActiveOnIndex={false}
+      style={Object {}}
+      to="/reports"
+    >
+      <Icon
+        as="i"
+        name="calculator"
+      />
+      Reports
+    </Link>
+  </li>
+</ul>
+`;

@@ -49,7 +49,7 @@ const Header: React.StatelessComponent<Props> = (props: Props): JSX.Element => {
                 <span className="header-logo">
                     <Icon name="diamond"/>
                 </span>
-                <span>
+                <span className="header-title">
                     <Link to="/">{ title }</Link>
                 </span>
             </div>

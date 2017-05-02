@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer Component Rendering Should render something even if NO props are received 1`] = `
+<footer
+  id="layout-footer"
+>
+  <div
+    className="ui grid"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="twelve wide column"
+      />
+      <div
+        className="four wide column"
+      />
+    </div>
+  </div>
+</footer>
+`;
+
+exports[`Footer Component Rendering Should render something if it receives props 1`] = `
+<footer
+  id="layout-footer"
+>
+  <div
+    className="ui grid"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="twelve wide column"
+      />
+      <div
+        className="four wide column"
+      />
+    </div>
+  </div>
+</footer>
+`;
+
+exports[`Footer behaviour should pass a selected value to the onClick handler 1`] = `
+<component
+  onClick={[Function]}
+/>
+`;

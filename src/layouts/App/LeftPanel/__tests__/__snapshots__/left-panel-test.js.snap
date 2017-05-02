@@ -1,0 +1,234 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LeftPanel Component Rendering Should render something if it receives required props 1`] = `
+<aside
+  className="nav"
+>
+  <nav
+    className="nav-options"
+  >
+    <ul
+      className="menu vertical"
+    >
+      <li
+        className=""
+        id="mnu-dashboard"
+        onClick={null}
+      >
+        <a
+          onClick={[Function]}
+          style={Object {}}
+        >
+          <i
+            aria-hidden="true"
+            className="dashboard icon"
+          />
+          Dashboard
+        </a>
+      </li>
+      <li
+        className="active parentLevel"
+        id="mnu-geography"
+        onClick={[Function]}
+      >
+        <a
+          onClick={[Function]}
+          style={Object {}}
+        >
+          <i
+            aria-hidden="true"
+            className="map icon"
+          />
+          Locations
+          <i
+            aria-hidden="true"
+            className="icon chevron down expander"
+          />
+        </a>
+        <ul
+          className="submenu"
+        >
+          <li
+            className="placeholder"
+          />
+          <li
+            className=""
+            id="mnu-countries"
+            onClick={[Function]}
+          >
+            <a
+              onClick={[Function]}
+              style={Object {}}
+            >
+              Countries
+            </a>
+          </li>
+          <li
+            className=""
+            id="mnu-city"
+            onClick={[Function]}
+          >
+            <a
+              onClick={[Function]}
+              style={Object {}}
+            >
+              Provinces
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li
+        className=""
+        id="mnu-notebook"
+        onClick={null}
+      >
+        <a
+          onClick={[Function]}
+          style={Object {}}
+        >
+          <i
+            aria-hidden="true"
+            className="book icon"
+          />
+          Notebook
+        </a>
+      </li>
+      <li
+        className=""
+        id="mnu-reports"
+        onClick={null}
+      >
+        <a
+          onClick={[Function]}
+          style={Object {}}
+        >
+          <i
+            aria-hidden="true"
+            className="calculator icon"
+          />
+          Reports
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <footer
+    className="nav-footer"
+  >
+    <a
+      className="toggle-collapse"
+      href="javascript:void(0)"
+      onClick={[Function]}
+      title="Expand/Collapse"
+    >
+      <i
+        aria-hidden="true"
+        className="angle double left icon"
+      />
+    </a>
+    <a
+      className="open-settings"
+      href="javascript:void(0)"
+      onClick={[Function]}
+      title="Settings"
+    >
+      <i
+        aria-hidden="true"
+        className="cogs icon"
+      />
+    </a>
+    <i
+      aria-hidden="true"
+      className="expand icon"
+    />
+  </footer>
+</aside>
+`;
+
+exports[`LeftPanel behaviour should pass a selected value to the onClick handler 1`] = `
+<aside
+  className="nav"
+>
+  <nav
+    className="nav-options"
+  >
+    <Nav
+      activeRoute=""
+      position="vertical"
+      routes={
+        Array [
+          Object {
+            "href": "/",
+            "icon": "dashboard",
+            "id": "dashboard",
+            "label": "Dashboard",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "href": "/countries",
+                "icon": "flag",
+                "id": "countries",
+                "label": "Countries",
+              },
+              Object {
+                "href": "/provinces",
+                "icon": "map",
+                "id": "city",
+                "label": "Provinces",
+              },
+            ],
+            "href": "",
+            "icon": "map",
+            "id": "geography",
+            "label": "Locations",
+          },
+          Object {
+            "href": "/notebook",
+            "icon": "book",
+            "id": "notebook",
+            "label": "Notebook",
+          },
+          Object {
+            "href": "/reports",
+            "icon": "calculator",
+            "id": "reports",
+            "label": "Reports",
+          },
+        ]
+      }
+    />
+  </nav>
+  <footer
+    className="nav-footer"
+  >
+    <a
+      className="toggle-collapse"
+      href="javascript:void(0)"
+      onClick={[Function]}
+      title="Expand/Collapse"
+    >
+      <Icon
+        aria-hidden="true"
+        as="i"
+        name="angle double left"
+      />
+    </a>
+    <a
+      className="open-settings"
+      href="javascript:void(0)"
+      onClick={[Function]}
+      title="Settings"
+    >
+      <Icon
+        aria-hidden="true"
+        as="i"
+        name="cogs"
+      />
+    </a>
+    <FullScreen
+      className="toggle-fullscreen"
+      title="FullScreen"
+    />
+  </footer>
+</aside>
+`;
