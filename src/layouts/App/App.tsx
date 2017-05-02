@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { browserHistory, Link } from 'react-router';
 import * as ReactGA from 'react-ga';
-import { Container, Sidebar, Segment, Popup } from 'semantic-ui-react';
+import { Container, Sidebar, Segment, Popup, Input, Icon } from 'semantic-ui-react';
 
 import { BaseComponent } from 'core/decorators';
 import { UserAuth, UserAction, UserProfile } from 'core/auth';
@@ -38,10 +38,25 @@ interface State {
 }
 
 class App extends BaseComponent<Props, State> {
-    // tslint:disable-next-line:no-string-literal
+    // tslint:disable-next-line:no-string-literal    
     routes: Array<IMenuItem> = menu['items'] as Array<IMenuItem>;
     currentRoute: string;
-    menuPosition: string = 'vertical';
+    menuPosition: string = 'horizontal';
+    appTitle: string = 'Master UI';
+    leftBarHeader: JSX.Element = (
+        <div>
+            <div className="nav-title">
+                <span className="nav-logo">
+                    <Icon name="diamond"/>
+                </span>
+                <Link to="/">{ this.appTitle }</Link>
+            </div>
+            {/*<div className="searchbox">
+                <Input icon="search" placeholder="Search ..." />
+            </div>*/}
+        </div>
+    );
+
     state = {           
         isNavBarCollapsed: false,
         page: new PageInfo(),
@@ -166,7 +181,7 @@ class App extends BaseComponent<Props, State> {
             <div className="page-header">
                 <h2>{ page.title }</h2>
             </div>);
-        
+
         return ( <section id="container" className={`${isNavBarCollapsed ? 'collapsed' : ''} ${this.menuPosition}-menu`}>
                     { showHeader && <Header 
                         user={user}
@@ -174,7 +189,7 @@ class App extends BaseComponent<Props, State> {
                         onTogglePanel={ this.handleTogglePanel }
                         routes={ this.menuPosition === 'horizontal' ? this.routes : null }
                         activeRoute={ this.getLocationPath() }
-                        title="Master UI"/> }
+                        title={ this.appTitle} /> }
                     <main className="main">
                         { this.menuPosition === 'vertical' && 
                             <LeftPanel 
@@ -184,7 +199,9 @@ class App extends BaseComponent<Props, State> {
                                 activeRoute={ this.getLocationPath() }
                                 onTogglePanel={ () => this.handleTogglePanel('left') }
                                 onOpenSettings={ this.handleOpenSettings }
-                                /> 
+                                >
+                                { !showHeader && this.leftBarHeader }
+                            </LeftPanel> 
                         }
                         <article className="page">                             
                             { children }
