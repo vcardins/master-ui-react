@@ -1,7 +1,17 @@
 import * as React from 'react';
 import shadeBlendConvert from './shadeBlendConvert';
+import './index.scss';
 
-const ColorSchemaPicker: React.StatelessComponent<{}> = (): JSX.Element => {
+interface Props {
+    id?: string;
+    label?: string;
+    value?: boolean;
+    onChange?: (event: any) => void;
+}
+
+const ColorSchemaPicker: React.StatelessComponent<Props> = (props: Props): JSX.Element => {
+    const { id = 'choose-theme-color', label = '', value, onChange } = props;
+
     const themeColorProp = 'themeColor';
     const themeLightColorProp = 'themeLightColor';  
     const themeLighterColorProp = 'themeLighterColor';  
@@ -18,6 +28,9 @@ const ColorSchemaPicker: React.StatelessComponent<{}> = (): JSX.Element => {
         setStyleProperty(`--${themeLighterColorProp}`, value && shadeBlendConvert(value, factor * 2));
         setStyleProperty(`--${themeLightestColorProp}`, value && shadeBlendConvert(value, factor * 3));
         localStorage.setItem(themeColorProp, value);
+        if (typeof onChange === 'function') {
+            onChange(value);
+        }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,10 +60,13 @@ const ColorSchemaPicker: React.StatelessComponent<{}> = (): JSX.Element => {
     init();
 
     return (
-        <span style={{margin: '0 10px', verticalAlign: 'middle'}}>
-            <input type="color" id="choose-theme-color" onChange={ handleChange } />
-            <a href="javascript:void(0)" style={{margin: '0 5px'}} onClick={resetColor} title="Reset Theme Color">×</a>
-        </span>
+        <div className="color-schema-picker-container">
+            { label && <label>{ label }</label>}
+            <span>
+                <input type="color" id={id} onChange={ handleChange } />
+                <a href="javascript:void(0)" onClick={resetColor} title="Reset Theme Color">×</a>
+            </span>
+        </div>
     );
     
 };

@@ -1,0 +1,20 @@
+@import '~variables';
+
+.color-schema-picker-container {
+    margin: 0 10px;
+
+    label {
+        display: inline-flex;
+        margin-right: 0.5em;
+        line-height: 1.5em;
+        font-weight: 400;
+    }
+
+    span {
+        display: inline-flex;
+
+        a {
+            margin-left: 0.25em;
+        }
+    }
+}

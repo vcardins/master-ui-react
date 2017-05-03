@@ -8,52 +8,89 @@
 }
 
 #sliding-pannel {
-    text-align: center;
     width: $sliding-bar-width;
     height: 100%;
     position: fixed;
     overflow: hidden;
     transition-duration: 0.5s;
     transition-timing-function: linear;
-    z-index: 9999;
+    transition-property: all;
+    z-index: 9;
+
+    &:not(.expanded) {
+        opacity: 0.5;
+    }
+
+    &.expanded {
+        opacity: 1;
+    }
 
     #sliding-panel-content {
         height: 100%;
         float: left;
         width: calc(100% - #{$sliding-trigger-width});
         background: var(--themeLightestColor);
+        padding: 0.75em;
     }
 
-    .trigger {
-        width: $sliding-trigger-width;
-        height: 100%;
-        float: left;
-        vertical-align: middle;
-        cursor: pointer;
+    &.right {
+        right: -1 * ($sliding-bar-width - $sliding-trigger-width);
+        transition-property: right opacity;
 
-        i {
-            font-size: 9px;
-            height: 1.5em;
+        &.expanded {
+            right: 0;
         }
     }
 
     &:not(.right) {
-        left: -1 * ($sliding-bar-width - 10px);
+        left: -1 * ($sliding-bar-width - $sliding-trigger-width);
         transition-property: left;
 
-        .trigger {
+        .sliding-pannel-trigger {
             float: right;
+        }
+
+        &.expanded {
+            left: 0;
         }
     }
 
-    &.right {
-        right: -1 * ($sliding-bar-width - 10px);
-        transition-property: right;
+    .sliding-pannel-trigger {
+        width: $sliding-trigger-width;
+        float: left;
+        text-align: center;
+        background: var(--themeLightestColor);
+        padding: 5px 0;
+        border-bottom-left-radius: 3px;
+
+        .sliding-pannel-trigger-checkbox {
+            display: none;
+
+            +.sliding-pannel-trigger-pinner {
+                cursor: pointer;
+                padding: 0.5em;
+            }
+
+            &:not(:checked)+.sliding-pannel-trigger-pinner {
+                i {
+                    width: 0.5em;
+                    transform: rotate(-45deg);
+                }
+            }
+        }
+
+        i {
+            font-size: 10px;
+            height: auto;
+            width: auto;
+            margin: 0;
+        }
     }
 
+    /*
     &:not(:hover) {
         &:not(.right) {
-            .trigger {
+            .sliding-pannel-trigger {
                 i {
                     width: 0.5em;
                     transform: rotate(-45deg);
@@ -62,7 +99,7 @@
         }
 
         &.right {
-            .trigger {
+            .sliding-pannel-trigger {
                 i {
                     width: 1.5em;
                     transform: rotate(45deg);
@@ -72,7 +109,7 @@
     }
 
     &:hover {
-        .trigger {
+        .sliding-pannel-trigger {
             @include Pulse(200ms);
         }
 
@@ -89,7 +126,7 @@
                 opacity: 1;
             }
         }
-    }
+    } */
 
     a {
         color: #000;
