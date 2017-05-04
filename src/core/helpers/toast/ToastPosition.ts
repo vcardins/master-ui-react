@@ -1,10 +1,10 @@
-enum ToastPosition {
-    tl,
-    tr,
-    tc,
-    bl,
-    br,
-    bc,
-}
+const ToastPosition = {
+    topLeft: 'tl',
+    topRight: 'tr',
+    topCenter: 'tc',
+    bottomLeft: 'bl',
+    bottomRight: 'br',
+    bottomCenter: 'bc',
+};
 
 export default ToastPosition;

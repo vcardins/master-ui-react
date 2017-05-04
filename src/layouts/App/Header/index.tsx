@@ -5,6 +5,7 @@ import Logo from '../Logo';
 import IMenuItem from '../IMenuItem';
 import { UserProfile } from 'core/auth';
 import appSettings from 'core/settings';
+import toast from 'core/helpers/toast';
 import Nav from '../Nav';
 import './index.scss';
 
@@ -34,6 +35,7 @@ const Header: React.StatelessComponent<Props> = (props: Props): JSX.Element => {
 
     const options = [
         { key: 'settings', text: 'Profile', icon: 'user', onClick: () => browserHistory.replace('/user-profile')  },
+        { key: 'toast', text: 'Show Notification', icon: 'sign out', onClick: () => toast.info('Message') },
         { key: 'sign-out', text: 'Sign Out', icon: 'sign out', onClick: onLogout },
     ];
 
