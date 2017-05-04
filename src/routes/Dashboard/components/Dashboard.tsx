@@ -59,6 +59,27 @@ const Dashboard: React.StatelessComponent<Props> = (props: Props): JSX.Element =
                     <Image src={paragraphImage} />
                 </Grid.Column>
             </Grid.Row>
+
+            <Grid.Row>
+                <Grid.Column>
+                    <Image src={paragraphImage} />
+                </Grid.Column>
+                <Grid.Column>
+                    <Image src={paragraphImage} />
+                </Grid.Column>
+                <Grid.Column>
+                    <Image src={paragraphImage} />
+                </Grid.Column>
+            </Grid.Row>
+
+             <Grid.Row columns={2}>
+                <Grid.Column>
+                    <Image src={paragraphImage} />
+                </Grid.Column>
+                <Grid.Column>
+                    <Image src={paragraphImage} />
+                </Grid.Column>
+            </Grid.Row>
         </Grid>
     );
     
@@ -66,15 +87,6 @@ const Dashboard: React.StatelessComponent<Props> = (props: Props): JSX.Element =
         <div>
             { GridExampleVerticallyDivided }
             { GridExampleRows }
-            <Grid>
-                <Grid.Column>
-                    <Card
-                        image="http://semantic-ui.com/images/avatar/large/elliot.jpg"
-                        header={header}
-                        meta="Friend"
-                        description={description}/>
-                </Grid.Column>
-            </Grid>            
         </div>
     );
 };
