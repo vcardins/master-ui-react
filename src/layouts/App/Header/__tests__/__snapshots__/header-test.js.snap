@@ -225,6 +225,29 @@ exports[`Header Component Rendering Should render something if it receives requi
           <span
             className="text"
           >
+            Show Notification
+          </span>
+        </div>
+        <div
+          aria-checked={false}
+          aria-disabled={undefined}
+          aria-selected={false}
+          className="item"
+          onClick={[Function]}
+          role="option"
+          style={
+            Object {
+              "pointerEvents": "all",
+            }
+          }
+        >
+          <i
+            aria-hidden="true"
+            className="sign out icon"
+          />
+          <span
+            className="text"
+          >
             Sign Out
           </span>
         </div>

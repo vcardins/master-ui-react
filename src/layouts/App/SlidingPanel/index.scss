@@ -7,7 +7,7 @@
     animation-name: pulse;
 }
 
-#sliding-pannel {
+#sliding-panel {
     width: $sliding-bar-width;
     height: 100%;
     position: fixed;
@@ -46,7 +46,7 @@
         left: -1 * ($sliding-bar-width - $sliding-trigger-width);
         transition-property: left;
 
-        .sliding-pannel-trigger {
+        .sliding-panel-trigger {
             float: right;
         }
 
@@ -55,7 +55,7 @@
         }
     }
 
-    .sliding-pannel-trigger {
+    .sliding-panel-trigger {
         width: $sliding-trigger-width;
         float: left;
         text-align: center;
@@ -63,15 +63,15 @@
         padding: 5px 0;
         border-bottom-left-radius: 3px;
 
-        .sliding-pannel-trigger-checkbox {
+        .sliding-panel-trigger-checkbox {
             display: none;
 
-            +.sliding-pannel-trigger-pinner {
+            +.sliding-panel-trigger-pinner {
                 cursor: pointer;
                 padding: 0.5em;
             }
 
-            &:not(:checked)+.sliding-pannel-trigger-pinner {
+            &:not(:checked)+.sliding-panel-trigger-pinner {
                 i {
                     width: 0.5em;
                     transform: rotate(-45deg);
@@ -90,7 +90,7 @@
     /*
     &:not(:hover) {
         &:not(.right) {
-            .sliding-pannel-trigger {
+            .sliding-panel-trigger {
                 i {
                     width: 0.5em;
                     transform: rotate(-45deg);
@@ -99,7 +99,7 @@
         }
 
         &.right {
-            .sliding-pannel-trigger {
+            .sliding-panel-trigger {
                 i {
                     width: 1.5em;
                     transform: rotate(45deg);
@@ -109,7 +109,7 @@
     }
 
     &:hover {
-        .sliding-pannel-trigger {
+        .sliding-panel-trigger {
             @include Pulse(200ms);
         }
 

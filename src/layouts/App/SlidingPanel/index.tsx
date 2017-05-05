@@ -2,33 +2,30 @@ import * as React from 'react';
 import './index.scss';
 
 interface Props {
-    id?: string;
     position?: string;
     children?: JSX.Element;
 }
 
 const SlidingPanel: React.StatelessComponent<Props> = (props: Props): JSX.Element => {
-     const { id = 'sliding-panel-pin', children, position = 'right' } = props;
+     const { children, position = 'right' } = props;
+     const elTag = 'sliding-panel';
 
      const handleOnChange = ({target : {checked}}) => {
-        const container = document.getElementById('sliding-pannel');
-        if (checked) {
-            container.classList.add('expanded');
-        } 
-        else {
-            container.classList.remove('expanded');
+        const container = document.getElementById(elTag);
+        if (container instanceof HTMLElement) {
+            container.classList[checked ? 'add' : 'remove']('expanded');
         }
      };
 
      return (
-        <div id="sliding-pannel" className={position}>
-            <div className="sliding-pannel-trigger">
-                <input type="checkbox" id={id} className="sliding-pannel-trigger-checkbox" onChange={handleOnChange}/>
-                <label htmlFor={id} className="sliding-pannel-trigger-pinner">
+        <div id={elTag} className={position}>
+            <div className={`${elTag}-trigger`}>
+                <input type="checkbox" id={`${elTag}-pin`} className={`${elTag}-trigger-checkbox`} onChange={handleOnChange}/>
+                <label htmlFor={`${elTag}-pin`} className={`${elTag}-trigger-pinner`}>
                     <i className="pin icon"></i>
                 </label>
             </div>
-            <div id="sliding-panel-content">
+            <div id={`${elTag}-content`}>
                 { children }
             </div>
         </div>

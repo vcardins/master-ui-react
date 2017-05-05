@@ -3,41 +3,28 @@
 exports[`SlidingPanel Component Rendering Should render something even if NO props are received 1`] = `
 <div
   className="right"
-  id="sliding-pannel"
+  id="sliding-panel"
 >
   <div
-    className="trigger"
+    className="sliding-panel-trigger"
   >
-    <i
-      className="pin icon"
+    <input
+      className="sliding-panel-trigger-checkbox"
+      id="sliding-panel-pin"
+      onChange={[Function]}
+      type="checkbox"
     />
+    <label
+      className="sliding-panel-trigger-pinner"
+      htmlFor="sliding-panel-pin"
+    >
+      <i
+        className="pin icon"
+      />
+    </label>
   </div>
   <div
     id="sliding-panel-content"
   />
 </div>
-`;
-
-exports[`SlidingPanel Component Rendering Should render something if it receives props 1`] = `
-<div
-  className="right"
-  id="sliding-pannel"
->
-  <div
-    className="trigger"
-  >
-    <i
-      className="pin icon"
-    />
-  </div>
-  <div
-    id="sliding-panel-content"
-  />
-</div>
-`;
-
-exports[`SlidingPanel behaviour should pass a selected value to the onClick handler 1`] = `
-<component
-  onClick={[Function]}
-/>
 `;

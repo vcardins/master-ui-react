@@ -70,6 +70,7 @@
     "isomorphic-style-loader": "^2.0.0",
     "isparta-loader": "latest",
     "jest": "^19.0.2",
+    "jsdom": "^10.1.0",
     "json-loader": "^0.5.4",
     "json-server": "^0.10.0",
     "lodash-webpack-plugin": "^0.11.3",
@@ -116,7 +117,8 @@
       "./test/jest/jestsetup.js"
     ],
     "moduleDirectories": [
-      "node_modules"
+      "node_modules",
+      "src"
     ],
     "snapshotSerializers": [
       "<rootDir>/node_modules/enzyme-to-json/serializer"
@@ -140,7 +142,11 @@
     "globals": {
       "TS_CONFIG": "tsconfig.json"
     },
-    "testResultsProcessor": "<rootDir>/node_modules/ts-jest/coverageprocessor.js"
+    "testResultsProcessor": "<rootDir>/node_modules/ts-jest/coverageprocessor.js",
+    "collectCoverage": false,
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}"
+    ]
   },
   "scripts": {
     ".prepush": "npm test && test:coverage",

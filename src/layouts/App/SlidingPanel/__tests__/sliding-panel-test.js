@@ -1,8 +1,10 @@
 /* eslint-env node, jest, mocha, jsx */
 import * as React from 'react';
 import * as Renderer from 'react-test-renderer';
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import SlidingPanel from '../index';
+
+const elTag = 'sliding-panel';
 
 function setup (props, test) {
     return () => test(
@@ -12,37 +14,64 @@ function setup (props, test) {
     );
 }
 
-describe('SlidingPanel Component Rendering', () => {
-    const onClick = jest.fn();
+function loadComponent (fn, props, test) {
+    const component = fn(<SlidingPanel {...props} />, { attachTo: document.body });
+    const trigger = component.find(`#${elTag}-pin`);
+    const content = component.find(`#${elTag}-content`);
 
+	return () => test({
+		component,
+        content,
+        trigger,
+	});
+}
+
+describe('SlidingPanel Component Rendering', () => {
 	it('Should exist', () => {
 		expect(SlidingPanel).not.toBeNull();
 	});
 
 	it('Should render something even if NO props are received', setup({},
-		(component) => expect(component.toJSON()).toMatchSnapshot()
+		(Component) => expect(Component.toJSON()).toMatchSnapshot()
 	));
-
-	it('Should render something if it receives props', setup(
-		{ 
-            alt: 'SlidingPanel component test', 
-            width: 150, 
-            height: 50, 
-            imageUrl: 'http://placehold.it/350x150',
-            onClick,
-         },
-		(component) => expect(component.toJSON()).toMatchSnapshot()
-	));	
 });
 
-describe('SlidingPanel behaviour', () => {
-    it('should pass a selected value to the onClick handler', setup({},
-		(component) => {
-            const onClick = jest.fn();
-            const wrapper = shallow(
-                <component onClick={onClick} />
-            );
-            expect(wrapper).toMatchSnapshot();
-        }
-	));    
-})
+const contentText = 'Element Exists';
+
+/* Validate component rendering */
+describe('Validate DOM element', loadComponent(shallow,
+	{ children: <div>{contentText}</div> },
+	({ component, content }) => {
+		it('Should load the correct content', () => {
+			expect(content.text()).toEqual(contentText);
+		});
+		
+        it('Should load toggle trigger', () => {
+			expect(component.find(`#${elTag}-pin`)).not.toBeNull();
+		});
+
+		it('Should appears on the app\'s right side if position property is not set', () => {
+            expect(component.hasClass('right')).toEqual(true);
+		});
+	}
+));
+
+/* Dropdown Selector Tests */
+describe('Validate component behaviours', loadComponent(mount,
+	{ 
+        position: 'left',
+        children: <div>{contentText}</div>, 
+    },
+	({ component, trigger }) => {
+        it('Should appears on the app\'s left side', () => {
+            expect(component.hasClass('left')).toEqual(true);
+		});
+
+        trigger.simulate('change', { stopPropagation: () => {}, preventDefault: () => {}, target: { checked: true } });
+        
+        it('Should expands the panel', () => {
+            console.log(component);
+            expect(component.hasClass('expanded')).toEqual(true);
+		});        
+	}
+));
