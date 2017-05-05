@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import './index.scss';
 
 interface Props {
@@ -18,7 +19,7 @@ const SlidingPanel: React.StatelessComponent<Props> = (props: Props): JSX.Elemen
      };
 
      return (
-        <div id={elTag} className={position}>
+        <div id={elTag} className={position} >
             <div className={`${elTag}-trigger`}>
                 <input type="checkbox" id={`${elTag}-pin`} className={`${elTag}-trigger-checkbox`} onChange={handleOnChange}/>
                 <label htmlFor={`${elTag}-pin`} className={`${elTag}-trigger-pinner`}>

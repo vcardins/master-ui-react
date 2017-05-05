@@ -32,11 +32,15 @@
         font-weight: 400;
         font-size: 1.5em;
         line-height: 25px;
+        margin-left: 1em;
 
         .header-logo {
-            width: $navbar-width-collapsed;
             text-align: center;
             display: inherit;
+        }
+
+        .header-title {
+            margin-left: 0.5em;
         }
     }
 

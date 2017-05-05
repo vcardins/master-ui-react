@@ -14,8 +14,8 @@ function setup (props, test) {
     );
 }
 
-function loadComponent (fn, props, test) {
-    const component = fn(<SlidingPanel {...props} />, { attachTo: document.body });
+function loadComponent (fn, props, test, attachTo = {}) {
+    const component = fn(<SlidingPanel {...props} />, attachTo);
     const trigger = component.find(`#${elTag}-pin`);
     const content = component.find(`#${elTag}-content`);
 
@@ -42,7 +42,7 @@ const contentText = 'Element Exists';
 describe('Validate DOM element', loadComponent(shallow,
 	{ children: <div>{contentText}</div> },
 	({ component, content }) => {
-		it('Should load the correct content', () => {
+		it('Should render to static HTML content', () => {
 			expect(content.text()).toEqual(contentText);
 		});
 		
@@ -70,8 +70,8 @@ describe('Validate component behaviours', loadComponent(mount,
         trigger.simulate('change', { stopPropagation: () => {}, preventDefault: () => {}, target: { checked: true } });
         
         it('Should expands the panel', () => {
-            console.log(component);
             expect(component.hasClass('expanded')).toEqual(true);
 		});        
-	}
+	},
+	{ attachTo: document.body }
 ));
