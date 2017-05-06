@@ -40,22 +40,21 @@ class ResetPasswordContainer extends React.Component<Props, State>  {
         this.setState(state);
     }
 
-    handleResetPassword (event): void {
+    async handleResetPassword (event) {
         event.preventDefault();
         const { email } = this.state;
 
         this.setState({ isLoading: true });
-        UserAuth.resetPassword(email)
-            .then((response: ActionResult) => {
-                this.setState({ isLoading: false });
-                if (response.redirect) {
-                    browserHistory.replace(response.redirect);
-                }                   
-            })
-            .catch((response: ActionResult) => {
-                const validationErrors = [].concat(new ValidationError(response.error.message, '', 'email'));
-                this.setState({ isLoading: false, validationErrors });    
-            });
+        const response: ActionResult = await UserAuth.resetPassword(email);
+        if (response.error) {
+            const validationErrors = [].concat(new ValidationError(response.error.message, '', 'email'));
+            this.setState({ isLoading: false, validationErrors });    
+        } else {
+            this.setState({ isLoading: false });
+            if (response.redirect) {
+                browserHistory.replace(response.redirect);
+            }
+        }
     }
 
     isFormValid(): boolean {

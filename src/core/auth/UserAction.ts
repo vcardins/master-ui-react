@@ -8,99 +8,66 @@ import settings from 'core/settings';
 
 const UserAction: IUserAction = { 
 
-    getProfile(): Promise<UserProfile> {
-        return Api.get('profile').then((profile: any) => {
-            return new UserProfile(profile);
-        });
+    async getProfile(): Promise<UserProfile> {
+        const profile = await Api.get('profile');
+        return new UserProfile(profile);
     },
 
-    updateProfile(data: UserProfile): Promise<UserProfile> {
-        return Api.patch('profile').then((profile: any) => {
-            return new UserProfile(profile);
-        });
+    async updateProfile(data: UserProfile): Promise<UserProfile> {
+        const profile = await Api.patch('profile');
+        return new UserProfile(profile);
     },
 
-    signIn(data: any): Promise<any> {
-        return null;
+    async signup(data: any): Promise<any> {
+        const response = await Api.post('account/register');
+        const apiResponse: ActionResult = new ActionResult();
+        apiResponse.redirect = settings.defaultRoute;
+        apiResponse.message = response.message;
+        return apiResponse;
     },
 
-    signOut(data: any): Promise<any> {
-       return null;
+    async verifyAccount(data: any): Promise<any> {
+         return await Api.patch('account/verifyAccount', data);
     },
 
-    signup(data: any): Promise<any> {
-         const apiResponse: ActionResult = new ActionResult();
-        return Api.post('account/register', data).then((response: any) => {
-            apiResponse.redirect = settings.defaultRoute;
-            apiResponse.message = response.message;
-            return apiResponse;
-        });
+    async changeEmail(data: any): Promise<any> {
+        return await Api.patch('account/changeEmail', data);
     },
 
-    verifyAccount(data: any): Promise<any> {
-         return Api.patch('account/verifyAccount', data).then((response: any) => {
-            return response;
-        });
+    async changeMobile(data: any): Promise<any> {
+        return await Api.patch('account/changeMobile', data);
     },
 
-    changeEmail(data: any): Promise<any> {
-        return Api.patch('account/changeEmail', data).then((response: any) => {
-            return response;
-        });
+    async changeAddress(data: any): Promise<any> {
+        return await Api.patch('account/changeAddress', data);
     },
 
-    changeMobile(data: any): Promise<any> {
-        return Api.patch('account/changeMobile', data).then((response: any) => {
-            return response;
-        });
+    async changePassword(data: any): Promise<any> {
+        return await Api.patch('account/changePassword', data);
     },
 
-    changeAddress(data: any): Promise<any> {
-        return Api.patch('account/changeAddress', data).then((response: any) => {
-            return response;
-        });
+    async isUsernameAvailable(username: string): Promise<any> {
+         return await Api.get('account/isUsernameAvailable', { username });
     },
 
-    changePassword(data: any): Promise<any> {
-        return Api.patch('account/changePassword', data).then((response: any) => {
-            return response;
-        });
+    async isEmailAvailable(email: string): Promise<any> {
+        return await Api.get('account/isEmailAvailable', { email });
     },
 
-    isUsernameAvailable(username: string): Promise<any> {
-         return Api.get('account/isUsernameAvailable', { username }).then((response: any) => {
-            return response;
-        });
+    async isPhoneNumberAvailable(phoneNumber: string): Promise<any> {
+        return await Api.get('account/isPhoneNumberAvailable', { phoneNumber });
     },
 
-    isEmailAvailable(email: string): Promise<any> {
-        return Api.get('account/isEmailAvailable', { email }).then((response: any) => {
-            return response;
-        });
+    async resetPassword(data: any): Promise<any> {
+        return await Api.post('account/reset-password', data);
     },
 
-    isPhoneNumberAvailable(phoneNumber: string): Promise<any> {
-        return Api.get('account/isPhoneNumberAvailable', { phoneNumber }).then((response: any) => {
-            return response;
-        });
+    async requestUsernameChange(data: any): Promise<any> {
+        return await Api.post('account/request-username-change', data);
     },
 
-    resetPassword(data: any): Promise<any> {
-        return Api.post('account/reset-password', data).then((response: any) => {
-            return response;
-        });
-    },
-
-    requestUsernameChange(data: any): Promise<any> {
-        return Api.post('account/request-username-change', data).then((response: any) => {
-            return response;
-        });
-    },
-
-    requestEmailChange(data: any): Promise<any> {
-        return Api.post('account/request-email-change', data).then((response: any) => {
-            return response;
-        });
+    async requestEmailChange(data: any): Promise<any> {
+        return await Api.post('account/request-email-change', data);
     },
 };
 

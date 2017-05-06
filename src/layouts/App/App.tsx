@@ -75,18 +75,16 @@ class App extends BaseComponent<Props, State> {
         this.preparePageInfo(newProps);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         const { dispatch, router } = this.props;      
 
         if (!UserAuth.isAuthenticated()) {
             // set the current url/path for future redirection (we use a Redux action)
             // then redirect (we use a React Router method)
-            // dispatch(setRedirectUrl(currentURL))
             browserHistory.replace(appSettings.loginRoute);
         } else {
-            /* const promises = [UserAction.getProfile()]; Api.get('lookup') //Promise.all(promises) */
-            UserAction.getProfile()
-                .then((result: any) => this.setState({ user: result }));
+            const user = await UserAction.getProfile();
+            this.setState({ user });
         }
 
         if (appSettings.analyticsId) {
@@ -142,10 +140,11 @@ class App extends BaseComponent<Props, State> {
         }        
     }
 
-    handleLogout() {
-        UserAuth.logout()
-            .then(({redirect}) => redirect ? browserHistory.push(redirect) : () => {})
-            .catch(Console.error);
+    async handleLogout() {
+        const { redirect } = await UserAuth.logout();
+        if (redirect) {
+            browserHistory.push(redirect);
+        }
     }
 
     handleTogglePanel(side: string, isCollapsed: boolean = false) {

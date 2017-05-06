@@ -11,7 +11,7 @@ class UserAuth {
    *
    * @param {string} token
    */
-  public static login(identifier: string, password: string) {
+  static async login(identifier: string, password: string): Promise<ActionResult> {
       let self = this;
       let promise = null;
 
@@ -23,51 +23,36 @@ class UserAuth {
       const bodyContent = `${grantContent}${userNameContent}${passwordContent}${clientId}`;
       const apiResponse: ActionResult = new ActionResult();
       apiResponse.action = 'login';
-
-      return new Promise((resolve: any, reject: any) => {
-          Api
-              .plainRequest(settings.api.loginUrl, 'POST', bodyContent, 'application/x-www-form-urlencoded', true)
-              .then((result: IAuthResponse) => {
-                if (!apiResponse.error) {
-                    self.setToken(result.access_token);
-                    self.setUser({username: result.username}, {title: result.role, bitMask: parseInt(result.bitMask, 0)});
-                    apiResponse.redirect = settings.defaultRoute;
-                    apiResponse.data = self.user;
-                    apiResponse.message = 'User has been successfully authenticated';
-                    resolve(apiResponse);
-                } else {
-
-                }
-              }).catch((error) => {
-                  apiResponse.error = new Error(error.error_description);
-                  reject(apiResponse);
-              });
-      });
+    
+      const result: any = await Api.plainRequest(settings.api.loginUrl, 'POST', bodyContent, 'application/x-www-form-urlencoded', true);
+      if (result.error) {
+          apiResponse.error = new Error(result.error_description);
+          this.clearToken();
+      } else {
+        this.setToken(result.access_token);
+        this.setUser({username: result.username}, {title: result.role, bitMask: parseInt(result.bitMask, 0)});
+        apiResponse.redirect = settings.defaultRoute;
+        apiResponse.data = this.user;
+        apiResponse.message = 'User has been successfully authenticated';
+      }
+      return apiResponse;
   }
 
-  public static resetPassword(email: string) {
+  static async resetPassword(email: string): Promise<ActionResult> {
       let self = this;
       const apiResponse: ActionResult = new ActionResult();
 
-      return new Promise((resolve: any, reject: any) => {
-          Api
-              .patch(settings.api.resetPasswordUrl, { email }, null, true)
-              .then((result) => {
-                if (!apiResponse.error) {
-                    apiResponse.redirect = settings.loginRedirect;
-                    apiResponse.message = 'User has been successfully authenticated';
-                    resolve(apiResponse);
-                } else {
-
-                }
-              }).catch((error) => {
-                  apiResponse.error = new Error(error.error_description);
-                  reject(apiResponse);
-              });
-      });
+      const result = await Api.patch(settings.api.resetPasswordUrl, { email }, null, true);
+      if (!result.error) {
+          apiResponse.redirect = settings.loginRedirect;
+          apiResponse.message = 'User has been successfully authenticated';
+      } else {
+          apiResponse.error = new Error(result.error_description);
+      }
+      return apiResponse;
   }  
 
-  public static get token(): string {
+  static get token(): string {
       return LocalStorage.get(this.tokenKey);
   }
   /**
@@ -87,7 +72,7 @@ class UserAuth {
     return `${settings.tokenPrefix}_${settings.tokenName}`;
   }
 
-  public static get user() {
+  static get user() {
     let usr = JSON.parse(LocalStorage.get(this.userKey));
     return usr;
   }
@@ -107,10 +92,10 @@ class UserAuth {
    */
 
   private static get publicUser() {
-    return { username: '', role: userRoles.public };
+    return { username: '', role: userRoles.public};
   }
 
-  public static isAuthorized(accessLevel, role) {
+  static isAuthorized(accessLevel, role) {
     role = (role || this.user.accessLevel) || this.publicUser.role;
     return accessLevel.bitMask <= role.bitMask;
   }
@@ -119,7 +104,7 @@ class UserAuth {
     return this.user.accessLevel || accessLevels.public;
   }
 
-  public static checkAuth(nextState, replace, accessLevel) {
+  static checkAuth(nextState, replace, accessLevel) {
 
       const isAuth = this.isAuthenticated();
 
@@ -139,7 +124,7 @@ class UserAuth {
 
   }
 
-  public static logout() {
+  static logout(): Promise<ActionResult> {
       return new Promise((resolve, reject) => {
           this.clearToken();
           const apiResponse = new ActionResult();

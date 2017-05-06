@@ -47,21 +47,19 @@ class ProvinceContainer extends React.Component<Props, State>  {
         this.setState({isLoading: true}, this.loadModels.bind(null, this.state.iso2));              
     }
 
-    loadModels(iso2: string) {
+    async loadModels(iso2: string) {
         const { id } = this.props.params;
         this.setState({ isLoading: true });
-        Actions.getAll(iso2)
-            .then((models: any) => {
-                const model = (!!id && models.filter(({code}) => code === id)[0]) || new Province();            
-                this.setState({ iso2, models, model, isLoading: false });
-            });  
+        const models = await Actions.getAll(iso2);
+        const model = (!!id && models.filter(({code}) => code === id)[0]) || new Province();            
+        this.setState({ iso2, models, model, isLoading: false });
     }
 
     handleCountrySelect(event, {value}) {
         this.loadModels(value);
     }
 
-    handleFieldChange (event: any): void {
+    handleFieldChange (event: any) {
         event.preventDefault();
         const { name, value } = event.target;
         const state = Object.assign({}, {}, this.state.model);
@@ -69,22 +67,20 @@ class ProvinceContainer extends React.Component<Props, State>  {
         this.setState({ model: state });
     }
 
-    handleSignup (event): void {
+    async handleSignup (event) {
         event.preventDefault();
         const { model } = this.state;
 
         this.setState({ isSaving: true });
-        Actions.save(model, true)
-            .then((response: any) => {
-                this.setState({ isSaving: false });
-            })
-            .catch((response: any) => {
-                const validationErrors = [];
-                // new FormValidationError(response);
-                console.log(validationErrors);
-                // const validationErrors = [].concat(new FormValidationError(response.message, '', 'username'));
-                this.setState({ isSaving: false, validationErrors });    
-            });
+        const response = await Actions.save(model, true);
+        if (response.error) {
+            const validationErrors = [];
+            console.log(validationErrors);
+            // const validationErrors = [].concat(new FormValidationError(response.message, '', 'username'));
+            this.setState({ isSaving: false, validationErrors });    
+        } else {
+            this.setState({ isSaving: false });
+        }
     }
 
     isFormValid(): boolean {

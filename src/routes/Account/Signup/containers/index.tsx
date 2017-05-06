@@ -45,25 +45,24 @@ class SignUp extends React.Component<Props, State>  {
         this.setState({ model: state });
     }
 
-    handleSignup (event): void {
+    async handleSignup (event) {
         event.preventDefault();
         const { model } = this.state;
 
         this.setState({ isLoading: true });
-        UserAction.signup(model)
-            .then((response: any) => {
-                this.setState({ isLoading: false });
-                if (response.redirect) {
-                    browserHistory.replace(response.redirect);
-                }                   
-            })
-            .catch((response: any) => {
-                const validationErrors = [];
-                // new FormValidationError(response);
-                console.log(validationErrors);
-                // const validationErrors = [].concat(new FormValidationError(response.message, '', 'username'));
-                this.setState({ isLoading: false, validationErrors });    
-            });
+        const response: ActionResult = await UserAction.signup(model);
+        if (!response.error) {
+            this.setState({ isLoading: false });
+            if (response.redirect) {
+                browserHistory.replace(response.redirect);
+            }      
+        } else {
+            const validationErrors = [];
+            // new FormValidationError(response);
+            console.log(validationErrors);
+            // const validationErrors = [].concat(new FormValidationError(response.message, '', 'username'));
+            this.setState({ isLoading: false, validationErrors });   
+        }
     }
 
     isFormValid(): boolean {

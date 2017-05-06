@@ -1,4 +1,5 @@
 import nanoajax from 'nanoajax';  // https://github.com/yanatan16/nanoajax
+import { ActionResult } from 'core/models';
 import settings from 'core/settings';
 import Utils from './Utils';
 import { UserAuth } from '../auth';
@@ -28,16 +29,13 @@ export default class Api {
     *
     * @returns {Promise|*}
     */
-  public static count(route: string, data: any) {
+  static count(route: string, data: any) {
     return this.get(route + '/count', data);
   }
 
-  public static find(route: string, prop: string, value: any): Promise<any> {
-    return this.get(route, 'GET').then((data: string[]) => {
-      return data.filter((item: any) => {
-        return item[prop] === value;
-      })[0];
-    });
+  static async find(route: string, prop: string, value: any): Promise<any> {
+    const data: string[] = await this.get(route, 'GET');
+    return data.filter((item: any) => item[prop] === value)[0] || {};
   }
 
   /**
@@ -49,7 +47,7 @@ export default class Api {
     *
     * @returns {Promise|*}
     */
-  public static get(route: string, data: any = undefined, contentType: any = null, anonymous: boolean = false): Promise<any> {
+  static get(route: string, data: any = undefined, contentType: any = null, anonymous: boolean = false): Promise<any> {
     return this.request(route, 'GET', data, contentType, anonymous);
   }
 
@@ -62,7 +60,7 @@ export default class Api {
     *
     * @returns {Promise|*}
     */
-  public static getById(route: string, identifier: any, contentType: any = null, anonymous: boolean = false): Promise<any> {
+  static getById(route: string, identifier: any, contentType: any = null, anonymous: boolean = false): Promise<any> {
     return this.request(route + '/' + identifier, 'GET', undefined, anonymous);
   }
 
@@ -74,15 +72,15 @@ export default class Api {
     *
     * @returns {Promise|*}
     */
-  public static post(route: string, data: any = null, contentType: any = null, anonymous: boolean = false): Promise<any> {
+  static post(route: string, data: any = null, contentType: any = null, anonymous: boolean = false): Promise<any> {
     return this.request(route, 'POST', data, contentType, anonymous);
   }
 
-  public static patch(route: string, data: any = null, contentType: any = null, anonymous: boolean = false): Promise<any> {
+  static patch(route: string, data: any = null, contentType: any = null, anonymous: boolean = false): Promise<any> {
     return this.request(route, 'PATCH', data, contentType, anonymous);
   }
 
-  public static upload(route: string, data: any = null, contentType: any = null, anonymous: boolean = false): Promise<any> {
+  static upload(route: string, data: any = null, contentType: any = null, anonymous: boolean = false): Promise<any> {
     return this.request(route, 'UPLOAD', data, contentType, anonymous);
   }
 
@@ -95,7 +93,7 @@ export default class Api {
     *
     * @returns {Promise|*}
     */
-  public static put(route: string, data: any = null, contentType: any = null, anonymous: boolean = false): Promise<any> {
+  static put(route: string, data: any = null, contentType: any = null, anonymous: boolean = false): Promise<any> {
     return this.request(route, 'PUT', data, contentType, anonymous);
   }
 
@@ -107,30 +105,30 @@ export default class Api {
     *
     * @returns {Promise|*}
     */
-  public static delete(route: string, data: any = null, contentType: any = null, anonymous: boolean = false): Promise<any> {
+  static delete(route: string, data: any = null, contentType: any = null, anonymous: boolean = false): Promise<any> {
     return this.request(route, 'DELETE', data, null, anonymous);
   }
 
-  public static plainRequest(route: string, httpRequestType: string, data: any = null, contentType: any = null, anonymous: boolean = false): Promise<any> {
+  static plainRequest(route: string, httpRequestType: string, data: any = null, contentType: any = null, anonymous: boolean = false): Promise<any> {
     this._isPlainRequest = true;
     return this.request(route, httpRequestType, data, contentType, anonymous);
   }
 
   private static request(route: string,
           httpRequestType: string,
-          data: any = {},
+          body: any = {},
           contentType: any = null,
           isAnonymous: boolean = false): Promise<any> {
-        let url = this._urlCompile(route, data, true);
+        let url = this._urlCompile(route, body, true);
         
         contentType = contentType || settings.api.contentType;
 
-        if (typeof (data) === 'object' && data.constructor.name === 'FormData') {
+        if (typeof (body) === 'object' && body.constructor.name === 'FormData') {
           contentType = null;
         }
 
         let configRequest = {
-            data: null,
+            body: null,
             method : httpRequestType,
             headers: { 'Content-Type': contentType },
         };
@@ -138,7 +136,7 @@ export default class Api {
         switch (httpRequestType) {
           case 'GET':
           case 'DELETE':
-            const params = this.getParams(data);
+            const params = this.getParams(body);
             if (params) {
               url += '?' + params;
             }
@@ -146,10 +144,10 @@ export default class Api {
           case 'PUT':
           case 'PATCH':
           case 'POST':
-            if (data.constructor.name === 'FormData') {
-              configRequest.data = new FormData(data);
+            if (body.constructor.name === 'FormData') {
+              configRequest.body = new FormData(body);
             } else {
-              configRequest.data = typeof(data) === 'object' ? JSON.stringify(data) : data;
+              configRequest.body = typeof(body) === 'object' ? JSON.stringify(body) : body;
             }
             break;
         }
@@ -166,19 +164,24 @@ export default class Api {
 
       return new Promise((resolve, reject) => {
         return nanoajax.ajax(request, (code, response, xmlHttpRequest) => {
-          
+          const result: ActionResult = new ActionResult();
+
           if (code !== 204) {
-            const codeExplanation = code ? `responses: ${code}` : 'parameters: in: body';
+             try {
+              const apiResponse = JSON.parse(response);
+              const codeExplanation = code ? `responses: ${code}` : 'parameters: in: body';
+              switch (code) {
+                case 400:
+                  break;
+                case 401:
+                  result.error = new Error('User not authorized. Please sign in again');
+                  break;                
+              }
 
-            if (code === 401) {
-              return reject(new Error('User not authorized. Please sign in again'));
-            }
+              resolve(apiResponse);
 
-            try {
-              const data = JSON.parse(response); 
-              resolve(data);
             } catch (e) {
-              return reject(
+              reject(
                   new Error(`Request response is not a valid JSON ${url}: ${request.method}: ${e.message}`),
               );
             }

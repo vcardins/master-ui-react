@@ -45,14 +45,12 @@ class NotebookContainer extends React.Component<Props, State>  {
         this.setState({isLoading: true}, this.loadModels);              
     }
 
-    loadModels() {
+    async loadModels() {
         const { id } = this.props.params;
         this.setState({ isLoading: true });
-        Actions.getAll()
-            .then((models: any) => {
-                const model = (!!id && models.filter(({id}) => id === id)[0]) || new Notebook();            
-                this.setState({ models, model, isLoading: false });
-            });  
+        const models = await Actions.getAll();
+        const model = (!!id && models.filter(({id}) => id === id)[0]) || new Notebook();            
+        this.setState({ models, model, isLoading: false });
     }
 
     handleFieldChange (event: any): void {
@@ -63,22 +61,21 @@ class NotebookContainer extends React.Component<Props, State>  {
         this.setState({ model: state });
     }
 
-    handleSignup (event): void {
+    async handleSignup (event) {
         event.preventDefault();
         const { model } = this.state;
 
         this.setState({ isSaving: true });
-        Actions.save(model, true)
-            .then((response: any) => {
-                this.setState({ isSaving: false });
-            })
-            .catch((response: any) => {
-                const validationErrors = [];
-                // new FormValidationError(response);
-                console.log(validationErrors);
-                // const validationErrors = [].concat(new FormValidationError(response.message, '', 'username'));
-                this.setState({ isSaving: false, validationErrors });    
-            });
+        const response = await Actions.save(model, true);
+        if (!response.error) {
+            this.setState({ isSaving: false });
+        } else {
+            const validationErrors = [];
+            // new FormValidationError(response);
+            console.log(validationErrors);
+            // const validationErrors = [].concat(new FormValidationError(response.message, '', 'username'));
+            this.setState({ isSaving: false, validationErrors });    
+        }
     }
 
     isFormValid(): boolean {

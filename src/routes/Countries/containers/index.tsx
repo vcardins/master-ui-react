@@ -16,7 +16,6 @@ interface State {
     models: Array<any>;
 }
 
-@animateTransition()
 class CountriesContainer extends React.Component<Props, State>  {
 
     state: State = { 
@@ -28,10 +27,10 @@ class CountriesContainer extends React.Component<Props, State>  {
         super(props);
     }
 
-    componentDidMount() {           
+    async componentDidMount() {           
         this.setState({isLoading: true});
-        Actions.getCountries()
-            .then((models: any) => this.setState({ models, isLoading: false }));
+        const models = await Actions.getCountries();
+        this.setState({ models, isLoading: false });
     }
 
     render(): JSX.Element {
@@ -51,4 +50,4 @@ class CountriesContainer extends React.Component<Props, State>  {
     }    
 }
 
-export default CountriesContainer;
+export default animateTransition()(CountriesContainer);

@@ -3,8 +3,6 @@ import UserProfile from './UserProfile';
 interface IUserAction {
     getProfile(): Promise<UserProfile>;
     updateProfile(data: UserProfile): Promise<UserProfile>;
-    signIn(data: any): Promise<any>;
-    signOut(data: any): Promise<any>;
     signup(data: any): Promise<any>;
     verifyAccount(data: any): Promise<any>;
     changeEmail(data: any): Promise<any>;
