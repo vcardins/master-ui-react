@@ -31,13 +31,14 @@ const Page: React.StatelessComponent<Props> = (props: Props): JSX.Element => {
     }
 
     const body = panels.map((panel, i) => {
-            const key = `pane-${i + 1}`;
-            return <div className={hasFixedHeader ? 'pane' : ''} id={key} key={key}>{panel}</div>;
-        });
+        const key = `pane-${i + 1}`;
+        return <div className={hasFixedHeader ? 'pane' : ''} id={key} key={key}>{panel}</div>;
+    });
 
     return (
          <div id={id}>
-            {!hideTitleBar && <div className="page-header">
+            {!hideTitleBar && 
+            <div className="page-header">
                 <span className="page-title">{title}</span>
                 <span className="page-subtitle">{subTitle}</span>
             </div>}

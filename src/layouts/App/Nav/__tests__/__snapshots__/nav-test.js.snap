@@ -1,28 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LeftPanel Component Rendering Should render something if it receives required props 1`] = `
+exports[`Navigation Component Rendering Should render something if it receives required props 1`] = `
 <ul
   className="menu vertical"
 >
   <li
     className=""
-    id="mnu-dashboard"
-    onClick={null}
-  >
-    <a
-      onClick={[Function]}
-      style={Object {}}
-    >
-      <i
-        aria-hidden="true"
-        className="dashboard icon"
-      />
-      Dashboard
-    </a>
-  </li>
-  <li
-    className="active parentLevel"
-    id="mnu-geography"
+    id="mnu-alpha"
     onClick={[Function]}
   >
     <a
@@ -31,9 +15,25 @@ exports[`LeftPanel Component Rendering Should render something if it receives re
     >
       <i
         aria-hidden="true"
-        className="map icon"
+        className="alarm icon"
       />
-      Locations
+      Alpha
+    </a>
+  </li>
+  <li
+    className="parentLevel"
+    id="mnu-beta"
+    onClick={[Function]}
+  >
+    <a
+      onClick={[Function]}
+      style={Object {}}
+    >
+      <i
+        aria-hidden="true"
+        className="bath icon"
+      />
+      Beta
       <i
         aria-hidden="true"
         className="icon chevron down expander"
@@ -43,176 +43,83 @@ exports[`LeftPanel Component Rendering Should render something if it receives re
       className="submenu"
     >
       <li
-        className="placeholder"
-      />
-      <li
         className=""
-        id="mnu-countries"
+        id="mnu-gama"
         onClick={[Function]}
       >
         <a
           onClick={[Function]}
           style={Object {}}
         >
-          Countries
+          Gama
         </a>
       </li>
       <li
         className=""
-        id="mnu-city"
+        id="mnu-zeta"
         onClick={[Function]}
       >
         <a
           onClick={[Function]}
           style={Object {}}
         >
-          Provinces
+          Zeta
         </a>
       </li>
     </ul>
-  </li>
-  <li
-    className=""
-    id="mnu-notebook"
-    onClick={null}
-  >
-    <a
-      onClick={[Function]}
-      style={Object {}}
-    >
-      <i
-        aria-hidden="true"
-        className="book icon"
-      />
-      Notebook
-    </a>
-  </li>
-  <li
-    className=""
-    id="mnu-reports"
-    onClick={null}
-  >
-    <a
-      onClick={[Function]}
-      style={Object {}}
-    >
-      <i
-        aria-hidden="true"
-        className="calculator icon"
-      />
-      Reports
-    </a>
   </li>
 </ul>
 `;
 
-exports[`LeftPanel behaviour should pass a selected value to the onClick handler 1`] = `
-<ul
-  className="menu vertical"
+exports[`Navigation Multilevel Rendering Should have a submenu 1`] = `
+<li
+  className="parentLevel"
+  id="mnu-beta"
+  onClick={[Function]}
 >
-  <li
-    className=""
-    id="mnu-dashboard"
-    onClick={null}
+  <Link
+    onlyActiveOnIndex={false}
+    style={Object {}}
   >
-    <Link
-      onlyActiveOnIndex={false}
-      style={Object {}}
-      to="/"
-    >
-      <Icon
-        as="i"
-        name="dashboard"
-      />
-      Dashboard
-    </Link>
-  </li>
-  <li
-    className="active parentLevel"
-    id="mnu-geography"
-    onClick={[Function]}
+    <Icon
+      as="i"
+      name="bath"
+    />
+    Beta
+    <Icon
+      as="i"
+      className="chevron down expander"
+    />
+  </Link>
+  <ul
+    className="submenu"
   >
-    <Link
-      onlyActiveOnIndex={false}
-      style={Object {}}
+    <li
+      className=""
+      id="mnu-gama"
+      onClick={[Function]}
     >
-      <Icon
-        as="i"
-        name="map"
-      />
-      Locations
-      <Icon
-        as="i"
-        className="chevron down expander"
-      />
-    </Link>
-    <ul
-      className="submenu"
-    >
-      <li
-        className="placeholder"
-      />
-      <li
-        className=""
-        id="mnu-countries"
-        onClick={[Function]}
+      <Link
+        onlyActiveOnIndex={false}
+        style={Object {}}
+        to="/gama"
       >
-        <Link
-          onlyActiveOnIndex={false}
-          style={Object {}}
-          to="/countries"
-        >
-          Countries
-        </Link>
-      </li>
-      <li
-        className=""
-        id="mnu-city"
-        onClick={[Function]}
+        Gama
+      </Link>
+    </li>
+    <li
+      className=""
+      id="mnu-zeta"
+      onClick={[Function]}
+    >
+      <Link
+        onlyActiveOnIndex={false}
+        style={Object {}}
+        to="/zeta"
       >
-        <Link
-          onlyActiveOnIndex={false}
-          style={Object {}}
-          to="/provinces"
-        >
-          Provinces
-        </Link>
-      </li>
-    </ul>
-  </li>
-  <li
-    className=""
-    id="mnu-notebook"
-    onClick={null}
-  >
-    <Link
-      onlyActiveOnIndex={false}
-      style={Object {}}
-      to="/notebook"
-    >
-      <Icon
-        as="i"
-        name="book"
-      />
-      Notebook
-    </Link>
-  </li>
-  <li
-    className=""
-    id="mnu-reports"
-    onClick={null}
-  >
-    <Link
-      onlyActiveOnIndex={false}
-      style={Object {}}
-      to="/reports"
-    >
-      <Icon
-        as="i"
-        name="calculator"
-      />
-      Reports
-    </Link>
-  </li>
-</ul>
+        Zeta
+      </Link>
+    </li>
+  </ul>
+</li>
 `;

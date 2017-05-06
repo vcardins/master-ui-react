@@ -1,5 +1,3 @@
-/* https://medialoot.com/blog/how-to-create-a-responsive-navigation-menu-using-only-css/ */
-/* https://codepen.io/wanni/pen/zsDJb */
 import * as React from 'react';
 import { Link } from 'react-router';
 import { Menu, Icon } from 'semantic-ui-react';
@@ -37,20 +35,33 @@ const Nav: React.StatelessComponent<Props> = (props: Props): JSX.Element => {
         const hasChildren = children.length > 0;
         const Tag: any = Link; 
         const props = Object.assign({}, !hasChildren ? { to: href } : undefined);
-        
-        return (<li key={id} id={`mnu-${id}`} onClick={hasChildren || isChild ? toggleSubmenu : null} className={`${href === activeRoute ? 'active' : ''} ${hasChildren ? 'parentLevel' : ''}`.trim()}>
-            <Tag {...props}>
-                { icon && !isChild && <Icon name={ icon } /> }
-                { label }
-                { hasChildren && <Icon className="chevron down expander"></Icon>}
-            </Tag>
-            { hasChildren && <ul className="submenu">{<li className="placeholder"></li>}{children.map((item) => getMenuItem(Object.assign({}, item, {isChild: true})))}</ul> }
-        </li>);
+        const className = `${href === activeRoute ? 'active' : ''} ${hasChildren ? 'parentLevel' : ''}`.trim();
+
+        return (
+            <li key={id} 
+                id={`mnu-${id}`} 
+                onClick={hasChildren || isChild ? toggleSubmenu : () => {}} 
+                className={className}>
+                <Tag {...props}>
+                    { icon && !isChild && <Icon name={ icon } /> }
+                    { label }
+                    { hasChildren && <Icon className="chevron down expander"></Icon>}
+                </Tag>
+                { hasChildren && 
+                <ul className="submenu">
+                    {/*<li className="placeholder"></li>*/}
+                    { children.map((item) => getMenuItem(Object.assign({}, item, { isChild: true }))) }
+                </ul> 
+                }
+            </li>
+        );
     };
     
-    const nav = routes.map(getMenuItem);
-  
-    return <ul className={`menu ${position}`}>{nav}</ul>;
+    return (
+        <ul className={`menu ${position}`}>
+            {routes.map(getMenuItem)}
+        </ul>
+    ); 
 };
 
 export default Nav;

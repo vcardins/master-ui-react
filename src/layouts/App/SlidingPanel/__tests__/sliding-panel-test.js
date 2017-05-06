@@ -41,13 +41,13 @@ const contentText = 'Element Exists';
 /* Validate component rendering */
 describe('Validate DOM element', loadComponent(shallow,
 	{ children: <div>{contentText}</div> },
-	({ component, content }) => {
+	({ component, content, trigger }) => {
 		it('Should render to static HTML content', () => {
 			expect(content.text()).toEqual(contentText);
 		});
 		
         it('Should load toggle trigger', () => {
-			expect(component.find(`#${elTag}-pin`)).not.toBeNull();
+			expect(trigger).not.toBeNull();
 		});
 
 		it('Should appears on the app\'s right side if position property is not set', () => {
