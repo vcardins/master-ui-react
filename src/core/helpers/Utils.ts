@@ -1,84 +1,85 @@
-﻿const Utils = {
-	setHashKey(obj, h) {
+﻿namespace Utils {
+
+	export function setHashKey(obj, h) {
 		if (h) {
 			obj.$$hashKey = h;
 		} else {
 			delete obj.$$hashKey;
 		}
-	},
+	}
 
-	baseExtend(target, objs, deep) {
+	export function baseExtend(target, objs, deep) {
 		let h = target.$$hashKey;
 
 		for (let i = 0, ii = objs.length; i < ii; ++i) {
 			let obj = objs[i];
-			if (!this.isObject(obj) && !this.isFunction(obj)) {
+			if (!isObject(obj) && !isFunction(obj)) {
 				continue;
 			}
 			let keys = Object.keys(obj);
 			for (let j = 0, jj = keys.length; j < jj; j++) {
 				let key = keys[j], src = obj[key];
 
-				if (deep && this.isObject(src)) {
-					if (!this.isObject(target[key])) {
+				if (deep && isObject(src)) {
+					if (!isObject(target[key])) {
 						target[key] = Array.isArray(src) ? [] : {};
 					}
-					this.baseExtend(target[key], [src], true);
+					baseExtend(target[key], [src], true);
 				} else {
 					target[key] = src;
 				}
 			}
 		}
-		this.setHashKey(target, h);
+		setHashKey(target, h);
 		return target;
-	},
+	}
 
-	isDefined(value: any) {
+	export function isDefined(value: any) {
 		return typeof value !== 'undefined';
-	},
+	}
 
- 	isUndefined(value: any) {
+ 	export function isUndefined(value: any) {
 		return typeof value === 'undefined';
-	},
+	}
 
-	camelCase(name: string) {
+	export function camelCase(name: string) {
         return name.replace(/([\:\-\_]+(.))/g, function(_, separator, letter, offset) {
           return offset ? letter.toUpperCase() : letter;
         });
-    },
+    }
 
-	isString(value: any) {
+	export function isString(value: any) {
 		return typeof value === 'string';
-	},
+	}
 
-	isObject (value: any) {
+	export function isObject (value: any) {
 		return value !== null && typeof value === 'object';
-	},
+	}
 
-	isFunction (value: any) {
+	export function isFunction (value: any) {
 		return typeof value === 'function';
-	},
+	}
 
-	checkDomain(url: string) {
+	export function checkDomain(url: string) {
 		if (url.indexOf('//') === 0 ) {
 			url = location.protocol + url;
 		}
 		return url.toLowerCase().replace(/([a-z])?:\/\//, '$1').split('/')[0];
-	},
+	}
 
-	isExternalLink(url: string) {
-		return ( ( url.indexOf(':') > -1 || url.indexOf('//') > -1 ) && this.checkDomain(location.href) !== this.checkDomain(url) );
-	},
+	export function isExternalLink(url: string) {
+		return ( ( url.indexOf(':') > -1 || url.indexOf('//') > -1 ) && checkDomain(location.href) !== checkDomain(url) );
+	}
 
 	// http://stackoverflow.com/a/1054862/725866
-	titleToSlug(text: string) {
+	export function titleToSlug(text: string) {
 		return text
 			.toLowerCase()
 			.replace(/[^\w ]+/g, '')
 			.replace(/ +/g, '-');
-	},
+	}
 
-	joinUrl  (baseUrl: string, url: string) {
+	export function joinUrl  (baseUrl: string, url: string) {
 		if (/^(?:[a-z]+:)?\/\//i.test(url)) {
 			return url;
 		}
@@ -94,31 +95,31 @@
 		};
 
 		return normalize(joined);
-	},
+	}
 
-	isBlankObject  (value) {
+	export function isBlankObject  (value) {
 		return value !== null && typeof value === 'object' && !Object.getPrototypeOf(value);
-	},
+	}
 
-	isArrayLike (obj) {
-		if (obj == null || this.isWindow(obj)) {
+	export function isArrayLike (obj) {
+		if (obj == null || isWindow(obj)) {
 			return false;
 		}
-	},
+	}
 
-	isWindow(obj) {
+	export function isWindow(obj) {
 	  return obj && obj.window === obj;
-	},
+	}
 
-	extend2 (...dst: any[]) {
-		return this.baseExtend(dst[0], arguments[1], false);
-	},
+	export function extend2 (...dst: any[]) {
+		return baseExtend(dst[0], arguments[1], false);
+	}
 
-	merge (...dst: any[]) {
-		return this.baseExtend(dst[0], [].slice.call(arguments, 1), true);
-	},
+	export function merge (...dst: any[]) {
+		return baseExtend(dst[0], [].slice.call(arguments, 1), true);
+	}
 
-	getObjectProperties (source: any, props: any[], target: any) {
+	export function getObjectProperties (source: any, props: any[], target: any) {
 		let obj = target || {};
 		if (props === null) { return obj; }
 		props.forEach(prop => {
@@ -127,11 +128,12 @@
 			}
 		});
 		return obj;
-	},
+	}
 
-	areEqual(obj1, obj2) {
+	export function areEqual (obj1, obj2) {
 		return Object.keys(obj1).every((key) => obj2.hasOwnProperty(key) && (obj1[key] === obj2[key]));
-	},
-};
+	}
+
+}
 
 export default Utils;

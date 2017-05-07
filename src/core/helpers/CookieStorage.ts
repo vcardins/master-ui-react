@@ -1,6 +1,6 @@
-export default class CookieStorage {
+namespace CookieStorage {
 
-  static get(key: string): any {
+  export function get(key: string): any {
 		const keyX = key + '=';
 		const ca = document.cookie.split(';');
 		for (let i = 0; i < ca.length; i++) {
@@ -15,18 +15,20 @@ export default class CookieStorage {
 		}
 	}
 
-	static set(key: string, value: any, time: any): void {
+	export function set(key: string, value: any, time: any): void {
 		let expires = '';
 		if (time) {
-       const date = new Date();
-       date.setTime(date.getTime() + (time * 24 * 60 * 60 * 1000));
-       expires = '; expires=' + date.toUTCString();
-     }     
-     document.cookie = `${key}=${value}${expires}; path=/`;
+			const date = new Date();
+			date.setTime(date.getTime() + (time * 24 * 60 * 60 * 1000));
+			expires = '; expires=' + date.toUTCString();
+		}
+     	document.cookie = `${key}=${value}${expires}; path=/`;
 	}
 
-	static remove(key: string): void {
+	export function remove(key: string): void {
 		this.set(key, '', new Date(-1));
 	}
 
 }
+
+export default CookieStorage;

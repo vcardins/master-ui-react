@@ -1,7 +1,7 @@
 import * as ReactDOM from 'react-dom';
 
-const DOM = {
-    animateElement: function(ref: any, callback: Function = null, delay = 500, type = 'opacity') {
+namespace DOM {
+	export function animateElement(ref: any, callback: Function = null, delay = 500, type = 'opacity') {
         const elem = ReactDOM.findDOMNode(ref);
         if (elem instanceof HTMLElement) {
             // Set the opacity of the element to 0
@@ -24,8 +24,7 @@ const DOM = {
             }
             return;
         }            
-    },
-
-};
+    }
+}
 
 export default DOM;

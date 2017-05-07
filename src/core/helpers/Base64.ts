@@ -1,7 +1,7 @@
-﻿const Base64 = () => {
+﻿namespace Base64 {
     const keyStr: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
 
-    function encode(e: string): string {
+    export function encode(e: string): string {
         let t = ''; let n, r, i, s, o, u, a; let f = 0; e = this.utf8Encode(e);
         while (f < e.length) {
             n = e.charCodeAt(f++); r = e.charCodeAt(f++);
@@ -18,7 +18,7 @@
         return t;
     }
 
-    function decode(e: string): string {
+    export function decode(e: string): string {
         let t = '';
         let n, r, i;
         let s, o, u, a;
@@ -42,7 +42,7 @@
         return t;
     }
 
-    function utf8Encode(e) {
+    export function utf8Encode(e) {
         e = e.replace(/\r\n/g, '\n');
         let t = '';
         for (let n = 0; n < e.length; n++) {
@@ -63,7 +63,7 @@
         return t;
     }
 
-    function utf8Decode(e) {
+    export function utf8Decode(e) {
         let t = '';
         let n = 0;
         let r = 0;        
@@ -88,13 +88,6 @@
         }
         return t;
     }
+}
 
-    return {
-        encode,
-        decode,
-        utf8Encode,
-        utf8Decode,
-    };
-};
-
-export default Base64();
+export default Base64;
