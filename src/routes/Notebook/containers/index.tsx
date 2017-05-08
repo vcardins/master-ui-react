@@ -41,13 +41,13 @@ class NotebookContainer extends React.Component<Props, State>  {
     
     componentDidMount() {                   
         this.formPanel = document.getElementById('pane-2').getElementsByClassName('form')[0] as HTMLElement;
-        this.setState({isLoading: true}, this.loadModels);              
+        this.setState({isLoading: true}, this.loadModels);
     }
 
     async loadModels() {
         const { id } = this.props.params;
         this.setState({ isLoading: true });
-        const models = await Actions.getAll();
+        const models = await Actions.get({cached: true});
         const model = (!!id && models.filter(({id}) => id === id)[0]) || new Notebook();            
         this.setState({ models, model, isLoading: false });
     }
@@ -60,12 +60,12 @@ class NotebookContainer extends React.Component<Props, State>  {
         this.setState({ model: state });
     }
 
-    async handleSignup (event) {
+    async handleSave (event) {
         event.preventDefault();
         const { model } = this.state;
 
         this.setState({ isSaving: true });
-        const response = await Actions.save(model, true);
+        const response = await Actions.save(model, model.id);
         if (!response.error) {
             this.setState({ isSaving: false });
         } else {
@@ -105,7 +105,7 @@ class NotebookContainer extends React.Component<Props, State>  {
             <NotebookForm 
                 key="form"                
                 model={ model }
-                onSubmit={ this.handleSignup }
+                onSubmit={ this.handleSave }
                 onChange={ this.handleFieldChange }
                 errors={ validationErrors }
                 isSaving={ isSaving }

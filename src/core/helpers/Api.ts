@@ -2,7 +2,7 @@ import nanoajax from 'nanoajax';  // https://github.com/yanatan16/nanoajax
 import settings from 'core/settings';
 import { UserAuth } from '../auth';
 
-namespace Api {
+module Api {
 	
 	let _isPlainRequest: boolean = false;
 

@@ -14,10 +14,8 @@ const userCursor = State.select('user');
 
 const UserAction: IUserAction = { 
 
-    loadProfile(): void {
-        userDataStore.getSingle().then((profile: any) => profile);
-    async getProfile(): Promise<UserProfile> {
-        const profile = await Api.get('profile');
+    async loadProfile(): Promise<UserProfile> {
+        const profile = await userDataStore.getSingle(); 
         return new UserProfile(profile);
     },
 

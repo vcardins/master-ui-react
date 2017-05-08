@@ -19,7 +19,7 @@ interface Props {
 }
 
 const Header: React.StatelessComponent<Props> = (props: Props): JSX.Element => {
-    const { title, onTogglePanel, onLogout, user, routes, activeRoute } = props;
+    const { title, onTogglePanel, onLogout, user = {}, routes, activeRoute } = props;
 
     const trigger = (
         <div className="profile">
