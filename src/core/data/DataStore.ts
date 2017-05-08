@@ -7,27 +7,27 @@ class DataStore<T> {
 
     private emitter: any = new EventEmitter();
     private endpoint: string = null;
-    private rootCursor: any;
-    private ajaxCursor: any;
+    private rootCursor: any = State.select();
+    private ajaxCursor: any = this.rootCursor.select('ajax');
     private modelsCursor: any;
     private modelCursor: any;
 
     // Initialize default values.
-    model: T;
-    models: Array<T>;
+    public model: T;
+    public models: Array<T>;
 
     // Cache parameters
-    cache: any = {
+    private cache: any = {
         count: {},
         fetch: {},
         load: {},
     };
 
     // Is scope used with data model or not, if yes this is actual scope
-    scope: boolean = false;
+    private scope: boolean = false;
 
     // Scope item names for single, collection and count
-    itemNames: any = {
+    private itemNames: any = {
         model: false,
         models: false,
         count: false,
@@ -50,8 +50,6 @@ class DataStore<T> {
         
         this.modelsCursor = State.select([branch].concat('models'));
         this.modelCursor = State.select([branch].concat('model'));
-        this.rootCursor = State.select();
-        this.ajaxCursor = this.rootCursor.select('ajax');
     }
 
     clearCache(): void {
@@ -59,26 +57,74 @@ class DataStore<T> {
         console.info('Cache Cleared: ' + this.endpoint);
     }
 
-    setEndpoint(endpoint: string): void {
+    public setEndpoint(endpoint: string): void {
         this.endpoint = endpoint;
         this._subscribe();
     }
 
-    find(identifier: any, parameters?: any): Promise<T> {
+    public async find(identifier: any, params?: any): Promise<T> {
 
          let self = this;
          let url = `${this.endpoint}` + (identifier ? `/${identifier}` : '');
-         return Api
-            .get(url, parameters)
-            .then(
-              function onSuccess(response) {
-                self.model = Array.isArray(response) ? response[0] : response;
-                return self.model;
-              },
-              function onError(error) {
-                console.error('DataModel.load() failed.', error, self.endpoint);
-              },
-            );
+         const response = await Api.get(url, params);
+         if (response.error) {
+             throw Error(response.error);
+         } 
+         else {
+            self.model = Array.isArray(response) ? response[0] : response;
+            return self.model;
+         }
+    }
+
+    private async loadModels(params: any = {}, endpoint: string = null, cursor: any): Promise<T | Array<T>> {
+        this.setProgress(true);
+        const response = await Api.get(endpoint || this.endpoint, params);
+         if (response.error) {
+             this.setError(response.error);
+             throw Error(response.error);
+         } 
+         else {
+            this.setProgress(false);
+            cursor.set(response);            
+            State.commit();    
+            return response;
+         }
+    }
+
+    public async getSingle(params: any = {}, endpoint: string = null, isSingleModel: boolean = false): Promise<T | Array<T>> {
+        return await this.loadModels(params, endpoint, this.modelCursor);
+    }
+
+    public async get(params: any = {}, endpoint: string = null, isSingleModel: boolean = false): Promise<T | Array<T>> {
+        const models = this.modelsCursor.get();
+        if (params.cached && models) {                        
+            return models;
+        }
+        return await this.loadModels(params, endpoint, this.modelsCursor);
+    }
+
+    public async save(data: T, identifier?: string | number) {
+        const url = !identifier ? this.endpoint : `${this.endpoint}/${identifier}`;
+        const fn = Api[!identifier ? 'post' : 'put'];
+
+        const response = await fn(url, data);
+        
+        this.setProgress(true);
+        if (response.error) {
+             this.setError(response.error);
+             throw Error(response.error);
+         } 
+         else {
+            this.setProgress(false);
+            // this.modelsCursor.set(response);            
+            // State.commit();    
+            return response;
+         }
+    }
+
+    public async upload(files: any, route: string, identifier?: any) {
+        const url = `${this.endpoint}${identifier ? '/' + identifier : ''}/${route || 'upload'}`;
+        return await Api.upload(url, files);
     }
 
     private setProgress (inProgress: boolean) {
@@ -87,52 +133,6 @@ class DataStore<T> {
 
     private setError (error: Error) {
         this.ajaxCursor.set('error', error);
-    }
-
-    private loadModels(params: any = {}, endpoint: string = null, cursor: any): Promise<T | Array<T>> {
-        this.setProgress(true);
-        return Api
-            .get(endpoint || this.endpoint, params)
-            .then((response) => {
-                cursor.set(response);
-                this.setProgress(false);
-                State.commit();    
-                return response;
-            })
-            .catch(this.setError);        
-    }
-
-    getSingle(params: any = {}, endpoint: string = null, isSingleModel: boolean = false): Promise<Array<T>> {
-        return this.loadModels(params, endpoint, this.modelCursor);
-    }
-
-    get(params: any = {}, endpoint: string = null, isSingleModel: boolean = false): Promise<Array<T>> {
-        return this.loadModels(params, endpoint, this.modelsCursor);
-    }
-
-    save(data: T, identifier?: any) {
-        let p = (!identifier) ?
-                Api.post(this.endpoint, data) :
-                Api.put(`${this.endpoint}/${identifier}`, data);
-
-        return p.then((result: any) => {return result; })
-                 .catch((error: any) => {
-                    console.error('DataModel.create() failed.', error, this.endpoint, data);
-                  });
-    }
-
-    upload(files: any, route: string, identifier?: any) {
-        let url = this.endpoint;
-        url += (identifier ? '/' + identifier : '');
-        url += '/' + (route || 'upload');
-
-        return Api.upload(url, files)
-               .then((result) => {
-                 return result;
-               })
-               .catch((error) => {
-                  console.error('DataModel.upload() failed.', error, this.endpoint, files);
-               });
     }
 
     private _subscribe() {
