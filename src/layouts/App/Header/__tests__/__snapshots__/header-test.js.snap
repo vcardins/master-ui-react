@@ -35,7 +35,7 @@ exports[`Header Component Rendering Should render something if it receives requi
       <li
         className=""
         id="mnu-dashboard"
-        onClick={null}
+        onClick={[Function]}
       >
         <a
           onClick={[Function]}
@@ -71,9 +71,6 @@ exports[`Header Component Rendering Should render something if it receives requi
           className="submenu"
         >
           <li
-            className="placeholder"
-          />
-          <li
             className=""
             id="mnu-countries"
             onClick={[Function]}
@@ -102,7 +99,7 @@ exports[`Header Component Rendering Should render something if it receives requi
       <li
         className=""
         id="mnu-notebook"
-        onClick={null}
+        onClick={[Function]}
       >
         <a
           onClick={[Function]}
@@ -118,7 +115,7 @@ exports[`Header Component Rendering Should render something if it receives requi
       <li
         className=""
         id="mnu-reports"
-        onClick={null}
+        onClick={[Function]}
       >
         <a
           onClick={[Function]}
