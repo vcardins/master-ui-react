@@ -69,6 +69,8 @@
                 position: relative;
                 display: block;
                 color: var(--themeLighterColor);
+                opacity: 1;
+                transition: font-size 0.5s;
 
                 &:hover {
                     color: var(--themeLightestColor);
