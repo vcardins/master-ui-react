@@ -73,6 +73,10 @@
                 &:hover {
                     color: var(--themeLightestColor);
                 }
+
+                i.expander {
+                    margin-top: 5px;
+                }
             }
 
             &.parentLevel {
@@ -138,6 +142,12 @@
         >li {
             display: inline-block;
             min-width: 10em;
+
+            a {
+                i.expander {
+                    margin-top: 15px;
+                }
+            }
         }
 
         .parentLevel {
@@ -194,7 +204,6 @@
             &.expanded {
                 .submenu {
                     opacity: 1;
-                    top: 40px;
                     display: block;
                     transition: opacity 0.5s ease;
                 }
@@ -217,7 +226,27 @@
                 line-height: normal;
                 font-size: 10px;
                 transition-duration: 250ms;
-                margin-top: 15px;
+            }
+        }
+    }
+
+    >li {
+        &::after {
+            background: #fff;
+            bottom: 0;
+            content: '';
+            display: block;
+            height: 2px;
+            left: 50%;
+            position: absolute;
+            transition: all 0.35s;
+            width: 0;
+        }
+
+        &:hover {
+            &::after {
+                width: 100%;
+                left: 0;
             }
         }
     }
@@ -227,10 +256,6 @@
         &.expanded {
             i.expander {
                 transform: rotateZ(180deg);
-            }
-
-            .submenu {
-                font-family: inherit;
             }
         }
 

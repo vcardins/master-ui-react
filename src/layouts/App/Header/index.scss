@@ -27,6 +27,14 @@
         linear-gradient(to top, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25))
         var(--themeColor);
 
+    a {
+        color: var(--themeLightestColor);
+
+        &:hover {
+            color: $white;
+        }
+    }
+
     /* linear-gradient(to bottom, $color-medium, $color-darkest); */
     padding: 0;
     color: $white;
@@ -40,9 +48,9 @@
     .header-left {
         width: $navbar-width-expanded - 50;
         font-weight: 400;
-        line-height: inherit;
+        line-height: normal;
         margin-left: 1.25em;
-        font-size: 16px;
+        font-size: 20px;
         text-align: center;
 
         .header-logo {
@@ -57,6 +65,10 @@
 
     .header-central {
         margin-left: 3em;
+
+        a {
+            line-height: normal;
+        }
     }
 
     .header-right {
