@@ -67,6 +67,9 @@ const basePlugins = [
         name: 'manifest', //But since there are no more common modules between them we end up with just the runtime code included in the manifest file
     }),    
     new LogPlugin(settings.port),
+    new BundleAnalyzerPlugin({
+        analyzerMode: 'disabled',
+    }),
 ].concat(sourceMap);
 
 const devPlugins = [
