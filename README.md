@@ -73,3 +73,17 @@ Testing
 - Components unit tests with Jest and Enzyme
 - Integration (e2e) testing with nightwatch
 
+https://github.com/archy-bold/ts-jest-test
+
+
+Data Model
+
+https://gist.github.com/hessryanm/177b0cada8c51516371e
+
+Faster React Components
+---------------
+https://medium.com/missive-app/45-faster-react-functional-components-now-3509a668e69f
+
+TypeScript Classes & Object-Oriented Programming
+--------------
+http://www.codebelt.com/typescript/typescript-classes-object-oriented-programming/
