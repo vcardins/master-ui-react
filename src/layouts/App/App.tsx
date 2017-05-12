@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { browserHistory, Link } from 'react-router';
 import * as ReactGA from 'react-ga';
-import { Container, Sidebar, Segment, Popup, Input, Icon } from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
 
 import { BaseComponent } from 'core/decorators';
 import { UserAuth, UserAction, UserProfile } from 'core/auth';
@@ -55,7 +55,7 @@ class App extends BaseComponent<Props, State> {
                 <Link to="/">{ appSettings.title }</Link>
             </div>
             {/*<div className="searchbox">
-                <Input icon="search" placeholder="Search ..." />
+                <input icon="search" placeholder="Search ..." />
             </div>*/}
         </div>
     );

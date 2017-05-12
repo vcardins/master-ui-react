@@ -1,7 +1,6 @@
 // decorators/with-form-Field.tsx
 import * as React from 'react';
 import { Form } from 'semantic-ui-react';
-const FormField = Form.Field;
 
 interface DecoratorProps {
   label?: string;
@@ -16,12 +15,12 @@ export default function withFormField<Props>(
 ) {
   const Decorator: React.StatelessComponent<DecoratorProps & Props> = (props) => {
     return (
-      <FormField
+      <Form.Field
         label={props.label}
         hasFeedback={props.hasFeedback}
       >
         <WrappedComponent {...props} />
-      </FormField>
+      </Form.Field>
     );
   };
   return Decorator;

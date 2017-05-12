@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Icon, Button, Popup } from 'semantic-ui-react';
 import './index.scss';
 
 interface Props {

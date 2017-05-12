@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router';
-import { Sidebar, Segment, Icon, Menu, Input } from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
 import Logo from '../Logo';
 import Nav from '../Nav';
 import IMenuItem from '../IMenuItem';

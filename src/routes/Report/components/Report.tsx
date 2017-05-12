@@ -1,6 +1,6 @@
 import * as React from 'react';
 import '../index.scss';
-import { Segment, Card } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
 
 interface Props extends React.HTMLProps<HTMLDivElement> {
     header: string;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router';
-import { Segment, Icon } from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
 import './index.scss';
 
 interface Props {

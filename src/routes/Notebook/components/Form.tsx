@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Form, Button, Message } from 'semantic-ui-react';
+import { Form, Button } from 'semantic-ui-react';
 import ContentPane from 'layouts/App/ContentPane';
 import Notebook from '../models/Notebook';
 import { FormValidationError } from 'core/models';

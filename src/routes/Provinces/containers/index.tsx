@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { browserHistory } from 'react-router';
-import { Grid, Segment, Message, Header, Icon, Table } from 'semantic-ui-react';
 import Actions from '../Actions';
 import ProvinceList from '../components/List';
 import ProvinceForm from '../components/Form';

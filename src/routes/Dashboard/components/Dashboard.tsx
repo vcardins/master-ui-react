@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router';
-import { Segment, Card, Grid, Image } from 'semantic-ui-react';
+import { Grid, Image } from 'semantic-ui-react';
 import '../index.scss';
 
 interface Props extends React.HTMLProps<HTMLDivElement> {

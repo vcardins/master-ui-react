@@ -5,7 +5,7 @@ import SignupForm from '../components/SignupForm';
 
 import { ActionResult, FormValidationError } from 'core/models';
 import { UserAction, UserSignup } from 'core/auth';
-import { Grid, Segment, Message, Header, Icon } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 
 import Validator from 'core/decorators/FormValidator';
 import schema from '../schema';

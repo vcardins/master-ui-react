@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router';
 import { FormValidationError } from 'core/models';
-import { Grid, Segment, Message, Header, Icon, Form, Checkbox, Button } from 'semantic-ui-react';
+import { Segment, Message, Header, Icon, Form, Checkbox, Button } from 'semantic-ui-react';
 import '../index.scss';
 
 interface Props extends React.HTMLProps<HTMLDivElement> {

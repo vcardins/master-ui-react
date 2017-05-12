@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { browserHistory } from 'react-router';
-import { Grid, Segment, Message, Header, Icon, Table } from 'semantic-ui-react';
 import Actions from '../Actions';
 import NotebookList from '../components/List';
 import NotebookForm from '../components/Form';

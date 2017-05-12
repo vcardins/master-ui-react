@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router';
-import { Table, Dropdown, Input, Loader } from 'semantic-ui-react';
+import { Table, Dropdown, Loader } from 'semantic-ui-react';
 import ContentPane from 'layouts/App/ContentPane';
 import Province from '../models/Province';
 import '../index.scss';
@@ -63,6 +63,6 @@ const ProvinceList: React.StatelessComponent<Props> = (props: Props): JSX.Elemen
             }
         </ContentPane>
     );
-}
+};
 
 export default ProvinceList;

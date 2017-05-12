@@ -4,7 +4,7 @@ import ResetPasswordForm from '../components/ResetPasswordForm';
 import { ActionResult, ValidationError } from 'core/models';
 import { UserAuth } from 'core/auth';
 import { animateTransition } from 'core/decorators';
-import { Grid, Segment, Message, Header, Icon } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 
 interface Props {
     children: JSX.Element;
