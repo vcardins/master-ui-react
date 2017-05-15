@@ -28,7 +28,7 @@ const Header: React.StatelessComponent<Props> = (props: Props): JSX.Element => {
             </div>
             <div className="info">
                 <span className="greetings">Hello,</span> 
-                <span className="name">{ user.firstName }</span>
+                <span className="name">{ user.firstName || '...' }</span>
             </div>
         </div>
     );

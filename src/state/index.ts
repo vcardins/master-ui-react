@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import * as Baobab from 'baobab';
 import StateDefaults from './defaults';
+import baobabJsonEditor from 'baobab-jsoneditor';
+
 
 const State = new Baobab(StateDefaults, {
 	// autoCommit boolean [true]: should the tree auto commit updates or should it let the user do so through the commit method?

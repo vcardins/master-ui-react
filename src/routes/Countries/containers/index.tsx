@@ -19,7 +19,7 @@ interface State {
 }
 
 @branch({
-  lookup: ['lookup'],
+  lookup: ['lookup', 'models'],
   ajax: ['ajax'],
 })
 class CountriesContainer extends React.Component<Props, State>  {
@@ -33,13 +33,9 @@ class CountriesContainer extends React.Component<Props, State>  {
     }
 
     render(): JSX.Element {
+        const { lookup, ajax } = this.props;
         // tslint:disable-next-line:no-string-literal
-        const lookup = this.props.lookup['models'];
-        // tslint:disable-next-line:no-string-literal
-        const models = !!lookup ? lookup['countries'] : [];
-        // tslint:disable-next-line:no-string-literal
-        const isLoading = this.props.ajax ? !!this.props.ajax['loading'] : false;
-        console.log(models, isLoading);
+        const models = lookup['countries'];
 
         return (
             <Page 
@@ -48,7 +44,7 @@ class CountriesContainer extends React.Component<Props, State>  {
                 subTitle="World Countries"
                 hasFixedHeader={true}
                 panels={[
-                    <CountriesList key="list" models={ models } isLoading={ isLoading }/>,
+                    <CountriesList key="list" models={ models } isLoading={ ajax.loading }/>,
                 ]} 
             />
         );
