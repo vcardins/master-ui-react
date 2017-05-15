@@ -1,0 +1,96 @@
+.loader-dots {
+    margin: 100px auto 0;
+    width: 70px;
+    text-align: center;
+
+    &>div {
+        width: 18px;
+        height: 18px;
+        background-color: #333;
+        border-radius: 100%;
+        display: inline-block;
+        animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    }
+
+    .bounce1 {
+        animation-delay: -0.32s;
+    }
+
+    .bounce2 {
+        animation-delay: -0.16s;
+    }
+}
+
+@keyframes sk-bouncedelay {
+    0%,
+    80%,
+    100% {
+        transform: scale(0);
+    }
+
+    40% {
+        transform: scale(1);
+    }
+}
+
+.sk-cube-grid {
+    width: 40px;
+    height: 40px;
+    margin: 100px auto;
+
+    .sk-cube {
+        width: 33%;
+        height: 33%;
+        background-color: #fff;
+        float: left;
+        animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+    }
+
+    .sk-cube1 {
+        animation-delay: 0.2s;
+    }
+
+    .sk-cube2 {
+        animation-delay: 0.3s;
+    }
+
+    .sk-cube3 {
+        animation-delay: 0.4s;
+    }
+
+    .sk-cube4 {
+        animation-delay: 0.1s;
+    }
+
+    .sk-cube5 {
+        animation-delay: 0.2s;
+    }
+
+    .sk-cube6 {
+        animation-delay: 0.3s;
+    }
+
+    .sk-cube7 {
+        animation-delay: 0s;
+    }
+
+    .sk-cube8 {
+        animation-delay: 0.1s;
+    }
+
+    .sk-cube9 {
+        animation-delay: 0.2s;
+    }
+}
+
+@keyframes sk-cubeGridScaleDelay {
+    0%,
+    70%,
+    100% {
+        transform: scale3d(1, 1, 1);
+    }
+
+    35% {
+        transform: scale3d(0, 0, 1);
+    }
+}

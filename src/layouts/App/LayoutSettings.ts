@@ -1,6 +1,6 @@
 class LayoutSettings {
     public menuOrientation: string = 'vertical';
-    public showTopBar: boolean = false;
+    public showTopBar: boolean = true;
     public showSlidingBar: boolean = true;
     public showProfileCard: boolean = false;
     public showFooter: boolean = false;

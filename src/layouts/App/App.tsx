@@ -101,6 +101,12 @@ class App extends BaseComponent<Props, State> {
         window.addEventListener('resize', this.handleWindowResize.bind(this, node));
         this.handleWindowResize(node);
         
+        const loader = document.getElementById('loader') as HTMLElement;
+        if (loader) {
+            loader.style.opacity = '0';
+            setTimeout(() => loader.remove(), 500);
+        }        
+
         const layoutString = localStorage.getItem('layout');
         if (layoutString) {
             const layout = JSON.parse(layoutString);
