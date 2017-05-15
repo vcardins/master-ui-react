@@ -33,8 +33,17 @@ const coreState = {
 	loading: false,
 	preload: true,
 	debugModeOn: process.env.NODE_ENV !== 'production',
-	user: {},
-	lookup: {},
+	ajax: {
+		loading: false,
+	},
+	user: {
+		model: {},
+	},
+	lookup: { 
+		models: {
+			countries: [],
+		},
+	},
 	pendingUpdates: {},
 };
 
