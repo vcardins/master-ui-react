@@ -1,4 +1,4 @@
-﻿import config from 'config';
+﻿import config from '../../config';
 import { LocalStorageTypes, AuthenticationTypes } from 'core/enums';
 import { merge } from 'lodash';
 import defaultConfig from './defaults';

@@ -145,13 +145,11 @@ namespace Api {
 
 		return new Promise((resolve, reject) => {
 			return nanoajax.ajax(request, (code, response, xmlHttpRequest) => {
-				console.log(code);
 				if (code === 204) { 
 					resolve();
 				}
 				try {
 					const apiResponse = JSON.parse(response);
-					const codeExplanation = code ? `responses: ${code}` : 'parameters: in: body';
 					switch (code) {
 						case 400:
 						case 401:								
