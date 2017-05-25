@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Page from 'layouts/App/Page';
+import Page from 'components/Page';
 import Dashboard from '../components/Dashboard';
 import { animateTransition } from 'core/decorators';
 

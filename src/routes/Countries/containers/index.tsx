@@ -3,7 +3,7 @@ import { browserHistory } from 'react-router';
 import CountriesList from '../components/List';
 import Actions from '../Actions';
 import Country from '../models/Country';
-import Page from 'layouts/App/Page';
+import Page from 'components/Page';
 import { animateTransition } from 'core/decorators';
 
 interface Props {

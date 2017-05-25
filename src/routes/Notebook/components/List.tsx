@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as moment from 'moment';
 import { Link } from 'react-router';
 import { Table, Dropdown, Loader } from 'semantic-ui-react';
-import ContentPane from 'layouts/App/ContentPane';
+import ContentPane from 'components/ContentPane';
 import Notebook from '../models/Notebook';
 import '../index.scss';
 

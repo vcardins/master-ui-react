@@ -4,7 +4,7 @@ import Actions from '../Actions';
 import ProvinceList from '../components/List';
 import ProvinceForm from '../components/Form';
 import Province from '../models/Province';
-import Page from 'layouts/App/Page';
+import Page from 'components/Page';
 import { animateTransition } from 'core/decorators';
 import { DOM } from 'core/helpers';
 

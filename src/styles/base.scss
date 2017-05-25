@@ -8,6 +8,11 @@ body {
     font-size: 0.95em;
 }
 
+[data-reactroot] {
+    height: 100%;
+    width: 100%;
+}
+
 * {
     margin: 0;
     padding: 0;

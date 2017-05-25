@@ -1,5 +1,4 @@
 import nanoajax from 'nanoajax';  // https://github.com/yanatan16/nanoajax
-import { ActionResult } from 'core/models';
 import settings from 'core/settings';
 import { UserAuth } from '../auth';
 
@@ -146,27 +145,22 @@ namespace Api {
 
 		return new Promise((resolve, reject) => {
 			return nanoajax.ajax(request, (code, response, xmlHttpRequest) => {
-				const result: ActionResult = new ActionResult();
-
-				if (code !== 204) {
-						try {
-						const apiResponse = JSON.parse(response);
-						const codeExplanation = code ? `responses: ${code}` : 'parameters: in: body';
-						switch (code) {
-							case 400:
-								break;
-							case 401:
-								result.error = new Error('User not authorized. Please sign in again');
-								break;                
-						}
-
-						resolve(apiResponse);
-
-					} catch (e) {
-						reject(
-								new Error(`Request response is not a valid JSON ${url}: ${request.method}: ${e.message}`),
-						);
+				console.log(code);
+				if (code === 204) { 
+					resolve();
+				}
+				try {
+					const apiResponse = JSON.parse(response);
+					const codeExplanation = code ? `responses: ${code}` : 'parameters: in: body';
+					switch (code) {
+						case 400:
+						case 401:								
+							reject(new Error(apiResponse.message));
+							break;
 					}
+					resolve(apiResponse);
+				} catch (e) {
+					reject(new Error(`Request response is not a valid JSON ${url}: ${request.method}: ${e.message}`));
 				}
 			});
 		});

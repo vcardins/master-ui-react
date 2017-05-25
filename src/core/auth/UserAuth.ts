@@ -27,7 +27,7 @@ class UserAuth {
       const result: any = await Api.plainRequest(settings.api.loginUrl, 'POST', bodyContent, 'application/x-www-form-urlencoded', true);
       if (result.error) {
           apiResponse.error = new Error(result.error_description);
-          this.clearToken();
+          this.clearTokens();
       } else {
         this.setToken(result.access_token);
         this.setUser({username: result.username}, {title: result.role, bitMask: parseInt(result.bitMask, 0)});
@@ -126,7 +126,7 @@ class UserAuth {
 
   static logout(): Promise<ActionResult> {
       return new Promise((resolve, reject) => {
-          this.clearToken();
+          this.clearTokens();
           const apiResponse = new ActionResult();
           apiResponse.action = 'logout';
           apiResponse.message = 'User successfully logged out';
@@ -135,7 +135,7 @@ class UserAuth {
       });
   }
 
-  private static clearToken(): void {
+  private static clearTokens(): void {
       LocalStorage.remove(this.tokenKey);
       LocalStorage.remove(this.userKey);
   }

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import UserProfile from '../components/UserProfile';
-import Page from 'layouts/App/Page';
+import Page from 'components/Page';
 import { DOM } from 'core/helpers';
 import { animateTransition } from 'core/decorators';
 

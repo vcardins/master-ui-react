@@ -4,7 +4,7 @@ import Actions from '../Actions';
 import NotebookList from '../components/List';
 import NotebookForm from '../components/Form';
 import Notebook from '../models/Notebook';
-import Page from 'layouts/App/Page';
+import Page from 'components/Page';
 import { animateTransition } from 'core/decorators';
 import { DOM } from 'core/helpers';
 

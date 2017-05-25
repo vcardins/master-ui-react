@@ -3,10 +3,10 @@ import { Link } from 'react-router';
 import { Icon } from 'semantic-ui-react';
 import Logo from '../Logo';
 import Nav from '../Nav';
-import IMenuItem from '../IMenuItem';
+import IMenuItem from '../App/IMenuItem';
 import UserInfo from './components/UserInfo';
 import { UserProfile } from 'core/auth';
-import FullScreen from '../../../widgets/FullScreen';
+import FullScreen from '../../widgets/FullScreen';
 import './index.scss';
 
 interface Props {

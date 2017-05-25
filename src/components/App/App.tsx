@@ -12,14 +12,15 @@ import IMenuItem from './IMenuItem';
 import LayoutSettings from './LayoutSettings';
 import appSettings from 'core/settings';
 
-import Header from './Header';
-import LeftPanel from './LeftPanel';
-import Footer from './Footer';
-import SlidingPanel from './SlidingPanel';
-import './index.scss';
+import Header from '../Header';
+import LeftPanel from '../LeftPanel';
+import Footer from '../Footer';
+import SlidingPanel from '../SlidingPanel';
+
 import ColorSchemaPicker from 'widgets/ColorSchemaPicker';
 import CoolToggle from 'widgets/CoolToggle';
 
+import './index.scss';
 import * as menu from '../menu.json';
 
 const Console = console;
@@ -68,25 +69,35 @@ class App extends BaseComponent<Props, State> {
     };
 
     constructor(props: Props) {
-        super();                
+        super();
     }
 
-    componentWillReceiveProps = (newProps) => {
+    componentWillReceiveProps (newProps) {
         this.preparePageInfo(newProps);
     }
 
     async componentDidMount() {
         const { dispatch, router } = this.props;      
-
+        // If user token does NOT exist, redirect user to login route
         if (!UserAuth.isAuthenticated()) {
-            // set the current url/path for future redirection (we use a Redux action)
-            // then redirect (we use a React Router method)
-            browserHistory.replace(appSettings.loginRoute);
+            this.handleFailureAuth();
         } else {
-            const user = await UserAction.getProfile();
-            this.setState({ user });
+            try {                
+                const user = await UserAction.getProfile();
+                this.setState({ user }, () => this.handleSuccessAuth());
+            } catch (e) {
+                this.handleFailureAuth();
+            } 
         }
+        this.handleSplashScreen();
+    }
+    
+    async handleFailureAuth () {
+        browserHistory.replace(appSettings.loginRoute);
+        await UserAuth.logout();        
+    }
 
+    handleSuccessAuth () {
         if (appSettings.analyticsId) {
             // Initialize Google Analytics
             ReactGA.initialize(appSettings.analyticsId, { debug: false });
@@ -101,19 +112,21 @@ class App extends BaseComponent<Props, State> {
         window.addEventListener('resize', this.handleWindowResize.bind(this, node));
         this.handleWindowResize(node);
         
-        const loader = document.getElementById('loader') as HTMLElement;
-        if (loader) {
-            loader.style.opacity = '0';
-            setTimeout(() => loader.remove(), 500);
-        }        
-
         const layoutString = localStorage.getItem('layout');
         if (layoutString) {
             const layout = JSON.parse(layoutString);
             this.setState({layout: Object.assign({}, this.state.layout, layout)});
         }
     }
-    
+
+    handleSplashScreen() {
+        const loader = document.getElementById('loader') as HTMLElement;
+        if (loader) {
+            loader.style.opacity = '0';
+            setTimeout(() => loader.remove(), 500);
+        }
+    }
+
 	logPageView() {
         ReactGA.set({ page: this.getLocationPath() });
         ReactGA.pageview(this.getLocationPath());

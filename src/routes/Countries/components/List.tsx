@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router';
 import { Table, Dropdown, Input, Loader } from 'semantic-ui-react';
-import ContentPane from 'layouts/App/ContentPane';
+import ContentPane from 'components/ContentPane';
 import '../index.scss';
 
 interface Props extends React.HTMLProps<HTMLDivElement> {

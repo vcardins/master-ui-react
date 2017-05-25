@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router';
 import { Table, Dropdown, Loader } from 'semantic-ui-react';
-import ContentPane from 'layouts/App/ContentPane';
+import ContentPane from 'components/ContentPane';
 import Province from '../models/Province';
 import '../index.scss';
 

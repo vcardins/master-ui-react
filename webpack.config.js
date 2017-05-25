@@ -46,7 +46,6 @@ let webpackConfig = {
             config: _path('config'),
             core: _path('core'),
             containers: _path('containers'),
-            layouts: _path('layouts'),
             routes: _path('routes'),
             reducers: _path('reducers'),
             styles: _path('styles'),
