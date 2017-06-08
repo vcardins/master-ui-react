@@ -10,17 +10,17 @@ let configBase = {
 	analyticsId: '',
 	api : {
 		url: '/',
-		clientId: '045A23D0-3859-42F1-A9CF-AE688EA0F030',
+		clientId: 'a859e31c-3604-4ab3-a169-ee262613dc3a',
 		loginUrl: 'token',
 		resetPasswordUrl: 'PasswordReset',
-		prefix: 'api',
+		prefix: 'api/v1',
 		clientSecret: '#$%ˆ&**()*()*)_)',
 	},
 };
 
 let configForDevelopment = {
-	api : { url: 'http://immiplanner.azurewebsites.net' },
-	signalR : { host: 'http://immiplanner.azurewebsites.net', logging : true },
+	api : { url: 'http://master-api.azurewebsites.net' },
+	signalR : { host: 'http://master-api.azurewebsites.net', logging : true },
 	isInDebugMode: true,
 	providers: {
 		google: {

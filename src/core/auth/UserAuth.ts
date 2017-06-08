@@ -23,16 +23,18 @@ class UserAuth {
       const bodyContent = `${grantContent}${userNameContent}${passwordContent}${clientId}`;
       const apiResponse: ActionResult = new ActionResult();
       apiResponse.action = 'login';
-    
+      
       const result: any = await Api.plainRequest(settings.api.loginUrl, 'POST', bodyContent, 'application/x-www-form-urlencoded', true);
+      
       if (result.error) {
           apiResponse.error = new Error(result.error_description);
           this.clearTokens();
       } else {
         this.setToken(result.access_token);
-        this.setUser({username: result.username}, {title: result.role, bitMask: parseInt(result.bitMask, 0)});
+        const user = {username: result.username, role: result.role};
+        this.setUser(user);
         apiResponse.redirect = settings.defaultRoute;
-        apiResponse.data = this.user;
+        apiResponse.data = user;
         apiResponse.message = 'User has been successfully authenticated';
       }
       return apiResponse;
@@ -77,8 +79,7 @@ class UserAuth {
     return usr;
   }
 
-  private static setUser(user: any, level: any): void {
-    user.accessLevel = level;
+  private static setUser(user: any): void {    
     LocalStorage.set(this.userKey, JSON.stringify(user));
   }
 

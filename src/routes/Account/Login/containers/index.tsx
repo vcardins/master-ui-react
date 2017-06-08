@@ -45,16 +45,22 @@ class LoginContainer extends React.Component<Props, State>  {
         event.preventDefault();
         const { username, password } = this.state;
 
-        this.setState({ isLoading: true });
-        const response = await UserAuth.login(username, password);
-        if (response.error) {
-            const validationErrors = [].concat(new ValidationError(response.error.message, '', 'username'));
-            this.setState({ isLoading: false, validationErrors });    
-        } else {
-            this.setState({ isLoading: false });
-            if (response.redirect) {
-                browserHistory.replace(response.redirect);
+        try {
+            this.setState({ isLoading: true });
+            const response = await UserAuth.login(username, password);
+        
+            if (response.error) {
+                const validationErrors = [].concat(new ValidationError(response.error.message, '', 'username'));
+                this.setState({ validationErrors });
+            } else {
+                if (response.redirect) {
+                    browserHistory.replace(response.redirect);
+                }
             }
+        } catch (e) {
+            this.setState({ validationErrors: [new ValidationError(e.message)] });
+        } finally {
+            this.setState({ isLoading: false });
         }
     }
 

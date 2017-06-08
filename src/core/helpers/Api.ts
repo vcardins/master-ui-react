@@ -148,12 +148,16 @@ module Api {
 				if (code === 204) { 
 					resolve();
 				}
+				if (code === 0) {
+					reject(new Error('Cross Domain communication is not allowed. Please, check API configurations and try again.'));
+				}
 				try {
 					const apiResponse = JSON.parse(response);
+					const { message, error_description } = apiResponse;
 					switch (code) {
 						case 400:
-						case 401:								
-							reject(new Error(apiResponse.message));
+						case 401:
+							reject(new Error(error_description || message));
 							break;
 					}
 					resolve(apiResponse);
