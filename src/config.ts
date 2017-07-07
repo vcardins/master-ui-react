@@ -10,7 +10,6 @@ let configBase = {
 	analyticsId: '',
 	api : {
 		url: '/',
-		clientId: 'a859e31c-3604-4ab3-a169-ee262613dc3a',
 		loginUrl: 'token',
 		resetPasswordUrl: 'PasswordReset',
 		prefix: 'api/v1',
