@@ -1,32 +1,32 @@
 {
-    "items": [
-        { 
-            "id": "dashboard", 
-            "href": "/", 
-            "label": "Dashboard", 
-            "icon": "dashboard" 
-        },
-        { 
-            "id": "geography", 
-            "href": "", 
-            "label": "Locations", 
-            "icon": "map",
-            "children": [ 
-                { "id": "countries", "href": "/countries", "label": "Countries", "icon": "flag" },
-                { "id": "city", "href": "/provinces", "label": "Provinces", "icon": "map" }
-            ]
-        },
-        { 
-            "id": "notebook", 
-            "href": "/notebook", 
-            "label": "Notebook", 
-            "icon": "book" 
-        },
-        { 
-            "id": "reports", 
-            "href": "/reports", 
-            "label": "Reports", 
-            "icon": "calculator" 
-        }
-    ]
+	"items": [
+		{ 
+			"id": "dashboard", 
+			"href": "/", 
+			"label": "Dashboard", 
+			"icon": "dashboard" 
+		},
+		{ 
+			"id": "geography", 
+			"href": "", 
+			"label": "Locations", 
+			"icon": "map",
+			"children": [ 
+				{ "id": "countries", "href": "/countries", "label": "Countries", "icon": "flag" },
+				{ "id": "city", "href": "/provinces", "label": "Provinces", "icon": "map" }
+			]
+		},
+		{ 
+			"id": "notebook", 
+			"href": "/notebook", 
+			"label": "Notebook", 
+			"icon": "book" 
+		},
+		{ 
+			"id": "reports", 
+			"href": "/reports", 
+			"label": "Reports", 
+			"icon": "calculator" 
+		}
+	]
 }

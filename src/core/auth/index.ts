@@ -8,12 +8,12 @@ import IUserAction from './IUserAction';
 import UserAction from './UserAction';
 
 export {
-    UserAuth,
-    AuthHelpers,
-    Access,
-    UserSignup,
-    UserProfile,
-    AccessLevel,
-    IUserAction,
-    UserAction,
+	UserAuth,
+	AuthHelpers,
+	Access,
+	UserSignup,
+	UserProfile,
+	AccessLevel,
+	IUserAction,
+	UserAction,
 };

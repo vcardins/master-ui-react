@@ -6,20 +6,20 @@ export default {
   path: '/notebook',
   component: Notebook,
   getChildRoutes: (location, next) => {
-    const subRoutes = [
-        {
-            path: '', // this path is empty
-            indexRoute: {
-                component: Notebook,
-            },
-            childRoutes: [
-                {
-                    path: ':id', 
-                    component: Notebook,
-                },
-            ],
-        },
-    ];
-    next(null, subRoutes);
+	const subRoutes = [
+		{
+			path: '', // this path is empty
+			indexRoute: {
+				component: Notebook,
+			},
+			childRoutes: [
+				{
+					path: ':id', 
+					component: Notebook,
+				},
+			],
+		},
+	];
+	next(null, subRoutes);
   },
 };

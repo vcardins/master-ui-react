@@ -10,9 +10,9 @@ describe('Footer Component Rendering', () => {
 });
 
 describe('Footer behaviour', () => {
-    it('should pass a selected value to the onClick handler', () => {
-        const wrapper = shallow(<component />);
-        expect(wrapper).toMatchSnapshot();
-    });
+	it('should pass a selected value to the onClick handler', () => {
+		const wrapper = shallow(<component />);
+		expect(wrapper).toMatchSnapshot();
+	});
 });
 

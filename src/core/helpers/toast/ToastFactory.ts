@@ -51,11 +51,11 @@ class Toast implements IToastFactory {
 
 	info (params: ToastParams | string): void { this.buildToast('info', params); }
 
-    success (params: ToastParams | string): void { this.buildToast('success', params); }
+	success (params: ToastParams | string): void { this.buildToast('success', params); }
 
-    warning (params: ToastParams | string): void { this.buildToast('warning', params); }
+	warning (params: ToastParams | string): void { this.buildToast('warning', params); }
 	
-    error (params: ToastParams | string): void { this.buildToast('error', params); }
+	error (params: ToastParams | string): void { this.buildToast('error', params); }
 	
 }
 

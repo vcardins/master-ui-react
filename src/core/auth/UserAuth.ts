@@ -12,50 +12,50 @@ class UserAuth {
    * @param {string} token
    */
   static async login(identifier: string, password: string): Promise<ActionResult> {
-      let self = this;
-      let promise = null;
+	  let self = this;
+	  let promise = null;
 
-      const grantContent = `grant_type=${settings.api.grantType}`;
-      const userNameContent = `${'&username='}${identifier}`;
-      const passwordContent = `${'&password='}${password}`;
-      const clientId = `${'&client_id='}${settings.api.clientId}`;
+	  const grantContent = `grant_type=${settings.api.grantType}`;
+	  const userNameContent = `${'&username='}${identifier}`;
+	  const passwordContent = `${'&password='}${password}`;
+	  const clientId = `${'&client_id='}${settings.api.clientId}`;
 
-      const bodyContent = `${grantContent}${userNameContent}${passwordContent}${clientId}`;
-      const apiResponse: ActionResult = new ActionResult();
-      apiResponse.action = 'login';
-      
-      const result: any = await Api.plainRequest(settings.api.loginUrl, 'POST', bodyContent, 'application/x-www-form-urlencoded', true);
-      
-      if (result.error) {
-          apiResponse.error = new Error(result.error_description);
-          this.clearTokens();
-      } else {
-        this.setToken(result.access_token);
-        const user = {username: result.username, role: result.role};
-        this.setUser(user);
-        apiResponse.redirect = settings.defaultRoute;
-        apiResponse.data = user;
-        apiResponse.message = 'User has been successfully authenticated';
-      }
-      return apiResponse;
+	  const bodyContent = `${grantContent}${userNameContent}${passwordContent}${clientId}`;
+	  const apiResponse: ActionResult = new ActionResult();
+	  apiResponse.action = 'login';
+	  
+	  const result: any = await Api.plainRequest(settings.api.loginUrl, 'POST', bodyContent, 'application/x-www-form-urlencoded', true);
+	  
+	  if (result.error) {
+		  apiResponse.error = new Error(result.error_description);
+		  this.clearTokens();
+	  } else {
+		this.setToken(result.access_token);
+		const user = {username: result.username, role: result.role};
+		this.setUser(user);
+		apiResponse.redirect = settings.defaultRoute;
+		apiResponse.data = user;
+		apiResponse.message = 'User has been successfully authenticated';
+	  }
+	  return apiResponse;
   }
 
   static async resetPassword(email: string): Promise<ActionResult> {
-      let self = this;
-      const apiResponse: ActionResult = new ActionResult();
+	  let self = this;
+	  const apiResponse: ActionResult = new ActionResult();
 
-      const result = await Api.patch(settings.api.resetPasswordUrl, { email }, null, true);
-      if (!result.error) {
-          apiResponse.redirect = settings.loginRedirect;
-          apiResponse.message = 'User has been successfully authenticated';
-      } else {
-          apiResponse.error = new Error(result.error_description);
-      }
-      return apiResponse;
+	  const result = await Api.patch(settings.api.resetPasswordUrl, { email }, null, true);
+	  if (!result.error) {
+		  apiResponse.redirect = settings.loginRedirect;
+		  apiResponse.message = 'User has been successfully authenticated';
+	  } else {
+		  apiResponse.error = new Error(result.error_description);
+	  }
+	  return apiResponse;
   }  
 
   static get token(): string {
-      return LocalStorage.get(this.tokenKey);
+	  return LocalStorage.get(this.tokenKey);
   }
   /**
    * Check if a user is authenticated - check if a token is saved in Local Storage
@@ -63,28 +63,28 @@ class UserAuth {
    * @returns {boolean}
    */
   static isAuthenticated() {
-    return !!this.token;
+	return !!this.token;
   }
 
   private static get userKey() {
-    return `${settings.tokenPrefix}_user`;
+	return `${settings.tokenPrefix}_user`;
   }
 
   private static get tokenKey() {
-    return `${settings.tokenPrefix}_${settings.tokenName}`;
+	return `${settings.tokenPrefix}_${settings.tokenName}`;
   }
 
   static get user() {
-    let usr = JSON.parse(LocalStorage.get(this.userKey));
-    return usr;
+	let usr = JSON.parse(LocalStorage.get(this.userKey));
+	return usr;
   }
 
-  private static setUser(user: any): void {    
-    LocalStorage.set(this.userKey, JSON.stringify(user));
+  private static setUser(user: any): void {	
+	LocalStorage.set(this.userKey, JSON.stringify(user));
   }
 
   private static setToken(token) {
-    return LocalStorage.set(this.tokenKey, token);
+	return LocalStorage.set(this.tokenKey, token);
   }
   /**
    * Get a token value.
@@ -93,52 +93,52 @@ class UserAuth {
    */
 
   private static get publicUser() {
-    return { username: '', role: userRoles.public};
+	return { username: '', role: userRoles.public};
   }
 
   static isAuthorized(accessLevel, role) {
-    role = (role || this.user.accessLevel) || this.publicUser.role;
-    return accessLevel.bitMask <= role.bitMask;
+	role = (role || this.user.accessLevel) || this.publicUser.role;
+	return accessLevel.bitMask <= role.bitMask;
   }
 
   static get accessLevel() {
-    return this.user.accessLevel || accessLevels.public;
+	return this.user.accessLevel || accessLevels.public;
   }
 
   static checkAuth(nextState, replace, accessLevel) {
 
-      const isAuth = this.isAuthenticated();
+	  const isAuth = this.isAuthenticated();
 
-      if ( (accessLevel > 0 && !isAuth) || (accessLevel === 0 && isAuth) ) {
-        replace({
-          pathname : '/',
-          state : { nextPathname : nextState.location.pathname },
-        });
-      }
+	  if ( (accessLevel > 0 && !isAuth) || (accessLevel === 0 && isAuth) ) {
+		replace({
+		  pathname : '/',
+		  state : { nextPathname : nextState.location.pathname },
+		});
+	  }
 
-      if (isAuth && nextState.location.pathname === '/') {
-        replace({
-          pathname : settings.defaultRoute,
-          state : { nextPathname : nextState.location.pathname },
-        });
-      }
+	  if (isAuth && nextState.location.pathname === '/') {
+		replace({
+		  pathname : settings.defaultRoute,
+		  state : { nextPathname : nextState.location.pathname },
+		});
+	  }
 
   }
 
   static logout(): Promise<ActionResult> {
-      return new Promise((resolve, reject) => {
-          this.clearTokens();
-          const apiResponse = new ActionResult();
-          apiResponse.action = 'logout';
-          apiResponse.message = 'User successfully logged out';
-          apiResponse.redirect = settings.loginRedirect;
-          resolve(apiResponse);
-      });
+	  return new Promise((resolve, reject) => {
+		  this.clearTokens();
+		  const apiResponse = new ActionResult();
+		  apiResponse.action = 'logout';
+		  apiResponse.message = 'User successfully logged out';
+		  apiResponse.redirect = settings.loginRedirect;
+		  resolve(apiResponse);
+	  });
   }
 
   private static clearTokens(): void {
-      LocalStorage.remove(this.tokenKey);
-      LocalStorage.remove(this.userKey);
+	  LocalStorage.remove(this.tokenKey);
+	  LocalStorage.remove(this.userKey);
   }
 
 }

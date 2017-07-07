@@ -3,36 +3,41 @@ import UserProfile from '../components/UserProfile';
 import Page from 'components/Page';
 import { DOM } from 'core/helpers';
 import { animateTransition } from 'core/decorators';
+import { branch } from 'baobab-react/higher-order';
 
 interface Props {
-    children: JSX.Element;
-    router: any;    
+	children: JSX.Element;
+	router: any;
+	user: any;
 }
 
 interface State {
 }
 
+@branch({
+  user: ['user', 'model'],
+})
 @animateTransition()
 class UserProfileContainer extends React.Component<Props, State>  {
-    
-    constructor(props: Props) {
-        super(props);
-    }    
+	
+	constructor(props: Props) {
+		super(props);
+	}	
 
-    render(): JSX.Element {
-        const children = <UserProfile header="Header" description="This is the UserProfile page."/>;
+	render(): JSX.Element {
+		const children = <UserProfile header="Header" description="This is the UserProfile page."/>;
 
-        return (
-            <Page 
-                id="report" 
-                title="User Profile" 
-                subTitle="UserProfiles UserProfiles UserProfiles UserProfiles"
-                panels={ [children] }
-                className="padded">
-                { children }
-            </Page>
-        );
-    }
+		return (
+			<Page 
+				id="page-userprofile" 
+				title="User Profile" 
+				subTitle="User Profile"
+				panels={ [children] }
+				className="padded">
+				{ children }
+			</Page>
+		);
+	}
 }
 
 export default UserProfileContainer;

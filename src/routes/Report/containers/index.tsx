@@ -5,8 +5,8 @@ import { DOM } from 'core/helpers';
 import { animateTransition } from 'core/decorators';
 
 interface Props {
-    children: JSX.Element;
-    router: any;    
+	children: JSX.Element;
+	router: any;	
 }
 
 interface State {
@@ -14,27 +14,27 @@ interface State {
 
 @animateTransition()
 class ReportContainer extends React.Component<Props, State>  {
-    
-    constructor(props: Props) {
-        super(props);
-    }    
+	
+	constructor(props: Props) {
+		super(props);
+	}	
 
-    render(): JSX.Element {
-        return (
-            <Page 
-                id="report" 
-                title="Reports" 
-                subTitle="Reports Reports Reports Reports"
-                className="padded"
-                panels={[
-                    <Report 
-                        header="Header"
-                        description="This is the Report page."
-                    />,
-                ]} 
-            />
-        );
-    }
+	render(): JSX.Element {
+		return (
+			<Page 
+				id="report" 
+				title="Reports" 
+				subTitle="Reports Reports Reports Reports"
+				className="padded"
+				panels={[
+					<Report 
+						header="Header"
+						description="This is the Report page."
+					/>,
+				]} 
+			/>
+		);
+	}
 }
 
 export default ReportContainer;

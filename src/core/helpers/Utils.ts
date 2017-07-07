@@ -43,10 +43,10 @@
 	}
 
 	export function camelCase(name: string) {
-        return name.replace(/([\:\-\_]+(.))/g, function(_, separator, letter, offset) {
-          return offset ? letter.toUpperCase() : letter;
-        });
-    }
+		return name.replace(/([\:\-\_]+(.))/g, function(_, separator, letter, offset) {
+		  return offset ? letter.toUpperCase() : letter;
+		});
+	}
 
 	export function isString(value: any) {
 		return typeof value === 'string';

@@ -5,47 +5,47 @@ import { shallow } from 'enzyme';
 import Nav from '../index';
 
 const menu = {
-    items: [
-        { 
-            id: 'alpha', 
-            href: '/alpha', 
-            label: 'Alpha', 
-            icon: 'alarm', 
-        },
-        { 
-            id: 'beta', 
-            href: '/beta',
-            label: 'Beta',
-            icon: 'bath',
-            children: [ 
-                { id: 'gama', href: '/gama', label: 'Gama', icon: 'bed' },
-                { id: 'zeta', href: '/zeta', label: 'Zeta', icon: 'beer' },
-            ],
-        },
-    ],
+	items: [
+		{ 
+			id: 'alpha', 
+			href: '/alpha', 
+			label: 'Alpha', 
+			icon: 'alarm', 
+		},
+		{ 
+			id: 'beta', 
+			href: '/beta',
+			label: 'Beta',
+			icon: 'bath',
+			children: [ 
+				{ id: 'gama', href: '/gama', label: 'Gama', icon: 'bed' },
+				{ id: 'zeta', href: '/zeta', label: 'Zeta', icon: 'beer' },
+			],
+		},
+	],
 };
 
 const defaultProps = { 
-    routes: menu['items'],
-    activeRoute: '',
-    position: 'vertical',
+	routes: menu['items'],
+	activeRoute: '',
+	position: 'vertical',
 };
 
 function loadComponent (props, test) {
-    const component = shallow(<Nav {...props} />);
-    
+	const component = shallow(<Nav {...props} />);
+	
 	return () => test({
-		component,    
+		component,	
 	});
 }
 
 
 function setup (props, test) {
-    return () => test(
-        Renderer.create(
-            <Nav {...props} />
-        )
-    );
+	return () => test(
+		Renderer.create(
+			<Nav {...props} />
+		)
+	);
 }
 
 describe('Navigation Component Rendering', () => {
@@ -60,23 +60,23 @@ describe('Navigation Component Rendering', () => {
 });
 
 describe('Navigation Multilevel Rendering', loadComponent(
-    defaultProps,
-    ({ component }) => {
-        const submenu = component.find('#mnu-beta');
-        const submenuOptions = submenu.find('.submenu li');
-        const expander = submenu.find('.expander');
-        const expectedOptionsTotal = defaultProps.routes[1].children.length;
+	defaultProps,
+	({ component }) => {
+		const submenu = component.find('#mnu-beta');
+		const submenuOptions = submenu.find('.submenu li');
+		const expander = submenu.find('.expander');
+		const expectedOptionsTotal = defaultProps.routes[1].children.length;
 
-        it('Should have a submenu', () => {
+		it('Should have a submenu', () => {
 			expect(submenu).toMatchSnapshot();
 		});
 
-        it(`Should have a submenu with ${expectedOptionsTotal} entries`, () => {
+		it(`Should have a submenu with ${expectedOptionsTotal} entries`, () => {
 			expect(submenuOptions.length).toBe(expectedOptionsTotal);
 		});
 
-        it('Should show submenu toggle icon', () => {
+		it('Should show submenu toggle icon', () => {
 			expect(expander).not.toBeNull();
 		});
-    }
+	}
 ));

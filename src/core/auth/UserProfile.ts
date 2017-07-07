@@ -40,14 +40,14 @@ export default class UserProfile extends EntityModel {
   // }
 
   constructor(model?: any) {
-    super(model);
+	super(model);
   }
 
   get fullName(){
-    return (this.firstName) ? (`${this.firstName}` + (this.lastName ? ' ' + this.lastName : '')) : undefined;
+	return (this.firstName) ? (`${this.firstName}` + (this.lastName ? ' ' + this.lastName : '')) : undefined;
   }
 
   get displayName(){
-    return (this.firstName) ? (`${this.firstName}` + (this.lastName ? ' ' + this.lastName.substring(0, 1) : '')) : undefined;
+	return (this.firstName) ? (`${this.firstName}` + (this.lastName ? ' ' + this.lastName.substring(0, 1) : '')) : undefined;
   }
 }

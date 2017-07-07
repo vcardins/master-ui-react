@@ -1,48 +1,49 @@
 @import './form.scss';
 @import './base.scss';
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin);
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
 
 :root {
-    --themeColor: $theme-color;
-    --themeLightColor: lighten($theme-color, 25%);
-    --themeLighterColor: lighten($theme-color, 50%);
-    --themeLightestColor: lighten($theme-color, 75%);
+	--themeColor: $theme-color;
+	--themeLightColor: lighten($theme-color, 25%);
+	--themeLighterColor: lighten($theme-color, 50%);
+	--themeLightestColor: lighten($theme-color, 75%);
 }
 
 body {
-    font-family: Lato;
+	font-family: Lato;
 
-    #app {
-        height: 100%;
-    }
+	#app {
+		height: 100%;
+	}
 
-    .grid {
-        height: 100%;
-    }
+	.grid {
+		height: 100%;
+	}
 }
 
 .padded {
-    @extend %padded;
+	@extend %padded;
 }
 
 .borderless {
-    border: 0;
+	border: 0;
 }
 
 .fade-enter {
-    opacity: 0.01;
+	opacity: 0.01;
 
-    &.fade-enter-active {
-        opacity: 1;
-        transition: opacity 500ms ease-in;
-    }
+	&.fade-enter-active {
+		opacity: 1;
+		transition: opacity 500ms ease-in;
+	}
 }
 
 .fade-leave {
-    opacity: 1;
+	opacity: 1;
 
-    .fade-leave-active {
-        opacity: 0.01;
-        transition: opacity 300ms ease-in;
-    }
+	.fade-leave-active {
+		opacity: 0.01;
+		transition: opacity 300ms ease-in;
+	}
 }

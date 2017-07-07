@@ -9,8 +9,8 @@ module Api {
 	/**
 		* Action method to get count of certain end point objects.
 		*
-		* @param   {string}    endPoint    Name of the end point
-		* @param   {{}}        parameters  Used query parameters
+		* @param   {string}	endPoint	Name of the end point
+		* @param   {{}}		parameters  Used query parameters
 		*
 		* @returns {Promise|*}
 		*/
@@ -27,8 +27,8 @@ module Api {
 		* Action method to get data from certain end point. This will always return a collection
 		* of data.
 		*
-		* @param   {string}    endPoint    Name of the end point
-		* @param   {{}}        parameters  Used query parameters
+		* @param   {string}	endPoint	Name of the end point
+		* @param   {{}}		parameters  Used query parameters
 		*
 		* @returns {Promise|*}
 		*/
@@ -40,8 +40,8 @@ module Api {
 		* Action method to get data from certain end point. This will always return a collection
 		* of data.
 		*
-		* @param   {string}    endPoint    Name of the end point
-		* @param   {{}}        parameters  Used query parameters
+		* @param   {string}	endPoint	Name of the end point
+		* @param   {{}}		parameters  Used query parameters
 		*
 		* @returns {Promise|*}
 		*/
@@ -52,8 +52,8 @@ module Api {
 	/**
 		* Action method to create new object to specified end point.
 		*
-		* @param   {string}    endPoint    Name of the end point
-		* @param   {{}}        data        Data to update
+		* @param   {string}	endPoint	Name of the end point
+		* @param   {{}}		data		Data to update
 		*
 		* @returns {Promise|*}
 		*/
@@ -72,9 +72,9 @@ module Api {
 	/**
 		* Action method to update specified end point object.
 		*
-		* @param   {string}    endPoint    Name of the end point
-		* @param   {number}    identifier  Identifier of endpoint object
-		* @param   {{}}        data        Data to update
+		* @param   {string}	endPoint	Name of the end point
+		* @param   {number}	identifier  Identifier of endpoint object
+		* @param   {{}}		data		Data to update
 		*
 		* @returns {Promise|*}
 		*/
@@ -85,8 +85,8 @@ module Api {
 	/**
 		* Action method to delete specified object.
 		*
-		* @param   {string}    endPoint    Name of the end point
-		* @param   {number}    identifier  Identifier of endpoint object
+		* @param   {string}	endPoint	Name of the end point
+		* @param   {number}	identifier  Identifier of endpoint object
 		*
 		* @returns {Promise|*}
 		*/

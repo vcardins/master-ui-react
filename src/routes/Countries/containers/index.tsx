@@ -8,14 +8,14 @@ import { animateTransition } from 'core/decorators';
 import { branch } from 'baobab-react/higher-order';
 
 interface Props {
-    children: JSX.Element;
-    router: any;
-    lookup: Array<any>;
-    ajax: any;
+	children: JSX.Element;
+	router: any;
+	lookup: Array<any>;
+	ajax: any;
 }
 
 interface State {
-    isLoading: boolean;
+	isLoading: boolean;
 }
 
 @branch({
@@ -24,31 +24,31 @@ interface State {
 })
 class CountriesContainer extends React.Component<Props, State>  {
 
-    state: State = { 
-        isLoading: false, 
-    };
+	state: State = { 
+		isLoading: false, 
+	};
 
-    constructor(props: Props) {
-        super(props);
-    }
+	constructor(props: Props) {
+		super(props);
+	}
 
-    render(): JSX.Element {
-        const { lookup, ajax } = this.props;
-        // tslint:disable-next-line:no-string-literal
-        const models = lookup['countries'];
+	render(): JSX.Element {
+		const { lookup, ajax } = this.props;
+		// tslint:disable-next-line:no-string-literal
+		const models = lookup['countries'];
 
-        return (
-            <Page 
-                id="country" 
-                title="Countries" 
-                subTitle="World Countries"
-                hasFixedHeader={true}
-                panels={[
-                    <CountriesList key="list" models={ models } isLoading={ ajax.loading }/>,
-                ]} 
-            />
-        );
-    }    
+		return (
+			<Page 
+				id="country" 
+				title="Countries" 
+				subTitle="World Countries"
+				hasFixedHeader={true}
+				panels={[
+					<CountriesList key="list" models={ models } isLoading={ ajax.loading }/>,
+				]} 
+			/>
+		);
+	}	
 }
 
 export default animateTransition()(CountriesContainer);

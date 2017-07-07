@@ -7,22 +7,22 @@ import SlidingPanel from '../index';
 const elTag = 'sliding-panel';
 
 function setup (props, test) {
-    return () => test(
-        Renderer.create(
-            <SlidingPanel {...props} />
-        )
-    );
+	return () => test(
+		Renderer.create(
+			<SlidingPanel {...props} />
+		)
+	);
 }
 
 function loadComponent (fn, props, test, attachTo = {}) {
-    const component = fn(<SlidingPanel {...props} />, attachTo);
-    const trigger = component.find(`#${elTag}-pin`);
-    const content = component.find(`#${elTag}-content`);
+	const component = fn(<SlidingPanel {...props} />, attachTo);
+	const trigger = component.find(`#${elTag}-pin`);
+	const content = component.find(`#${elTag}-content`);
 
 	return () => test({
 		component,
-        content,
-        trigger,
+		content,
+		trigger,
 	});
 }
 
@@ -46,12 +46,12 @@ describe('Validate DOM element', loadComponent(shallow,
 			expect(content.text()).toEqual(contentText);
 		});
 		
-        it('Should load toggle trigger', () => {
+		it('Should load toggle trigger', () => {
 			expect(trigger).not.toBeNull();
 		});
 
 		it('Should appears on the app\'s right side if position property is not set', () => {
-            expect(component.hasClass('right')).toEqual(true);
+			expect(component.hasClass('right')).toEqual(true);
 		});
 	}
 ));
@@ -59,19 +59,19 @@ describe('Validate DOM element', loadComponent(shallow,
 /* Dropdown Selector Tests */
 describe('Validate component behaviours', loadComponent(mount,
 	{ 
-        position: 'left',
-        children: <div>{contentText}</div>, 
-    },
+		position: 'left',
+		children: <div>{contentText}</div>, 
+	},
 	({ component, trigger }) => {
-        it('Should appears on the app\'s left side', () => {
-            expect(component.hasClass('left')).toEqual(true);
+		it('Should appears on the app\'s left side', () => {
+			expect(component.hasClass('left')).toEqual(true);
 		});
 
-        trigger.simulate('change', { stopPropagation: () => {}, preventDefault: () => {}, target: { checked: true } });
-        
-        it('Should expands the panel', () => {
-            expect(component.hasClass('expanded')).toEqual(true);
-		});        
+		trigger.simulate('change', { stopPropagation: () => {}, preventDefault: () => {}, target: { checked: true } });
+		
+		it('Should expands the panel', () => {
+			expect(component.hasClass('expanded')).toEqual(true);
+		});		
 	},
 	{ attachTo: document.body }
 ));

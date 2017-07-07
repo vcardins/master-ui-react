@@ -6,10 +6,10 @@ import DOM from './DOM';
 import toast from './toast';
 
 export {
-    LocalStorage,
-    Base64,
-    Utils,
-    Api,
-    DOM,
-    toast,
+	LocalStorage,
+	Base64,
+	Utils,
+	Api,
+	DOM,
+	toast,
 };
