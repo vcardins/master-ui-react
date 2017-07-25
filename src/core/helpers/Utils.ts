@@ -134,6 +134,24 @@
 		return Object.keys(obj1).every((key) => obj2.hasOwnProperty(key) && (obj1[key] === obj2[key]));
 	}
 
+	export function groupArray (data, groupByProp, keyProp, transform) { 
+		return data
+			.reduce((r, item) => {
+				const parentItem = r.find((i) => i[keyProp] === item[groupByProp]);
+				if (!parentItem) {
+					if (!item[groupByProp]) {
+						r.push(Object.assign({}, item, transform(item), {children: []}));	
+					} 
+				}
+				else {
+					parentItem.children.push(item);
+				}
+				return r;
+			}, []);
+	}
+	// const groupedCategories = groupArray(data, 'parentCategoryId', 'id', ({id, name}) => (
+	// 		{ name: `${capitalize(name)}`}
+	// 	));
 }
 
 export default Utils;

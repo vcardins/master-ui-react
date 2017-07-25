@@ -3,8 +3,7 @@ import '../index.scss';
 import { Card } from 'semantic-ui-react';
 
 interface Props extends React.HTMLProps<HTMLDivElement> {
-    header: string;
-    description: string;
+    user: any;
 }
 
 /**
@@ -13,15 +12,14 @@ interface Props extends React.HTMLProps<HTMLDivElement> {
  * @param {Props} props 
  * @returns {JSX.Element} 
  */
-const UserProfile: React.StatelessComponent<Props> = (props: Props): JSX.Element => {
-    const { header, description } = props;
+const UserSettings = ({ user }: Props): JSX.Element => {
 
     {/*<!--
     Checkbox Trickery with CSS:
     http://codersblock.com/blog/checkbox-trickery-with-css/ 
     -->*/}
     return (
-        <form>
+        <form className="user-settings">
             <h1>C:\Users\Will\Magic</h1>
             <div className="tree">
                 <div>
@@ -92,4 +90,4 @@ const UserProfile: React.StatelessComponent<Props> = (props: Props): JSX.Element
     );
 };
 
-export default UserProfile;
+export default UserSettings;
