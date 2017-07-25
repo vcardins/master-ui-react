@@ -30,12 +30,10 @@ const Page: React.StatelessComponent<Props> = (props: Props): JSX.Element => {
 		classNames.push(className);
 	}
 
-	const body = panels.length > 1
-		? panels.map((panel, i) => {
+	const body = panels.map((panel, i) => {
 			const key = `pane-${i + 1}`;
-			return <div className={hasFixedHeader ? 'pane' : ''} id={key} key={key}>{panel}</div>;
-		})
-		: panels[0];
+			return <div className="pane" id={key} key={key}>{panel}</div>;
+		});
 
 	return (
 		 <div id={id}>

@@ -64,7 +64,7 @@ section.vertical-menu {
 
 			.page-content {
 				flex: 1 1 auto;
-				margin: 5px 0 5px 5px;
+				margin: 0;
 
 				.loader {
 					width: 100%;
@@ -78,9 +78,11 @@ section.vertical-menu {
 
 					.pane {
 						@extend %scrollable;
-
-						flex: 1;
 					}
+				}
+
+				.pane {
+					flex: 1;
 				}
 
 				&.multi-pane-2 {
@@ -103,6 +105,8 @@ section.vertical-menu {
 
 				&:not(.fixed-pane-header) {
 					@extend %scrollable;
+
+					display: flex;
 				}
 
 				.table {
