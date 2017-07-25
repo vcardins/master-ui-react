@@ -14,16 +14,15 @@ interface Props extends React.HTMLProps<HTMLDivElement> {
 	isValid: boolean;
 }
 
-const ProvinceForm: React.StatelessComponent<Props> = (props: Props): JSX.Element => {
-	let componentRef;
-	const {
+const ProvinceForm = ({
 		model,
 		onSubmit,
 		onChange,
 		errors,
 		isSaving,
 		isValid,
-	} = props;
+	}: Props): JSX.Element => {
+	let componentRef;
 
 	const ActionButtons = () => (
 		<Button.Group labeled basic size="small" floated="right" compact className="borderless">
