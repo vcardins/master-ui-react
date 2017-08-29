@@ -2,15 +2,15 @@ import nanoajax from 'nanoajax';  // https://github.com/yanatan16/nanoajax
 import settings from 'core/settings';
 import { UserAuth } from '../auth';
 
-namespace Api {
+module Api {
 	
 	let _isPlainRequest: boolean = false;
 
 	/**
 		* Action method to get count of certain end point objects.
 		*
-		* @param   {string}    endPoint    Name of the end point
-		* @param   {{}}        parameters  Used query parameters
+		* @param   {string}	endPoint	Name of the end point
+		* @param   {{}}		parameters  Used query parameters
 		*
 		* @returns {Promise|*}
 		*/
@@ -27,8 +27,8 @@ namespace Api {
 		* Action method to get data from certain end point. This will always return a collection
 		* of data.
 		*
-		* @param   {string}    endPoint    Name of the end point
-		* @param   {{}}        parameters  Used query parameters
+		* @param   {string}	endPoint	Name of the end point
+		* @param   {{}}		parameters  Used query parameters
 		*
 		* @returns {Promise|*}
 		*/
@@ -40,8 +40,8 @@ namespace Api {
 		* Action method to get data from certain end point. This will always return a collection
 		* of data.
 		*
-		* @param   {string}    endPoint    Name of the end point
-		* @param   {{}}        parameters  Used query parameters
+		* @param   {string}	endPoint	Name of the end point
+		* @param   {{}}		parameters  Used query parameters
 		*
 		* @returns {Promise|*}
 		*/
@@ -52,8 +52,8 @@ namespace Api {
 	/**
 		* Action method to create new object to specified end point.
 		*
-		* @param   {string}    endPoint    Name of the end point
-		* @param   {{}}        data        Data to update
+		* @param   {string}	endPoint	Name of the end point
+		* @param   {{}}		data		Data to update
 		*
 		* @returns {Promise|*}
 		*/
@@ -72,9 +72,9 @@ namespace Api {
 	/**
 		* Action method to update specified end point object.
 		*
-		* @param   {string}    endPoint    Name of the end point
-		* @param   {number}    identifier  Identifier of endpoint object
-		* @param   {{}}        data        Data to update
+		* @param   {string}	endPoint	Name of the end point
+		* @param   {number}	identifier  Identifier of endpoint object
+		* @param   {{}}		data		Data to update
 		*
 		* @returns {Promise|*}
 		*/
@@ -85,8 +85,8 @@ namespace Api {
 	/**
 		* Action method to delete specified object.
 		*
-		* @param   {string}    endPoint    Name of the end point
-		* @param   {number}    identifier  Identifier of endpoint object
+		* @param   {string}	endPoint	Name of the end point
+		* @param   {number}	identifier  Identifier of endpoint object
 		*
 		* @returns {Promise|*}
 		*/
@@ -148,12 +148,16 @@ namespace Api {
 				if (code === 204) { 
 					resolve();
 				}
+				if (code === 0) {
+					reject(new Error('Cross Domain communication is not allowed. Please, check API configurations and try again.'));
+				}
 				try {
 					const apiResponse = JSON.parse(response);
+					const { message, error_description } = apiResponse;
 					switch (code) {
 						case 400:
-						case 401:								
-							reject(new Error(apiResponse.message));
+						case 401:
+							reject(new Error(error_description || message));
 							break;
 					}
 					resolve(apiResponse);

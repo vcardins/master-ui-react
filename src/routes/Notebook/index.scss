@@ -1,16 +1,16 @@
 @import '~variables';
 
 #notebook {
-    .pane:first-child {
-        flex: 0.6;
+	.pane:first-child {
+		flex: 0.6;
 
-        .dropdown {
-            min-height: auto;
-            border: 0;
-        }
-    }
+		.dropdown {
+			min-height: auto;
+			border: 0;
+		}
+	}
 
-    .pane:last-child {
-        flex: 0.4;
-    }
+	.pane:last-child {
+		flex: 0.4;
+	}
 }

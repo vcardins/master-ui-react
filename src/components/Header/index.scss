@@ -2,136 +2,136 @@
 
 #app[data-viewport="mini"],
 #app[data-viewport="tiny"] {
-    #header {
-        .profile {
-            .info {
-                opacity: 0;
-                display: none;
-            }
-        }
-    }
+	#header {
+		.profile {
+			.info {
+				opacity: 0;
+				display: none;
+			}
+		}
+	}
 }
 
 .collapsed {
-    #header {
-        .header-left {
-            margin-left: 0em;
-        }
-    }
+	#header {
+		.header-left {
+			margin-left: 0em;
+		}
+	}
 }
 
 .vertical-menu {
-    .header-central {
-        .menu {
-            display: none;
-        }
-    }
+	.header-central {
+		.menu {
+			display: none;
+		}
+	}
 }
 
 #header {
-    line-height: 40px;
-    height: 40px;
-    background:
-        linear-gradient(to top, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25))
-        var(--themeColor);
+	line-height: 40px;
+	height: 40px;
+	background:
+	linear-gradient(to top, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25))
+	var(--themeColor);
 
-    a {
-        color: var(--themeLightestColor);
+	a {
+		color: var(--themeLightestColor);
 
-        &:hover {
-            color: $white;
-        }
-    }
+		&:hover {
+			color: $white;
+		}
+	}
 
-    /* linear-gradient(to bottom, $color-medium, $color-darkest); */
-    padding: 0;
-    color: $white;
+	/* linear-gradient(to bottom, $color-medium, $color-darkest); */
+	padding: 0;
+	color: $white;
 
-    .header-left,
-    .header-central,
-    .header-right {
-        display: inline-block;
-    }
+	.header-left,
+	.header-central,
+	.header-right {
+		display: inline-block;
+	}
 
-    .header-left {
-        width: $navbar-width-expanded - 50;
-        font-weight: 400;
-        line-height: normal;
-        margin-left: 1.25em;
-        font-size: 20px;
-        text-align: center;
-        transition: margin-left 0.2s;
+	.header-left {
+		width: $navbar-width-expanded - 50;
+		font-weight: 400;
+		line-height: normal;
+		margin-left: 1.25em;
+		font-size: 20px;
+		text-align: center;
+		transition: margin-left 0.2s;
 
-        .header-logo {
-            text-align: center;
-            display: inherit;
-        }
+		.header-logo {
+			text-align: center;
+			display: inherit;
+		}
 
-        .header-title {
-            margin-left: 0.5em;
-        }
-    }
+		.header-title {
+			margin-left: 0.5em;
+		}
+	}
 
-    .header-central {
-        margin-left: 3em;
+	.header-central {
+		margin-left: 3em;
 
-        a {
-            line-height: normal;
-        }
-    }
+		a {
+			line-height: normal;
+		}
+	}
 
-    .header-right {
-        float: right;
-        margin-right: 1em;
+	.header-right {
+		float: right;
+		margin-right: 1em;
 
-        img.image {
-            margin-right: 1em;
-        }
+		img.image {
+			margin-right: 1em;
+		}
 
-        .dropdown {
-            display: inline-flex;
-        }
+		.dropdown {
+			display: inline-flex;
+		}
 
-        .profile {
-            display: inline-block;
-            margin-right: 1em;
-            vertical-align: middle;
+		.profile {
+			display: inline-block;
+			margin-right: 1em;
+			vertical-align: middle;
 
-            .photo,
-            .info {
-                display: inline-block;
-            }
+			.photo,
+			.info {
+				display: inline-block;
+			}
 
-            .photo {
-                vertical-align: top;
+			.photo {
+				vertical-align: top;
 
-                .avatar {
-                    margin-right: 1em;
-                }
-            }
+				.avatar {
+					margin-right: 1em;
+				}
+			}
 
-            .info {
-                line-height: initial;
-                vertical-align: inherit;
-                opacity: 1;
-                transition: opacity 0.5s ease;
+			.info {
+				line-height: initial;
+				vertical-align: inherit;
+				opacity: 1;
+				transition: opacity 0.5s ease;
 
-                &>span {
-                    display: block;
-                }
+				&>span {
+					display: block;
+				}
 
-                .greetings {
-                    font-size: 75%;
-                    line-height: 10px;
-                }
-            }
-        }
+				.greetings {
+					font-size: 75%;
+					line-height: 10px;
+				}
+			}
+		}
 
-        .logout {
-            display: inline-block;
-            vertical-align: bottom;
-            width: $navbar-width-collapsed - 20;
-            text-align: center;
-        }
-    }
+		.logout {
+			display: inline-block;
+			vertical-align: bottom;
+			width: $navbar-width-collapsed - 20;
+			text-align: center;
+		}
+	}
 }

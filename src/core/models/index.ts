@@ -5,9 +5,9 @@ import FormValidationError from './FormValidationError';
 import PageInfo from './PageInfo';
 
 export {
-    EntityModel,
-    ActionResult,
-    ValidationError,
-    FormValidationError,
-    PageInfo,
+	EntityModel,
+	ActionResult,
+	ValidationError,
+	FormValidationError,
+	PageInfo,
 };

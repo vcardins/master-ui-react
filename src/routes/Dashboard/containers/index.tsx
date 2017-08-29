@@ -4,40 +4,40 @@ import Dashboard from '../components/Dashboard';
 import { animateTransition } from 'core/decorators';
 
 interface Props {
-    children: JSX.Element;
-    router: any;    
+	children: JSX.Element;
+	router: any;	
 }
 
 interface State {
-    lookup: any;
+	lookup: any;
 }
 
 @animateTransition()
 class DashboardContainer extends React.Component<Props, State>  {
-    
-    state: State = { 
-        lookup: {}, 
-    };
+	
+	state: State = { 
+		lookup: {}, 
+	};
 
-    constructor(props: Props) {
-        super(props);        
-    }        
+	constructor(props: Props) {
+		super(props);		
+	}		
 
-    render(): JSX.Element {
-        return <Page 
-            id="dashboard" 
-            title="Dashboard" 
-            hideTitleBar={true} 
-            className="padded"
-            panels={[
-                    <Dashboard                 
-                        header="Header"
-                        lookup={ this.state.lookup }
-                        description="This is the Dashboard page."
-                    />,
-                ]}
-            />;
-    }
+	render(): JSX.Element {
+		return <Page 
+			id="dashboard" 
+			title="Dashboard" 
+			hideTitleBar={true} 
+			className="padded"
+			panels={[
+					<Dashboard				 
+						header="Header"
+						lookup={ this.state.lookup }
+						description="This is the Dashboard page."
+					/>,
+				]}
+			/>;
+	}
 }
 
 export default DashboardContainer;

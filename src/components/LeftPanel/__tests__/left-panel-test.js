@@ -24,43 +24,43 @@ const user = {
   avatar: '',
   coverPhoto: 'unknown.jpg',
   preferences: {
-    showMyLocation: true,
-    shareProfileAsPublic: true,
-    allowNotifications: true,
-    shareWhatsAppId: true,
-    shareSkypeId: true,
-    shareTwitterId: true,
-    shareFacebookId: true,
-    dateFormat: 'ddd, MMM d, yyyy',
-    timezoneId: 56,
-    utcOffset: 12.0,
-    coverPhoto: 'unknown.jpg',
-    avatar: 'unknownd',
+	showMyLocation: true,
+	shareProfileAsPublic: true,
+	allowNotifications: true,
+	shareWhatsAppId: true,
+	shareSkypeId: true,
+	shareTwitterId: true,
+	shareFacebookId: true,
+	dateFormat: 'ddd, MMM d, yyyy',
+	timezoneId: 56,
+	utcOffset: 12.0,
+	coverPhoto: 'unknown.jpg',
+	avatar: 'unknownd',
   },
   status: {
-    userId: 0,
-    statusId: 1,
-    availability: 'Online',
-    message: null,
+	userId: 0,
+	statusId: 1,
+	availability: 'Online',
+	message: null,
   },
 };
 
 const defaultProps = { 
-    user, 
-    collapsed: false,
-    showUserInfo: false,
-    routes: menu['items'],
-    activeRoute: '',
-    onTogglePanel: jest.fn(),
-    onOpenSettings: jest.fn(),
+	user, 
+	collapsed: false,
+	showUserInfo: false,
+	routes: menu['items'],
+	activeRoute: '',
+	onTogglePanel: jest.fn(),
+	onOpenSettings: jest.fn(),
 };
 
 function setup (props, test) {
-    return () => test(
-        Renderer.create(
-            <LeftPanel {...props} />
-        )
-    );
+	return () => test(
+		Renderer.create(
+			<LeftPanel {...props} />
+		)
+	);
 }
 
 describe('LeftPanel Component Rendering', () => {
@@ -75,11 +75,11 @@ describe('LeftPanel Component Rendering', () => {
 });
 
 describe('LeftPanel behaviour', () => {
-    it('should pass a selected value to the onClick handler', setup(
-        defaultProps,
+	it('should pass a selected value to the onClick handler', setup(
+		defaultProps,
 		() => {
-            const wrapper = shallow(<LeftPanel {...defaultProps} />);
-            expect(wrapper).toMatchSnapshot();
-        }
-	));    
+			const wrapper = shallow(<LeftPanel {...defaultProps} />);
+			expect(wrapper).toMatchSnapshot();
+		}
+	));	
 })

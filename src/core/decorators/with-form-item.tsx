@@ -14,14 +14,14 @@ export default function withFormField<Props>(
   WrappedComponent: React.StatelessComponent<Props>,
 ) {
   const Decorator: React.StatelessComponent<DecoratorProps & Props> = (props) => {
-    return (
-      <Form.Field
-        label={props.label}
-        hasFeedback={props.hasFeedback}
-      >
-        <WrappedComponent {...props} />
-      </Form.Field>
-    );
+	return (
+	  <Form.Field
+		label={props.label}
+		hasFeedback={props.hasFeedback}
+	  >
+		<WrappedComponent {...props} />
+	  </Form.Field>
+	);
   };
   return Decorator;
 }

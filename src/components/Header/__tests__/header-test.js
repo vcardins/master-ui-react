@@ -24,42 +24,42 @@ const user = {
   avatar: '',
   coverPhoto: 'unknown.jpg',
   preferences: {
-    showMyLocation: true,
-    shareProfileAsPublic: true,
-    allowNotifications: true,
-    shareWhatsAppId: true,
-    shareSkypeId: true,
-    shareTwitterId: true,
-    shareFacebookId: true,
-    dateFormat: 'ddd, MMM d, yyyy',
-    timezoneId: 56,
-    utcOffset: 12.0,
-    coverPhoto: 'unknown.jpg',
-    avatar: 'unknownd',
+	showMyLocation: true,
+	shareProfileAsPublic: true,
+	allowNotifications: true,
+	shareWhatsAppId: true,
+	shareSkypeId: true,
+	shareTwitterId: true,
+	shareFacebookId: true,
+	dateFormat: 'ddd, MMM d, yyyy',
+	timezoneId: 56,
+	utcOffset: 12.0,
+	coverPhoto: 'unknown.jpg',
+	avatar: 'unknownd',
   },
   status: {
-    userId: 0,
-    statusId: 1,
-    availability: 'Online',
-    message: null,
+	userId: 0,
+	statusId: 1,
+	availability: 'Online',
+	message: null,
   },
 };
 
 const defaultProps = { 
-    user, 
-    title: 'Master UI',
-    routes: menu['items'],
-    activeRoute: '',
-    onLogout: jest.fn(),
-    onTogglePanel: jest.fn(),
+	user, 
+	title: 'Master UI',
+	routes: menu['items'],
+	activeRoute: '',
+	onLogout: jest.fn(),
+	onTogglePanel: jest.fn(),
 };
 
 function setup (props, test) {
-    return () => test(
-        Renderer.create(
-            <Header {...props} />
-        )
-    );
+	return () => test(
+		Renderer.create(
+			<Header {...props} />
+		)
+	);
 }
 
 describe('Header Component Rendering', () => {
@@ -74,11 +74,11 @@ describe('Header Component Rendering', () => {
 });
 
 describe('Header behaviour', () => {
-    it('should pass a selected value to the onClick handler', setup(
-        defaultProps,
+	it('should pass a selected value to the onClick handler', setup(
+		defaultProps,
 		() => {
-            const wrapper = shallow(<Header {...defaultProps} />);
-            expect(wrapper).toMatchSnapshot();
-        }
-	));    
+			const wrapper = shallow(<Header {...defaultProps} />);
+			expect(wrapper).toMatchSnapshot();
+		}
+	));	
 })

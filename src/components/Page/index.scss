@@ -2,118 +2,124 @@
 
 #app[data-viewport="mini"] #container,
 #app[data-viewport="tiny"] #container {
-    @extend %resize-page;
+	@extend %resize-page;
 }
 
 #container.collapsed {
-    @extend %resize-page;
+	@extend %resize-page;
 }
 
 section.horizontal-menu {
-    .main {
-        >.page {
-            width: 100%;
-        }
-    }
+	.main {
+		>.page {
+			width: 100%;
+		}
+	}
 }
 
 section.vertical-menu {
-    .main {
-        >.page {
-            width: calc(100% - #{$navbar-width-expanded});
-        }
-    }
+	.main {
+		>.page {
+			width: calc(100% - #{$navbar-width-expanded});
+		}
+	}
 }
 
 .main {
-    >.page {
-        display: flex;
-        flex-direction: column;
-        transition: width 0.5s ease;
+	>.page {
+		display: flex;
+		flex-direction: column;
+		transition: width 0.5s ease;
 
-        >div {
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-            z-index: 0;
+		>div {
+			width: 100%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			overflow-y: auto;
+			z-index: 0;
 
-            .page-header {
-                @extend %top-fixed-bar;
+			.page-header {
+				@extend %top-fixed-bar;
 
-                padding: 0.75em 1em;
-                background-color: $white;
-                box-shadow: 1px 1px 2px 1px rgba(34, 36, 38, 0.15);
+				padding: 0.75em 1em;
+				background-color: $white;
+				box-shadow: 1px 1px 2px 1px rgba(34, 36, 38, 0.15);
 
-                .page-title {
-                    display: inline-block;
-                    font-weight: bold;
-                    font-size: 150%;
-                }
+				.page-title {
+					display: inline-block;
+					font-weight: bold;
+					font-size: 150%;
+				}
 
-                .page-subtitle {
-                    font-size: 80%;
-                    display: block;
-                    min-height: 1.25em;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                }
-            }
+				.page-subtitle {
+					font-size: 80%;
+					display: block;
+					min-height: 1.25em;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
+			}
 
-            .page-content {
-                flex: 1 1 auto;
-                margin: 5px 0 5px 5px;
+			.page-content {
+				flex: 1 1 auto;
+				margin: 0;
 
-                .loader {
-                    width: 100%;
-                    margin: 5em auto;
-                }
+				.loader {
+					width: 100%;
+					margin: 5em auto;
+				}
 
-                &.fixed-pane-header {
-                    overflow: hidden;
-                    display: flex;
-                    z-index: 0;
+				&.fixed-pane-header {
+					overflow: hidden;
+					display: flex;
+					z-index: 0;
 
-                    .pane {
-                        @extend %scrollable;
+					.pane {
+						@extend %scrollable;
+					}
+				}
 
-                        flex: 1;
-                    }
-                }
+				.pane {
+					flex: 1;
+				}
 
-                &.multi-pane-2 {
-                    .pane {
-                        flex: 0.5;
-                    }
-                }
+				&.multi-pane-2 {
+					.pane {
+						flex: 0.5;
+					}
+				}
 
-                &.multi-pane-3 {
-                    .pane {
-                        flex: 0.33;
-                    }
-                }
+				&.multi-pane-3 {
+					.pane {
+						flex: 0.33;
+					}
+				}
 
-                &.multi-pane-4 {
-                    .pane {
-                        flex: 0.25;
-                    }
-                }
+				&.multi-pane-4 {
+					.pane {
+						flex: 0.25;
+					}
+				}
 
-                &:not(.fixed-pane-header) {
-                    @extend %scrollable;
-                }
+				&:not(.fixed-pane-header) {
+					@extend %scrollable;
 
-                .table {
-                    border-radius: 0;
-                    border: 0;
+					display: flex;
+				}
 
-                    &.selectable {
-                        tr {
-                            cursor: pointer;
-                        }
-                    }
-                }
-            }
-        }
-    }
+				.table {
+					border-radius: 0;
+					border: 0;
+
+					&.selectable {
+						tr {
+							cursor: pointer;
+						}
+					}
+				}
+			}
+		}
+	}
 }

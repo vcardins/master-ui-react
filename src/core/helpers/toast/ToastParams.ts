@@ -9,14 +9,14 @@ const LEVELS = {
 };
 
 function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min;
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min)) + min;
 }
 
 class ToastParams {
 	id: string = `toast-${getRandomInt(0, 99999)}`;
-    title: string;
+	title: string;
 	message: string;
 	level?: string;
 	position: string = ToastPosition.topRight;

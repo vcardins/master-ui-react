@@ -1,42 +1,42 @@
 @import '~variables';
 
 .page-content {
-    .pane {
-        padding: 0;
-        display: flex;
+	.pane {
+		padding: 0;
+		display: flex;
 
-        .pane-content {
-            display: flex;
-            flex: 1 1 auto;
-            overflow: hidden;
-            flex-direction: column;
+		.pane-content {
+			display: flex;
+			flex: 1 1 auto;
+			overflow: hidden;
+			flex-direction: column;
 
-            .pane-content-header {
-                @extend %top-fixed-bar;
+			.pane-content-header {
+				@extend %top-fixed-bar;
 
-                min-height: 38px;
-                border-bottom: 1px solid var(--themeLightestColor);
-                box-shadow: 1px 5px 20px 10px rgba(255, 255, 255, 0.85);
-                line-height: 24px;
+				min-height: 38px;
+				border-bottom: 1px solid var(--themeLightestColor);
+				box-shadow: 1px 5px 20px 10px rgba(255, 255, 255, 0.85);
+				line-height: 24px;
 
-                .ui.basic.buttons {
-                    border: 0;
-                    margin: 4px;
-                    color: $white;
-                }
-            }
+				.ui.basic.buttons {
+					border: 0;
+					margin: 4px;
+					color: $white;
+				}
+			}
 
-            .pane-content-header,
-            .pane-content-body {
-                &:not(:last-child) {
-                    border-right: 0.5px solid #eee;
-                }
-            }
+			.pane-content-header,
+			.pane-content-body {
+				&:not(:last-child) {
+					border-right: 0.5px solid #eee;
+				}
+			}
 
-            .pane-content-body {
-                flex: 1 1 auto;
-                overflow-y: auto;
-            }
-        }
-    }
+			.pane-content-body {
+				flex: 1 1 auto;
+				overflow-y: auto;
+			}
+		}
+	}
 }

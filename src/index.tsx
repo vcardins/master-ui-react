@@ -12,33 +12,35 @@ const ROOT_NODE = 'app';
 const ROOT_ELEMENT = document.getElementById(ROOT_NODE);
 
 const renderError = (error) => {
-    const RedBox = require('redbox-react');
-    ReactDOM.render(<RedBox error={error}/>, ROOT_ELEMENT);
+	const RedBox = require('redbox-react');
+	ReactDOM.render(<RedBox error={error}/>, ROOT_ELEMENT);
 };
 
 const render = (children) => {
-    const App = (
-        <AppContainer>
-            <Router routes={children} history={browserHistory} />
-        </AppContainer>
-    );
-    document.addEventListener('DOMContentLoaded', () => {
-        ReactDOM.render(App, ROOT_ELEMENT);
-    });
+	// Let's bind the component to the tree through the `root` higher-order component
+	const App = (
+		<AppContainer>
+			<Router routes={children} history={browserHistory} />
+		</AppContainer>
+	);
+
+	document.addEventListener('DOMContentLoaded', () => {
+		ReactDOM.render(App, ROOT_ELEMENT);
+	});
 };
 
 // Enable HMR and catch runtime errors in RedBox
 // This code is excluded from production bundle
 const hotModule = module as NodeModuleHot;
 if (hotModule.hot) { 
-    hotModule.hot.accept('./routes', () => {
-        const newRoutes = require('./routes').default;
-        try {
-            render(newRoutes);
-        } catch (error) {
-            renderError(error);
-        }        
-    });
+	hotModule.hot.accept('./routes', () => {
+		const newRoutes = require('./routes').default;
+		try {
+			render(newRoutes);
+		} catch (error) {
+			renderError(error);
+		}
+	});
 }
 
 render(routes);

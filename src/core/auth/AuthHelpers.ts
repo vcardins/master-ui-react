@@ -11,14 +11,14 @@ export function accessEquals(requiredLevel, currentLevel) {
 export class NotAuthorizedException {
   redirectTo: string;
   constructor(to = '/login') {
-    this.redirectTo = to;
+	this.redirectTo = to;
   }
 }
 
 export class AccessDeniedException {
   redirectTo: string;
   constructor(to = '/403') {
-    this.redirectTo = to;
+	this.redirectTo = to;
   }
 }
 
@@ -31,21 +31,21 @@ export function buildRoles(roles) {
   let bitMask: string = '01';
 
   if (roles.length > 31) {
-    console.log(
-      'You have too many roles!' +
-      'Max=31 before the bit shift pushes the accompanying integer out of the memory footprint for an integer',
-    );
+	console.log(
+	  'You have too many roles!' +
+	  'Max=31 before the bit shift pushes the accompanying integer out of the memory footprint for an integer',
+	);
   }
 
   // dbg
   const userRoles = reduce(roles, (result, role) => {
-    const intCode: number = parseInt(bitMask, 2);
-    result[role] = {
-      bitMask: intCode,
-      title: role,
-    };
-    bitMask = (intCode << 1 ).toString(2);
-    return result;
+	const intCode: number = parseInt(bitMask, 2);
+	result[role] = {
+	  bitMask: intCode,
+	  title: role,
+	};
+	bitMask = (intCode << 1 ).toString(2);
+	return result;
   }, {});
 
   return userRoles;
@@ -58,66 +58,66 @@ export function buildRoles(roles) {
 export function buildAccessLevels(accessLevelDeclarations, userRoles) {
 
   /*
-    Zero step - transform
-    { level1Name: level1, level2Name: level2 } object
-     =>
-    [ { name: level1Name, level: level1 }, { name: level2Name, level: level2 } ] array
+	Zero step - transform
+	{ level1Name: level1, level2Name: level2 } object
+	 =>
+	[ { name: level1Name, level: level1 }, { name: level2Name, level: level2 } ] array
    */
   const declarationsArr = map(accessLevelDeclarations, (level, name) => ({ name, level }));
 
   /*
-    First step: filter access levels like:
-     'public': '*',
-    That means every user role enabled, so bitMask => sum of all bit masks
+	First step: filter access levels like:
+	 'public': '*',
+	That means every user role enabled, so bitMask => sum of all bit masks
    */
   let accessLevels = 
-      filter(declarationsArr, ({ level }) => typeof level === 'string') // eslint-disable-line no-shadow
-      .reduce((result, { level, name }) => { // eslint-disable-line no-shadow
+	  filter(declarationsArr, ({ level }) => typeof level === 'string') // eslint-disable-line no-shadow
+	  .reduce((result, { level, name }) => { // eslint-disable-line no-shadow
 
-        if (level !== '*') {
-          console.log(
-            level === '*',
-            'Access Control Error: Could not parse "' + level + '" as access definition for level "' + name + '"',
-          );
-        }
+		if (level !== '*') {
+		  console.log(
+			level === '*',
+			'Access Control Error: Could not parse "' + level + '" as access definition for level "' + name + '"',
+		  );
+		}
 
-        const resultBitMask = reduce(userRoles, (result) => result + '1', ''); // eslint-disable-line no-shadow
+		const resultBitMask = reduce(userRoles, (result) => result + '1', ''); // eslint-disable-line no-shadow
 
-        result[name] = {
-          bitMask: parseInt(resultBitMask, 2),
-        };
+		result[name] = {
+		  bitMask: parseInt(resultBitMask, 2),
+		};
 
-        return result;
-      }, {})
+		return result;
+	  }, {})
   ;
 
   /*
-    Second step: filter access levels like:
-     'user': ['user', 'admin'],
-    That means we need to iterate on ['user', 'admin'] array and summ bit mask for 'user' and 'admin'
+	Second step: filter access levels like:
+	 'user': ['user', 'admin'],
+	That means we need to iterate on ['user', 'admin'] array and summ bit mask for 'user' and 'admin'
    */
   accessLevels =
-    filter(declarationsArr, ({ level }) => typeof level !== 'string') // eslint-disable-line no-shadow
-    .reduce((result, { level, name }) => { // eslint-disable-line no-shadow
-      const levelName = name;
-      const levelsArr = level;
-      const resultBitMask = 0;
-      // const resultBitMask = Array.reduce((levelsArr), (resultBitMask, roleName) => { // eslint-disable-line no-shadow
+	filter(declarationsArr, ({ level }) => typeof level !== 'string') // eslint-disable-line no-shadow
+	.reduce((result, { level, name }) => { // eslint-disable-line no-shadow
+	  const levelName = name;
+	  const levelsArr = level;
+	  const resultBitMask = 0;
+	  // const resultBitMask = Array.reduce((levelsArr), (resultBitMask, roleName) => { // eslint-disable-line no-shadow
 
-      //   if (userRoles.hasOwnProperty(roleName) !== true) {
-      //     console.log(
-      //       'Access Control Error: Could not find role "' + roleName + '" in registered roles while building access for "' + levelName + '"'
-      //     );
-      //   }
+	  //   if (userRoles.hasOwnProperty(roleName) !== true) {
+	  // 	 console.log(
+	  // 	   'Access Control Error: Could not find role "' + roleName + '" in registered roles while building access for "' + levelName + '"'
+	  // 	 );
+	  //   }
 
-      //   return resultBitMask | userRoles[roleName].bitMask;
-      // }, 0);
+	  //   return resultBitMask | userRoles[roleName].bitMask;
+	  // }, 0);
 
-      result[name] = {
-        bitMask: resultBitMask,
-      };
-      return result;
-    }, accessLevels)
+	  result[name] = {
+		bitMask: resultBitMask,
+	  };
+	  return result;
+	}, accessLevels)
   ;
   return accessLevels;
 }

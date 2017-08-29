@@ -13,14 +13,14 @@ let configBase = {
 		clientId: '4fdffca7-5fad-4842-b6b9-6954fa807a15',
 		loginUrl: 'token',
 		resetPasswordUrl: 'PasswordReset',
-		prefix: 'api',
+		prefix: 'api/v1',
 		clientSecret: '#$%ˆ&**()*()*)_)',
 	},
 };
 
 let configForDevelopment = {
-	api : { url: 'http://immiplanner.azurewebsites.net' },
-	signalR : { host: 'http://immiplanner.azurewebsites.net', logging : true },
+	api : { url: 'http://master-api.azurewebsites.net' },
+	signalR : { host: 'http://master-api.azurewebsites.net', logging : true },
 	isInDebugMode: true,
 	providers: {
 		google: {

@@ -1,8 +1,9 @@
-import { Api } from 'core/helpers';
+import DataStore from 'core/data/DataStore';
 
-const Actions = {
-    getAll: async (page: number = 1, size: number = 999) => await Api.get('notebook'),
-    save: async (model: any, isNew: boolean) => await Api[isNew ? 'post' : 'put']('notebook', model),
-};
+class NotebookStore extends DataStore<any> {
+	constructor() {
+		super('notebook', 'notebook');
+	}
+}
 
-export default Actions;
+export default new NotebookStore();

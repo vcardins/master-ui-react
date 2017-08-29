@@ -49,6 +49,7 @@ let webpackConfig = {
             routes: _path('routes'),
             reducers: _path('reducers'),
             styles: _path('styles'),
+            state: _path('state'),
             widgets: _path('widgets'),
             variables: _path('styles//vars.scss'),
         },
