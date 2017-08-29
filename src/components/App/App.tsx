@@ -278,7 +278,7 @@ class App extends BaseComponent<Props, State> {
 					label="Show top bar" 
 					checked={ layout.showTopBar }
 					onChange={ ({target}) => { this.handleSettingsChange({ showTopBar: target.checked }); } }
-				/>					
+				/>
 				<CoolToggle 
 					id="showFooter"
 					type="flat" 

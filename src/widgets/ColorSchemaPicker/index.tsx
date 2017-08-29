@@ -37,7 +37,7 @@ const ColorSchemaPicker: React.StatelessComponent<Props> = (props: Props): JSX.E
 		e.preventDefault();
 		e.stopPropagation();
 		const { value } = e.target;
-		setColorProperties(value);		
+		setColorProperties(value);
 	};
 	
 	const resetColor = (e: any) => {

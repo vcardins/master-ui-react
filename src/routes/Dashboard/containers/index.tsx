@@ -30,7 +30,7 @@ class DashboardContainer extends React.Component<Props, State>  {
 			hideTitleBar={true} 
 			className="padded"
 			panels={[
-					<Dashboard				 
+					<Dashboard
 						header="Header"
 						lookup={ this.state.lookup }
 						description="This is the Dashboard page."

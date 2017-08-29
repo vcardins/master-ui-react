@@ -172,7 +172,7 @@ exports[`Header Component Rendering Should render something if it receives requi
           <span
             className="name"
           >
-            System Admin
+            System
           </span>
         </div>
       </div>

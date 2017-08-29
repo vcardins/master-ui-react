@@ -3,7 +3,7 @@ import * as React from 'react';
 import * as Renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 import Header from '../index';
-import * as menu from '../../../menu.json';
+import * as menu from '../../menu.json';
 
 const user = {
   userId: 1,

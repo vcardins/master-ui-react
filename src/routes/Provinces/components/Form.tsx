@@ -38,7 +38,7 @@ const ProvinceForm = ({
 				<Form.Field name="code" label="Code" value={ model.code } control="input" onChange={onChange} readOnly />
 				<Form.Field name="name" label="Name" value={ model.name } control="input" onChange={onChange} readOnly />
 			</Form>
-			{/*{ renderErrors(errors) }*/}				
+			{/*{ renderErrors(errors) }*/}
 		</ContentPane>
 	);
 };
